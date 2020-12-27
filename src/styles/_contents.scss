@@ -1,0 +1,8 @@
+.contents {
+  width: 100%;
+  min-height: calc(100vh - #{rem(150)});
+  padding: rem(50) 0;
+}
+.gantt_container {
+  height: calc(100vh - 50px - 200px);
+}

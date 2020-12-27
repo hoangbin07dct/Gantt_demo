@@ -1,0 +1,33 @@
+.calendar {
+  .tl {
+    margin-bottom: rem(40);
+    color: #f00;
+    font-size: rem(30);
+  }
+  .calendarInner {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .calendarYear {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    &:not(:last-child) {
+      border-right: 2px solid #ccc;
+    }
+    .yearLabel {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: rem(45);
+      color: #fff;
+      background: #000;
+      text-align: center;
+      
+    }
+  }
+}
