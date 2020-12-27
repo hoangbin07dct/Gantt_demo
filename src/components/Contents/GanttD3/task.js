@@ -1,11 +1,10 @@
 import * as d3 from 'd3';
 export default class Task {
-  constructor(x, y, width, height, color, progress) {
+  constructor(x, y, width, height, progress) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.color = color;
     this.progress = progress;
   }
   render() {
@@ -18,11 +17,11 @@ export default class Task {
       .attr('ry', 3)
       .attr('width', 0)
       .attr('height', this.height)
-      .attr('stroke', this.color)
-      .attr('fill', this.color)
+      .attr('stroke', '#2b3a6a')
+      .attr('fill', '#2b3a6a')
       .transition().duration(1000)
       .attr('width', (d) => this.width)
-      .attr('opacity', 0.5);;
+      .attr('opacity', 0.5);
 
     // render progress bar
     let progress = taskContainer.append('rect')
@@ -31,12 +30,13 @@ export default class Task {
       .attr('width', 0)
       .attr('height', this.height)
       .attr('stroke', 'none')
-      .attr('fill', (d) => this.color)
+      .attr('fill', '#2b3a6a')
       .transition().duration(1000)
       .attr('width', (d) => this.progress);
 
     // event hover
     taskContainer.on('mouseover', () => {
+      taskContainer.style("cursor", "move");
       taskContainer.style('opacity', 0.7);
     });
     taskContainer.on('mouseout', () => {

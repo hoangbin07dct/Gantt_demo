@@ -1,11 +1,10 @@
 import * as d3 from 'd3';
 export default class GroupTasks {
-  constructor(width, gap, data, categories, colorScale) {
+  constructor(width, gap, data, categories) {
     this.width = width;
     this.gap = gap;
     this.data = data;
     this.categories = categories;
-    this.colorScale = colorScale;
     this.render();
   }
   render() {
@@ -26,13 +25,12 @@ export default class GroupTasks {
       .attr('height', this.gap)
       .attr('stroke', 'none')
       .attr('fill', (d) => {
-        for (var i = 0; i < this.categories.length; i++) {
-          if (d.type == this.categories[i]) {
-            return d3.rgb(this.colorScale(i));
-          }
+        if(this.categories.indexOf(d.type) % 2 !== 0) {
+          return '#C0C7D7';
+        } else {
+          return '#E0E5F1';
         }
-      })
-      .attr('opacity', 0.2);
+      });
     return groupTasksContainer.node();
   }
 }

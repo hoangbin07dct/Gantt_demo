@@ -4,6 +4,9 @@ export default class DragChart {
     this.tasksList = tasksList;
     this.tasksListContainer = tasksListContainer;
     this.target = this.tasksList.selectAll('.task')._groups[0];
+    this.tasksListContainer.selectAll('.task')
+      // .on("mouseout", (d, i) => {}) // TODO later
+      .call(this.dragHandle());
   }
 
   dragHandle = () => {
@@ -23,12 +26,4 @@ export default class DragChart {
         .on("drag", dragMove)
         .on("end", dragend);
   };
-
-  render() {
-    let test = this.tasksListContainer.selectAll('.task')
-      .on("mouseover", (d, i) => {d3.select(this.target[i]).style("cursor", "move");})
-      // .on("mouseout", (d, i) => {}) // TODO later
-      .call(this.dragHandle());
-    return test.node();
-  }
 }

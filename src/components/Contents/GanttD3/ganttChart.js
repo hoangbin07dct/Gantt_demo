@@ -3,7 +3,7 @@ import GroupTasks from './groupTasks';
 import TasksList from './tasksList';
 
 export default class GanttChart {
-  constructor(containerElement, width, height) {
+  constructor(containerElement, width, height, from, to) {
     this.containerElement = containerElement;
     this.margin = {
       top: 50,
@@ -13,48 +13,42 @@ export default class GanttChart {
     };
     this.width = width - this.margin.left - this.margin.right;
     this.height = height - this.margin.top - this.margin.bottom;
+    this.from = from.format('YYYY-MM-DD');
+    this.to = to.format('YYYY-MM-DD');
     this.svg = d3.select(containerElement)
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .style('background-color', '#f5f5f5')
       .append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+    this.timeScale = null;
   }
   render(data) {
     let gap = 24;
     let categories = data.map((d) => d.type);
     categories = checkUnique(categories);
-    let colorScale = d3.scaleLinear().domain([0, categories.length]).range(['#00B9FA', '#F95002']).interpolate(d3.interpolateHcl);
 
     let dateFormat = d3.timeParse('%Y-%m-%d');
-    let timeScale = d3
+    this.timeScale = d3
       .scaleTime()
-      .domain([
-        d3.min(data, function (d) {
-          return dateFormat(d.startTime);
-        }),
-        d3.max(data, function (d) {
-          return dateFormat(d.endTime);
-        }),
-      ])
+      .domain([dateFormat(this.from), dateFormat(this.to)])
       .range([0, this.width]);
 
     // axisX
     this.axisX = d3
       .axisTop()
-      .scale(timeScale)
+      .scale(this.timeScale)
       .ticks(d3.timeDay.every(1))
-      .tickFormat((date) => d3.timeFormat('%Y/%m/%d')(date));
+      .tickFormat((date) => d3.timeFormat('%d')(date));
 
     // render axis X
-    this.svg.append('g').attr('class', 'axis').transition().duration(1000).call(this.axisX);
+    this.svg.append('g').attr('class', 'axisX').transition().duration(1000).call(this.axisX);
 
     // render groupTasks
-    let groupTasks = this.svg.node().appendChild(new GroupTasks(this.width, gap, data, categories, colorScale).render());
+    let groupTasks = this.svg.node().appendChild(new GroupTasks(this.width, gap, data, categories).render());
 
     // render TasksList
-    let tasksList = this.svg.node().appendChild(new TasksList(gap, data, categories, timeScale, colorScale).render());
+    let tasksList = this.svg.node().appendChild(new TasksList(gap, data, categories, this.timeScale).render());
 
     function checkUnique(arr) {
       let hash = {},
@@ -67,5 +61,12 @@ export default class GanttChart {
       }
       return result;
     }
+  }
+  changeScale(from, to) {
+    this.from = from.format('YYYY-MM-DD');
+    this.to = to.format('YYYY-MM-DD');
+    this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
+    this.svg.select('.axisX')
+        .call(this.axisX.scale(this.timeScale));
   }
 }

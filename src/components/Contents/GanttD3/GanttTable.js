@@ -12,7 +12,7 @@ const GanttTable = ({ ...props }) => {
       <thead>
         <tr>
           <th>Task Name</th>
-          <th>Status</th>
+          <th>Progress</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@ const GanttTable = ({ ...props }) => {
           return (
             <tr key={key}>
               <td>{element.task}</td>
-              <td>{element.progress}</td>
+              <td>{element.progress}%</td>
             </tr>
           );
         })}
