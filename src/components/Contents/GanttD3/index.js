@@ -6,7 +6,7 @@ const getWidth = () => {
   return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }
 const GanttD3 = (props) => {
-  var data = [
+  var initData = [
     {
       task: 'conceptualize',
       type: 'development',
@@ -75,6 +75,7 @@ const GanttD3 = (props) => {
     },
   ];
   const [width, setWidth] = useState(getWidth());
+  const [data, setData] = useState(initData);
   const chartRef = useRef();
 
   const resizeListener = useCallback(
