@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import Task from './task';
 export default class TasksList {
   constructor(gap, data, categories, timeScale, colorScale) {
     this.gap = gap;
@@ -6,6 +7,7 @@ export default class TasksList {
     this.categories = categories;
     this.timeScale = timeScale;
     this.colorScale = colorScale;
+    
   }
   render() {
     let dateFormat = d3.timeParse('%Y-%m-%d');
@@ -15,29 +17,20 @@ export default class TasksList {
       .selectAll('rect')
       .data(this.data)
       .enter();
-    let task = tasksList.append('rect')
-    .attr('rx', 3)
-    .attr('ry', 3)
-    .attr('x', (d) => {
-      return this.timeScale(dateFormat(d.startTime));
-    })
-    .attr('y', (d, i) => {
-      return i * this.gap;
-    })
-    .attr('width', 0)
-    .attr('height', this.gap - 4)
-    .attr('stroke', 'none')
-    .attr('fill', (d) => {
+    let task = tasksList.append((d,i) => {
+      let x = this.timeScale(dateFormat(d.startTime));
+      let y = i * this.gap + 2;
+      let width = this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime));
+      let height = this.gap - 4;
+      let color;
       for (var i = 0; i < this.categories.length; i++) {
         if (d.type == this.categories[i]) {
-          return d3.rgb(this.colorScale(i));
+          color = d3.rgb(this.colorScale(i));
         }
       }
-    })
-    .transition().duration(1000)
-    .attr('width', (d) => {
-      return this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime));
+      return new Task(x, y, width, height, color).render();
     });
+
     return tasksListContainer.node();
   }
 }
