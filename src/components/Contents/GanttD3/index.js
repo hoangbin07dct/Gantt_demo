@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import _, {debounce} from 'lodash';
+import _, { debounce } from 'lodash';
 import GanttChart from './ganttChart';
 import withRouter from './index';
 const getWidth = () => {
@@ -85,6 +85,9 @@ const GanttD3 = (props) => {
   );
 
   useEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.innerHTML = '';
+    };
     const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9);
     ganttChart.render(data);
   }, [width]);

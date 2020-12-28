@@ -4,6 +4,7 @@ import TasksList from './tasksList';
 
 export default class GanttChart {
   constructor(containerElement, width, height) {
+    this.containerElement = containerElement;
     this.margin = {
       top: 50,
       right: 50,
