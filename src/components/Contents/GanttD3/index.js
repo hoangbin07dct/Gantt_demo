@@ -149,6 +149,7 @@ const GanttD3 = (props) => {
     e.preventDefault();
     initData.push(infoForm);
     console.log(initData);
+    document.querySelector('#dom svg').remove();
     const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9);
     ganttChart.render(initData);
 
