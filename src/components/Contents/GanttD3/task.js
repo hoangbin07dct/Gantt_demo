@@ -10,43 +10,36 @@ export default class Task {
   }
   render() {
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
-    let taskContainer = d3.select(containElement).attr('class', 'task');
+    let taskContainer = d3.select(containElement)
+      .attr('class', 'task')
+      .attr('transform', `translate(${this.x},${this.y})`);
     let task = taskContainer.append('rect')
-    .attr('rx', 3)
-    .attr('ry', 3)
-    .attr('x', (d) => {
-      return this.x;
-    })
-    .attr('y', (d) => {
-      return this.y;
-    })
-    .attr('width', 0)
-    .attr('height', this.height)
-    .attr('stroke', this.color)
-    .attr('fill', this.color)
-    .transition().duration(1000)
-    .attr('width', (d) => this.width)
-    .attr('opacity', 0.5);;
+      .attr('rx', 3)
+      .attr('ry', 3)
+      .attr('width', 0)
+      .attr('height', this.height)
+      .attr('stroke', this.color)
+      .attr('fill', this.color)
+      .transition().duration(1000)
+      .attr('width', (d) => this.width)
+      .attr('opacity', 0.5);;
 
+    // render progress bar
     let progress = taskContainer.append('rect')
-    .attr('rx', 3)
-    .attr('ry', 3)
-    .attr('x', (d) => {
-      return this.x;
-    })
-    .attr('y', (d) => {
-      return this.y;
-    })
-    .attr('width', 0)
-    .attr('height', this.height)
-    .attr('stroke', 'none')
-    .attr('fill', (d) => this.color)
-    .transition().duration(1000)
-    .attr('width', (d) => this.progress);
-    taskContainer.on('mouseover', ()=>{
+      .attr('rx', 3)
+      .attr('ry', 3)
+      .attr('width', 0)
+      .attr('height', this.height)
+      .attr('stroke', 'none')
+      .attr('fill', (d) => this.color)
+      .transition().duration(1000)
+      .attr('width', (d) => this.progress);
+
+    // event hover
+    taskContainer.on('mouseover', () => {
       taskContainer.style('opacity', 0.7);
     });
-    taskContainer.on('mouseout', ()=>{
+    taskContainer.on('mouseout', () => {
       taskContainer.style('opacity', 1);
     });
 
