@@ -4,7 +4,8 @@ import GanttChart from './ganttChart';
 import withRouter from './index';
 import GanttTable from './GanttTable';
 import common from '../../../styles/Common.module.scss';
-
+import Modal from "./Modal";
+import useModal from './useModal';
 
 
 const GanttD3 = (props) => {
@@ -102,7 +103,7 @@ const GanttD3 = (props) => {
   const [width, setWidth] = useState();
   const [data, setData] = useState(initData);
   const chartRef = useRef();
-
+  const {isShowing, toggle} = useModal();
   const resizeListener = useCallback(
     debounce(() => {
       setWidth(getWidth());
@@ -128,8 +129,51 @@ const GanttD3 = (props) => {
     };
   }, []);
 
+  
+  const [infoForm, setInfoForm] = useState({
+    task: '',
+    type:'',
+    startTime: '',
+    endTime: '',
+    details: ''
+  });
+
+
+  const [value, setValue] = React.useState("");
+  const addTodo = text => {
+    
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    initData.push(infoForm);
+    console.log(initData);
+    const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9);
+    ganttChart.render(initData);
+
+
+  };
+
+  console.log(initData);
+  const InputChange = (e) => {
+    setInfoForm({
+      ...infoForm,
+      [e.target.name]: e.target.value
+    });
+    
+  };
+  console.log(infoForm);
+
   return (
     <React.Fragment>
+      <button className={common.button_default} onClick={toggle}>Add New Task</button>
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        handleSubmit={handleSubmit}
+        InputChange={InputChange}
+        infoForm={infoForm}
+      />
       <GanttTable data={data}></GanttTable>
       <div id="dom" className={common.dom} ref={chartRef}></div>
     </React.Fragment>
