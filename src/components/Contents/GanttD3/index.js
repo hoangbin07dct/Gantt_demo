@@ -2,10 +2,17 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import _, { debounce } from 'lodash';
 import GanttChart from './ganttChart';
 import withRouter from './index';
-const getWidth = () => {
-  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-}
+import GanttTable from './GanttTable';
+import common from '../../../styles/Common.module.scss';
+
+
+
 const GanttD3 = (props) => {
+  const getWidth = () => {
+    // return (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+    console.log(document.getElementById('dom').getBoundingClientRect().width);
+    return document.getElementById('dom').getBoundingClientRect().width;
+  };
   var initData = [
     {
       task: 'conceptualize',
@@ -74,7 +81,7 @@ const GanttD3 = (props) => {
       endTime: '2013-2-16',
     },
   ];
-  const [width, setWidth] = useState(getWidth());
+  const [width, setWidth] = useState();
   const [data, setData] = useState(initData);
   const chartRef = useRef();
 
@@ -88,12 +95,15 @@ const GanttD3 = (props) => {
   useEffect(() => {
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
-    };
+    }
     const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9);
     ganttChart.render(data);
   }, [width]);
 
   useEffect(() => {
+    setData(initData);
+    setWidth();
+
     window.addEventListener('resize', resizeListener);
     return () => {
       window.removeEventListener('resize', resizeListener);
@@ -101,9 +111,10 @@ const GanttD3 = (props) => {
   }, []);
 
   return (
-    <div>
-      <div className="dom" ref={chartRef}></div>
-    </div>
+    <React.Fragment>
+      <GanttTable data={data}></GanttTable>
+      <div id="dom" className={common.dom} ref={chartRef}></div>
+    </React.Fragment>
   );
 };
 
