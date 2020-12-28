@@ -22,13 +22,14 @@ export default class TasksList {
       let y = i * this.gap + 2;
       let width = this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime));
       let height = this.gap - 4;
+      let progress = width * d.progress/100;
       let color;
       for (var i = 0; i < this.categories.length; i++) {
         if (d.type == this.categories[i]) {
           color = d3.rgb(this.colorScale(i));
         }
       }
-      return new Task(x, y, width, height, color).render();
+      return new Task(x, y, width, height, color, progress).render();
     });
 
     return tasksListContainer.node();
