@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import Task from './task';
+import DragChart from './dragChart';
 export default class TasksList {
   constructor(gap, data, categories, timeScale, colorScale) {
     this.gap = gap;
@@ -24,13 +25,15 @@ export default class TasksList {
       let height = this.gap - 4;
       let progress = width * d.progress/100;
       let color;
-      for (var i = 0; i < this.categories.length; i++) {
-        if (d.type == this.categories[i]) {
+      for (let i = 0; i < this.categories.length; i++) {
+        if (d.type === this.categories[i]) {
           color = d3.rgb(this.colorScale(i));
         }
       }
       return new Task(x, y, width, height, color, progress).render();
     });
+    
+    new DragChart(tasksList, tasksListContainer).render();
 
     return tasksListContainer.node();
   }
