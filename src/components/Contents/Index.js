@@ -2,6 +2,7 @@ import React from 'react';
 // import Calendar from "./Calendar/Index";
 import Gantt from './Gantt/Index';
 import common from "../../styles/Common.module.scss";
+import GanttD3 from './GanttD3';
 // const times = {
 //   start: '2020-01-01',
 //   end: '2021-01-01'
@@ -19,9 +20,10 @@ const data = {
 const Contents = () => {
   return (
     <main className={common.contents}>
-      <div className={common.wrap}>
-        <div className={common.gantt_container}>
-          <Gantt tasks={data}/>
+      <div>
+        <div>
+          {/* <Gantt tasks={data}/> */}
+          <GanttD3/>
         </div>
       </div>
     </main>
