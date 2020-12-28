@@ -115,13 +115,14 @@ const GanttD3 = (props) => {
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
     }
+    console.log(width);
     const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9);
     ganttChart.render(data);
   }, [width]);
 
   useEffect(() => {
     setData(initData);
-    setWidth();
+    setWidth(getWidth());
 
     window.addEventListener('resize', resizeListener);
     return () => {

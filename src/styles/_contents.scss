@@ -8,6 +8,7 @@
 }
 .dom {
   width: 100%;
+  overflow: hidden;
 }
 .taskTable, th, td {
   border: 1px solid #ccc;
@@ -16,6 +17,7 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 400px;
+  margin-top: 26px;
 }
 .gantt_container {
   height: calc(100vh - 50px - 200px);

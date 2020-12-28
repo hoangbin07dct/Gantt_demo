@@ -20,7 +20,7 @@ const GanttTable = ({ ...props }) => {
           return (
             <tr key={key}>
               <td>{element.task}</td>
-              <td>100</td>
+              <td>{element.progress}</td>
             </tr>
           );
         })}
