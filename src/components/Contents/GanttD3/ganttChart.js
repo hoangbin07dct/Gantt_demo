@@ -73,8 +73,8 @@ export default class GanttChart {
       .append('g')
       .attr('class', 'subAxisX')
       .attr('transform', `translate(0, -20)`)
-      .transition()
-      .duration(1000)
+      // .transition()
+      // .duration(1000)
       .call(this.subAxisX);
 
     // axisX
@@ -99,8 +99,8 @@ export default class GanttChart {
     const timeText = this.svg
       .append('g')
       .attr('class', 'axisX')
-      .transition()
-      .duration(1000)
+      // .transition()
+      // .duration(1000)
       .call(this.axisX)
       .call((g) => {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');

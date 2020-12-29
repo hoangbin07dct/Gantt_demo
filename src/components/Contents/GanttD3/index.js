@@ -228,8 +228,9 @@ const GanttD3 = (props) => {
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
     }
-    ganttChart.current = new GanttChart(chartRef.current, width, data.length, from, to);
-    ganttChart.current.render(data);
+    const dataRender = [...data].filter(d => d.isShow === true);
+    ganttChart.current = new GanttChart(chartRef.current, width, dataRender.length, from, to);
+    ganttChart.current.render(dataRender);
   }, [width, data]);
   useEffect(() => {
     ganttChart.current.changeScale(from, to);

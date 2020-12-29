@@ -26,13 +26,13 @@ export default class Task {
       .attr('x',`${this.planStart}`)
       .attr('rx', 3)
       .attr('ry', 3)
-      .attr('width', 0)
+      // .attr('width', 0)
       .attr('height', this.height)
       .attr('stroke', 'orange')
       .attr('fill', 'orange')
       .attr('opacity', 1)
       // .attr('transform', `translate(0,${this.height + 2})`)
-      .transition().duration(1000)
+      // .transition().duration(1000)
       .attr('width', (d) => this.planWidth);
 
       // render init plan
@@ -41,14 +41,14 @@ export default class Task {
     .attr('x',`${this.initialPlanStart}`)
     .attr('rx', 3)
     .attr('ry', 3)
-    .attr('width', 0)
+    // .attr('width', 0)
     .attr('height', this.height)
     .attr('stroke', '#000000')
     .attr('stroke-width', '1')
     .attr('stroke-dasharray', '5,5')
     .attr('fill', 'none')
     // .attr('transform', `translate(0,${this.height + 2})`)
-    .transition().duration(1000)
+    // .transition().duration(1000)
     .attr('width', (d) => this.initialPlanWidth)
     .attr('opacity', 1);
     // render progress bar
@@ -71,13 +71,13 @@ export default class Task {
       .attr('x',`${this.currentStart}`)
       .attr('rx', 3)
       .attr('ry', 3)
-      .attr('width', 0)
+      // .attr('width', 0)
       .attr('height', this.height)
       .attr('stroke', '#2b3a6a')
       .attr('stroke-width', '1')
       .attr('fill', '#2b3a6a')
       .attr('transform', `translate(0,${this.height + 4})`)
-      .transition().duration(1000)
+      // .transition().duration(1000)
       .attr('width', (d) => this.currentWidth)
       .attr('opacity', 1);
 
