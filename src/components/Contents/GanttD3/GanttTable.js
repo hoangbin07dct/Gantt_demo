@@ -31,26 +31,30 @@ const GanttTable = ({ ...props }) => {
           if (element.type !== currentGroup) {
             currentGroup = element.type;
             td = (
-              <td className={common.vertAlign} rowSpan={props.data.filter((el) => el.type === currentGroup).length}>
+              <td className={common.vertAlign} rowSpan={props.data.filter((el) => (el.type === currentGroup) && el.isShow).length}>
                 {element.type}
               </td>
             );
           }
           return (
-            <tr key={key}>
-              {td}
-              <td style={{ paddingLeft: (element.level - 1) * 20 + 5 + 'px' }}>
-                <div className={common.flexCenter}>
-                  {element.hasChild ? (
-                    <span className={common.expController}>
-                      <img src={!element.collapsed ? exp_collapse : exp_expand} alt="expController" />
-                    </span>
-                  ) : <span className={common.emptyController}></span>}
-                  <span>{element.task}</span>
-                </div>
-              </td>
-              <td>{element.progress}%</td>
-            </tr>
+            element.isShow && (
+              <tr key={key}>
+                {td}
+                <td style={{ paddingLeft: (element.level - 1) * 20 + 5 + 'px' }}>
+                  <div className={common.flexCenter}>
+                    {element.hasChild ? (
+                      <span id={element.id} className={common.expController} onClick={props.handleCollapse}>
+                        <img src={!element.collapsed ? exp_collapse : exp_expand} alt="expController" />
+                      </span>
+                    ) : (
+                      <span className={common.emptyController}></span>
+                    )}
+                    <span>{element.task}</span>
+                  </div>
+                </td>
+                <td>{element.progress}%</td>
+              </tr>
+            )
           );
         })}
       </tbody>
