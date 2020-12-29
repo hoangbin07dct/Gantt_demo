@@ -27,12 +27,12 @@ export default class TasksList {
       let currentWidth = this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent));
       let planWidth = this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan));
       let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
-      let height = 20;
+      let height = 10;
       let progress = planWidth * d.progress/100;
       return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress).render();
     });
 
-    new DragChart(tasksList, this.tasksListContainer);
+    // new DragChart(tasksList, this.tasksListContainer);
 
     return this.tasksListContainer.node();
   }
@@ -52,16 +52,21 @@ export default class TasksList {
       .attr('x', d => this.timeScale(dateFormat(d.startTimePlan)))
       .attr('width', (d) => this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan)));
 
-    this.tasksListContainer
-      .selectAll('.progress')
-      .data(this.data)
-      .attr('x', d => this.timeScale(dateFormat(d.startTimePlan)))
-      .attr('width', (d) => (this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan))) * d.progress/100);
+    // this.tasksListContainer
+    //   .selectAll('.progress')
+    //   .data(this.data)
+    //   .attr('x', d => this.timeScale(dateFormat(d.startTimePlan)))
+    //   .attr('width', (d) => (this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan))) * d.progress/100);
 
     this.tasksListContainer
       .selectAll('.current')
       .data(this.data)
-      .attr("x1", d => this.timeScale(dateFormat(d.startTimeCurrent)))
-      .attr("x2", d => this.timeScale(dateFormat(d.endTimeCurrent)));
+      .attr('x', d => this.timeScale(dateFormat(d.startTimeCurrent)))
+      .attr('width', (d) => this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent)));
+  //   this.tasksListContainer
+  //     .selectAll('.current')
+  //     .data(this.data)
+  //     .attr("x1", d => this.timeScale(dateFormat(d.startTimeCurrent)))
+  //     .attr("x2", d => this.timeScale(dateFormat(d.endTimeCurrent)));
   }
 }
