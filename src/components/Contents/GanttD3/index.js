@@ -17,6 +17,7 @@ const GanttD3 = (props) => {
   var initData = [
     {
       id: 1,
+      isShow: true,
       task: 'Task1',
       type: 'Group1',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -34,6 +35,7 @@ const GanttD3 = (props) => {
 
     {
       id: 2,
+      isShow: true,
       task: 'Task2',
       type: 'Group1',
       startTimeCurrent: '2020-12-15', //year/month/day
@@ -51,6 +53,7 @@ const GanttD3 = (props) => {
 
     {
       id: 3,
+      isShow: true,
       task: 'Task3',
       type: 'Group1',
       startTimeCurrent: '2020-12-05', //year/month/day
@@ -68,6 +71,7 @@ const GanttD3 = (props) => {
 
     {
       id: 4,
+      isShow: true,
       task: 'Task4',
       type: 'Group2',
       startTimeCurrent: '2020-11-30', //year/month/day
@@ -85,6 +89,7 @@ const GanttD3 = (props) => {
 
     {
       id: 5,
+      isShow: true,
       task: 'Task5',
       type: 'Group2',
       startTimeCurrent: '2020-12-05', //year/month/day
@@ -102,6 +107,7 @@ const GanttD3 = (props) => {
 
     {
       id: 6,
+      isShow: true,
       task: 'Task6',
       type: 'Group3',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -119,6 +125,7 @@ const GanttD3 = (props) => {
 
     {
       id: 7,
+      isShow: true,
       task: 'Task7',
       type: 'Group3',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -135,6 +142,7 @@ const GanttD3 = (props) => {
     },
     {
       id: 8,
+      isShow: true,
       task: 'Task8',
       type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -152,6 +160,7 @@ const GanttD3 = (props) => {
 
     {
       id: 9,
+      isShow: true,
       task: 'Task9',
       type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -168,6 +177,7 @@ const GanttD3 = (props) => {
     },
     {
       id: 10,
+      isShow: true,
       task: 'Task10',
       type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -184,6 +194,7 @@ const GanttD3 = (props) => {
     },
     {
       id: 11,
+      isShow: true,
       task: 'Task11',
       type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
@@ -221,18 +232,18 @@ const GanttD3 = (props) => {
     ganttChart.current.render(data);
   }, [width, data]);
   useEffect(() => {
-       ganttChart.current.changeScale(from, to);
-      //  if (chartRef.current) {
-      //   chartRef.current.innerHTML = '';
-      // }
-      // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
-      // ganttChart.current.render(data);
-      // ganttChart.current.changeScale(from, to);
-      // if (chartRef.current) {
-      //   chartRef.current.innerHTML = '';
-      // }
-      // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
-      // ganttChart.current.render(data);
+    ganttChart.current.changeScale(from, to);
+    //  if (chartRef.current) {
+    //   chartRef.current.innerHTML = '';
+    // }
+    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
+    // ganttChart.current.render(data);
+    // ganttChart.current.changeScale(from, to);
+    // if (chartRef.current) {
+    //   chartRef.current.innerHTML = '';
+    // }
+    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+    // ganttChart.current.render(data);
   }, [from, to]);
 
   useEffect(() => {
@@ -323,14 +334,30 @@ const GanttD3 = (props) => {
     setTo(e);
   };
 
+  const handleCollapse = (e) => {
+    const target = e.currentTarget;
+    let temp = [...data];
+    const index = temp.findIndex((el) => el.id == Number(target.id));
+    for (let i = index + 1; i < temp.length; i++) {
+      if (temp[i].level > temp[index].level) {
+        temp[i].isShow = temp[index].collapsed;
+      } else break;
+      
+    }
+    if (index > -1) {
+      temp[index].collapsed = !temp[index].collapsed;
+    }
+    setData(temp);
+  };
+
   return (
     <React.Fragment>
       <div className={common.FormInput}>
         <Datetime
           // ref={dateFromRef}
-          locale='ja-JP'
+          locale="ja-JP"
           value={from}
-          dateFormat='YYYY/MM/DD'
+          dateFormat="YYYY/MM/DD"
           timeFormat={false}
           onChange={updateFrom}
           closeOnSelect={true}
@@ -338,9 +365,9 @@ const GanttD3 = (props) => {
         <span>〜</span>
         <Datetime
           // ref={dateToRef}
-          locale='ja-JP'
+          locale="ja-JP"
           value={to}
-          dateFormat='YYYY/MM/DD'
+          dateFormat="YYYY/MM/DD"
           timeFormat={false}
           onChange={updateTo}
           closeOnSelect={true}
@@ -369,9 +396,9 @@ const GanttD3 = (props) => {
             getEndTimeInitialPlan={getEndTimeInitialPlan}
           />
 
-          <GanttTable data={data}></GanttTable>
+          <GanttTable data={data} handleCollapse={handleCollapse}></GanttTable>
         </div>
-        <div id='dom' className={common.dom} ref={chartRef}></div>
+        <div id="dom" className={common.dom} ref={chartRef}></div>
       </div>
     </React.Fragment>
   );
