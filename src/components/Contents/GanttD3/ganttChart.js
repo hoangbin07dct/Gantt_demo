@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import GroupTasks from './groupTasks';
 import TasksList from './tasksList';
+import moment from 'moment';
 
 export default class GanttChart {
   constructor(containerElement, width, length, from, to) {
@@ -38,6 +39,8 @@ export default class GanttChart {
       .domain([dateFormat(this.from), dateFormat(this.to)])
       .range([0, this.width]);
 
+    let transX = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays() / 2);
+
     // SubAxis
     this.subAxisX = d3
       .axisTop()
@@ -72,7 +75,7 @@ export default class GanttChart {
     let tasksList = this.mainChart.node().appendChild(this.tasksList.render());
 
     // render axis X
-    this.svg
+    const timeText = this.svg
       .append('g')
       .attr('class', 'axisX')
       .transition()
@@ -81,8 +84,9 @@ export default class GanttChart {
       .call((g) => {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
-        g.selectAll('text').attr('transform', 'translate(10,0)');
+        g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
+    this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
     let grid = this.svg.append('g');
     grid
       .selectAll('line')
