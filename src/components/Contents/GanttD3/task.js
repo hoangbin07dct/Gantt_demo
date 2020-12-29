@@ -104,7 +104,7 @@ export default class Task {
        tooltip.style('opacity', 1)
        d3.select(".tooltipInner")    .html(this.taskDetail.task)    ;
        d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
-       .style("top", (d3.event.pageY) + "px");  
+       .style("top", (d3.event.pageY - 80) + "px");  
 
 
     });
