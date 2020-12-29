@@ -1,6 +1,6 @@
 @import '_mixin.scss';
 @import '_variable.scss';
-@import '../../node_modules/reset-css/reset.css';
+@import './utils/_reset.css';
 
 
 * {
@@ -18,7 +18,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   font-size: rem(12);
   font-weight: 500;
-  line-height: 21px;
+  line-height: 23px;
 }
 .wrap {
   width: 94%;
