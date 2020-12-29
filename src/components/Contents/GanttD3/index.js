@@ -122,12 +122,18 @@ const GanttD3 = (props) => {
     ganttChart.current.render(data);
   }, [width]);
   useEffect(() => {
-    ganttChart.current.changeScale(from, to);
-    // if (chartRef.current) {
-    //   chartRef.current.innerHTML = '';
-    // }
-    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
-    // ganttChart.current.render(data);
+       // ganttChart.current.changeScale(from, to);
+       if (chartRef.current) {
+        chartRef.current.innerHTML = '';
+      }
+      ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+      ganttChart.current.render(data);
+      ganttChart.current.changeScale(from, to);
+      // if (chartRef.current) {
+      //   chartRef.current.innerHTML = '';
+      // }
+      // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+      // ganttChart.current.render(data);
   }, [from, to]);
 
   useEffect(() => {
@@ -146,6 +152,7 @@ const GanttD3 = (props) => {
     startTime: '',
     endTime: '',
     details: '',
+    progress: '',
   });
 
   const [value, setValue] = React.useState('');
@@ -155,6 +162,7 @@ const GanttD3 = (props) => {
     e.preventDefault();
     initData.push(infoForm);
     console.log(initData);
+    toggle();
     document.querySelector('#dom svg').remove();
     const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
     ganttChart.render(initData);
@@ -164,6 +172,20 @@ const GanttD3 = (props) => {
     setInfoForm({
       ...infoForm,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const InputStartTime = (e) => {
+    setInfoForm({
+      ...infoForm,
+      startTime: e.format('YYYY-MM-DD'),
+    });
+  };
+  
+  const InputEndTime = (e) => {
+    setInfoForm({
+      ...infoForm,
+      endTime: e.format('YYYY-MM-DD'),
     });
   };
 
@@ -179,9 +201,9 @@ const GanttD3 = (props) => {
       <div className={common.FormInput}>
         <Datetime
           // ref={dateFromRef}
-          locale="ja-JP"
+          locale='ja-JP'
           value={from}
-          dateFormat="YYYY/MM/DD"
+          dateFormat='YYYY/MM/DD'
           timeFormat={false}
           onChange={updateFrom}
           closeOnSelect={true}
@@ -189,9 +211,9 @@ const GanttD3 = (props) => {
         <span>〜</span>
         <Datetime
           // ref={dateToRef}
-          locale="ja-JP"
+          locale='ja-JP'
           value={to}
-          dateFormat="YYYY/MM/DD"
+          dateFormat='YYYY/MM/DD'
           timeFormat={false}
           onChange={updateTo}
           closeOnSelect={true}
@@ -212,11 +234,13 @@ const GanttD3 = (props) => {
             handleSubmit={handleSubmit}
             InputChange={InputChange}
             infoForm={infoForm}
+            InputStartTime={InputStartTime}
+            InputEndTime={InputEndTime}
           />
 
           <GanttTable data={data}></GanttTable>
         </div>
-        <div id="dom" className={common.dom} ref={chartRef}></div>
+        <div id='dom' className={common.dom} ref={chartRef}></div>
       </div>
     </React.Fragment>
   );

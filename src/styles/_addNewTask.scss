@@ -1,4 +1,4 @@
-.add_new_task{
+.add_new_task {
   border: 1px solid #000;
   width: 30px;
   height: 30px;
@@ -17,9 +17,34 @@
   width: 100vw;
   height: 100vh;
   background-color: #000;
-  opacity: .5;
+  opacity: 0.5;
 }
 
+.ip {
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid #ddd;
+  outline: none;
+  height: 30px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.form_ttl {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.time {
+  > input {
+    width: 100%;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    outline: none;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 10px;
+  }
+}
 .modal_wrapper {
   position: fixed;
   top: 0;
@@ -32,6 +57,18 @@
   outline: 0;
 }
 
+.form_btn {
+  width: 200px;
+  height: 35px;
+  background: #247ba0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-left: auto;
+  cursor: pointer;
+}
 .modal {
   z-index: 100;
   background: white;
@@ -52,21 +89,27 @@
   font-weight: 700;
   line-height: 1;
   color: #000;
-  opacity: .3;
+  opacity: 0.3;
   cursor: pointer;
   border: none;
 }
 
 button {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 700;
   border: none;
   border-radius: 3px;
-  padding: .3rem 1rem;
-  margin-left: .5rem;
+  padding: 0.3rem 1rem;
+  margin-left: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .button_default {
-  background: #247BA0;
+  background: #247ba0;
   color: #fff;
+  margin-bottom: 20px;
 }
