@@ -43,7 +43,7 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
+      level: 2,
       hasChild: true
     },
 
@@ -59,8 +59,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
-      hasChild: true
+      level: 3,
+      hasChild: false
     },
 
     {
@@ -75,8 +75,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
-      hasChild: true
+      level: 3,
+      hasChild: false
     },
 
     {
@@ -91,8 +91,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
-      hasChild: true
+      level: 2,
+      hasChild: false
     },
 
     {
@@ -107,7 +107,7 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
+      level: 2,
       hasChild: true
     },
 
@@ -123,8 +123,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
-      hasChild: true
+      level: 3,
+      hasChild: false
     },
     {
       id: 8,
@@ -154,8 +154,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 1,
-      hasChild: true
+      level: 2,
+      hasChild: false
     },
   ];
   const [width, setWidth] = useState();
