@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 export default class Task {
   constructor(x, y, width, height, progress) {
-    this.x = x;
+    this.x = isNaN(x) ? 0 : x;
     this.y = y;
     this.width = width;
     this.height = height;
