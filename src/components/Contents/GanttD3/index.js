@@ -217,7 +217,7 @@ const GanttD3 = (props) => {
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
     }
-    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
+    ganttChart.current = new GanttChart(chartRef.current, width, data.length, from, to);
     ganttChart.current.render(data);
   }, [width, data]);
   useEffect(() => {
