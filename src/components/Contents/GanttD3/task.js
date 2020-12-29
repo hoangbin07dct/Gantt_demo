@@ -67,7 +67,7 @@ export default class Task {
     // render current
     let current = taskContainer.append('rect')
       .attr('class', 'current')
-      .attr('x',`${this.initialPlanStart}`)
+      .attr('x',`${this.currentStart}`)
       .attr('rx', 3)
       .attr('ry', 3)
       .attr('width', 0)
