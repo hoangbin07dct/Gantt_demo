@@ -19,85 +19,143 @@ const GanttD3 = (props) => {
       id: 1,
       task: 'conceptualize',
       type: 'development',
-      startTime: '2020-12-01', //year/month/day
-      endTime: '2020-12-02',
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 2,
       task: 'sketch',
       type: 'development',
-      startTime: '2020-12-02', //year/month/day
-      endTime: '2020-12-05',
-      details: 'No sketching either, really',
-      progress: 20,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 3,
       task: 'color profiles',
       type: 'development',
-      startTime: '2020-12-05', //year/month/day
-      endTime: '2020-12-10',
-      progress: 45,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 4,
       task: 'HTML',
       type: 'coding',
-      startTime: '2020-12-04', //year/month/day
-      endTime: '2020-12-09',
-      details: 'all three lines of it',
-      progress: 25,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 5,
       task: 'write the JS',
       type: 'coding',
-      startTime: '2020-12-11', //year/month/day
-      endTime: '2020-12-20',
-      progress: 60,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 6,
       task: 'advertise',
       type: 'promotion',
-      startTime: '2020-12-15', //year/month/day
-      endTime: '2020-12-18',
-      details: 'This counts, right?',
-      progress: 75,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 7,
       task: 'spam links',
       type: 'promotion',
-      startTime: '2020-12-17', //year/month/day
-      endTime: '2020-12-25',
-      progress: 100,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
     {
       id: 8,
       task: 'eat',
       type: 'celebration',
-      startTime: '2020-12-25', //year/month/day
-      endTime: '2020-12-27',
-      details: 'All the things',
-      progress: 50,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
 
     {
       id: 9,
       task: 'crying',
       type: 'celebration',
-      startTime: '2020-12-24', //year/month/day
-      endTime: '2020-12-27',
-      progress: 20,
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 1,
+      hasChild: true
     },
   ];
   const [width, setWidth] = useState();
