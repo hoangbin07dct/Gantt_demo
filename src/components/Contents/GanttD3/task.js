@@ -72,6 +72,7 @@ export default class Task {
       .attr("y1", 0)
       .attr("x2", `${this.currentStart}`)
       .attr("y2", 0)
+      .attr('shape-rendering','crispEdges')
       .attr('transform', `translate(0,${2*this.height + 4})`)
       .transition().duration(1000)
       .attr("x2", `${this.currentStart + this.currentWidth}`);

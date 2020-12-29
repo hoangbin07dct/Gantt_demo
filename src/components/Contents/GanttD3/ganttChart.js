@@ -9,7 +9,7 @@ export default class GanttChart {
       top: 50,
       right: 40,
       bottom: 50,
-      left: 40,
+      left: 0,
     };
     this.width = width - this.margin.left - this.margin.right;
     this.height = height - this.margin.top - this.margin.bottom;
@@ -54,14 +54,14 @@ export default class GanttChart {
       .axisTop()
       .scale(this.timeScale)
       .ticks(d3.timeDay.every(1))
-      // .tickSize(-this.height)
+      .tickSize(-this.height)
       .tickFormat((date) => d3.timeFormat('%d')(date));
 
     this.mainChart = this.svg.append('g').attr('class', 'main-chart');
 
     // render groupTasks
     this.groupTasks = new GroupTasks(this.width, gap, data, categories);
-    let groupTasks = this.mainChart.node().appendChild(this.groupTasks.render());
+    // let groupTasks = this.mainChart.node().appendChild(this.groupTasks.render());
 
     // render TasksList
     this.tasksList = new TasksList(gap, data, categories, this.timeScale);
@@ -72,7 +72,26 @@ export default class GanttChart {
       .attr('class', 'axisX')
       .transition()
       .duration(1000)
-      .call(this.axisX);
+      .call(this.axisX)
+      .call(g => {
+        g.selectAll('line')
+          .attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.selectAll('text')
+          .attr('transform', 'translate(10,0)');
+      });
+    let grid = this.svg.append('g');
+    grid.selectAll('line')
+      .data(data)
+      .enter()
+      .append('line')
+      .attr('stroke', 'rgba(0, 0, 0, 0.2)')
+      .attr('stroke-width', '1')
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", `${this.width}`)
+      .attr("y2", 0)
+      .attr('shape-rendering','crispEdges')
+      .attr('transform', (d, i) => `translate(0,${(i+1)*gap})`);
 
     //add clip path to the svg
     this.mainChart.append('defs').append('clipPath').attr('id', 'clip')
@@ -98,7 +117,11 @@ export default class GanttChart {
     this.to = to.format('YYYY-MM-DD');
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg.select('.axisX')
-      .call(this.axisX.scale(this.timeScale));
+      .call(this.axisX.scale(this.timeScale))
+      .call(g => {
+        g.selectAll('line')
+          .attr('stroke', 'rgba(0, 0, 0, 0.2)');
+      });
     this.svg.select('.subAxisX')
       .call(this.subAxisX.scale(this.timeScale));
     this.tasksList.changeScale(this.timeScale);
