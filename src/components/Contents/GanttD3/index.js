@@ -269,8 +269,8 @@ const GanttD3 = (props) => {
     console.log(initData);
     toggle();
     document.querySelector('#dom svg').remove();
-    const ganttChart = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
-    ganttChart.render(initData);
+    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
+    ganttChart.current.render(initData);
   };
 
   const InputChange = (e) => {
