@@ -29,7 +29,7 @@ export default class TasksList {
       let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
       let height = 20;
       let progress = planWidth * d.progress/100;
-      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress).render();
+      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress,d).render();
     });
 
     // new DragChart(tasksList, this.tasksListContainer);

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 export default class Task {
-  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress) {
+  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress,d) {
     
     this.currentStart = currentStart;
     this.currentWidth = currentWidth;
@@ -12,6 +12,7 @@ export default class Task {
     this.progress = progress;
     // this.x = isNaN(x) ? 0 : x;
     this.y = y;
+    this.taskDetail = d;
   }
   render() {
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
@@ -96,8 +97,16 @@ export default class Task {
 
     // event hover
     taskContainer.on('mouseover', () => {
-      // taskContainer.style("cursor", "move");
-      taskContainer.style('opacity', 0.7);
+       // taskContainer.style("cursor", "move");
+       taskContainer.style("cursor", "move");
+       taskContainer.style('opacity', 0.7);
+       let tooltip = d3.select(".tooltip");
+       tooltip.style('opacity', 1)
+       d3.select(".tooltipInner")    .html(this.taskDetail.task)    ;
+       d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
+       .style("top", (d3.event.pageY) + "px");  
+
+
     });
     taskContainer.on('mouseout', () => {
       taskContainer.style('opacity', 1);
