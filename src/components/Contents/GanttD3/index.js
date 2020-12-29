@@ -266,11 +266,12 @@ const GanttD3 = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     initData.push(infoForm);
+    setData(initData);
     console.log(initData);
     toggle();
     document.querySelector('#dom svg').remove();
     ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
-    ganttChart.current.render(initData);
+    ganttChart.current.render(data);
   };
 
   const InputChange = (e) => {
