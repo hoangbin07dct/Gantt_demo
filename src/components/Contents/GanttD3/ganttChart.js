@@ -37,15 +37,25 @@ export default class GanttChart {
       .domain([dateFormat(this.from), dateFormat(this.to)])
       .range([0, this.width]);
 
+    // SubAxis
+    this.subAxisX = d3
+      .axisTop()
+      .scale(this.timeScale)
+      .ticks(d3.timeMonth.every(1))
+      .tickFormat((date) => d3.timeFormat('%Y/%m')(date));
+    // render SubAxis
+    this.svg.append('g')
+      .attr('class', 'subAxisX')
+      .attr('transform', `translate(0, -20)`)
+      .transition().duration(1000).call(this.subAxisX);
+
     // axisX
     this.axisX = d3
       .axisTop()
       .scale(this.timeScale)
       .ticks(d3.timeDay.every(1))
+      // .tickSize(-this.height)
       .tickFormat((date) => d3.timeFormat('%d')(date));
-
-    // render axis X
-    this.svg.append('g').attr('class', 'axisX').transition().duration(1000).call(this.axisX);
 
     this.mainChart = this.svg.append('g').attr('class', 'main-chart');
 
@@ -56,6 +66,13 @@ export default class GanttChart {
     // render TasksList
     this.tasksList = new TasksList(gap, data, categories, this.timeScale);
     let tasksList = this.mainChart.node().appendChild(this.tasksList.render());
+
+    // render axis X
+    this.svg.append('g')
+      .attr('class', 'axisX')
+      .transition()
+      .duration(1000)
+      .call(this.axisX);
 
     //add clip path to the svg
     this.mainChart.append('defs').append('clipPath').attr('id', 'clip')
@@ -81,7 +98,9 @@ export default class GanttChart {
     this.to = to.format('YYYY-MM-DD');
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg.select('.axisX')
-        .call(this.axisX.scale(this.timeScale));
+      .call(this.axisX.scale(this.timeScale));
+    this.svg.select('.subAxisX')
+      .call(this.subAxisX.scale(this.timeScale));
     this.tasksList.changeScale(this.timeScale);
   }
 }
