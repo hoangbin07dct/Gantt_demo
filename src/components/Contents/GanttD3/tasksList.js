@@ -20,14 +20,14 @@ export default class TasksList {
     let task = tasksList.append((d,i) => {
       const minDate = d3.min([dateFormat(d.startTimeCurrent), dateFormat(d.startTimePlan), dateFormat(d.startTimeInitialPlan)]);
       let x = this.timeScale(minDate);
-      let y = i * this.gap + 2;
+      let y = i * this.gap + 4;
       let currentStart = this.timeScale(dateFormat(d.startTimeCurrent))
       let planStart = this.timeScale(dateFormat(d.startTimePlan))
       let initialPlanStart = this.timeScale(dateFormat(d.startTimeInitialPlan))
       let currentWidth = this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent));
       let planWidth = this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan));
       let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
-      let height = 10;
+      let height = 20;
       let progress = planWidth * d.progress/100;
       return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress).render();
     });

@@ -30,7 +30,7 @@ export default class Task {
       .attr('stroke', 'orange')
       .attr('fill', 'orange')
       .attr('opacity', 1)
-      .attr('transform', `translate(0,${this.height + 2})`)
+      // .attr('transform', `translate(0,${this.height + 2})`)
       .transition().duration(1000)
       .attr('width', (d) => this.planWidth);
 
@@ -46,7 +46,7 @@ export default class Task {
     .attr('stroke-width', '1')
     .attr('stroke-dasharray', '5,5')
     .attr('fill', 'none')
-    .attr('transform', `translate(0,${this.height + 2})`)
+    // .attr('transform', `translate(0,${this.height + 2})`)
     .transition().duration(1000)
     .attr('width', (d) => this.initialPlanWidth)
     .attr('opacity', 1);
@@ -75,7 +75,7 @@ export default class Task {
       .attr('stroke', '#2b3a6a')
       .attr('stroke-width', '1')
       .attr('fill', '#2b3a6a')
-      .attr('transform', `translate(0,${2*this.height + 4})`)
+      .attr('transform', `translate(0,${this.height + 4})`)
       .transition().duration(1000)
       .attr('width', (d) => this.currentWidth)
       .attr('opacity', 1);
@@ -96,7 +96,7 @@ export default class Task {
 
     // event hover
     taskContainer.on('mouseover', () => {
-      taskContainer.style("cursor", "move");
+      // taskContainer.style("cursor", "move");
       taskContainer.style('opacity', 0.7);
     });
     taskContainer.on('mouseout', () => {
