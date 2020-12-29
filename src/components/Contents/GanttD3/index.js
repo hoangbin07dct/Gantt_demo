@@ -75,8 +75,8 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 3,
-      hasChild: false
+      level: 1,
+      hasChild: true
     },
 
     {
@@ -107,7 +107,7 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 2,
+      level: 1,
       hasChild: true
     },
 
@@ -123,7 +123,7 @@ const GanttD3 = (props) => {
       endTimeInitialPlan: '2020-12-05',
       details: "This actually didn't take any conceptualization",
       progress: 90,
-      level: 3,
+      level: 2,
       hasChild: false
     },
     {
@@ -155,6 +155,36 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
+      hasChild: true
+    },
+    {
+      id: 10,
+      task: 'crying',
+      type: 'celebration',
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 3,
+      hasChild: false
+    },
+    {
+      id: 11,
+      task: 'crying',
+      type: 'celebration',
+      startTimeCurrent: '2020-12-03', //year/month/day
+      endTimeCurrent: '2020-12-10',
+      startTimePlan: '2020-12-02', //year/month/day
+      endTimePlan: '2020-12-07',
+      startTimeInitialPlan: '2020-12-01', //year/month/day
+      endTimeInitialPlan: '2020-12-05',
+      details: "This actually didn't take any conceptualization",
+      progress: 90,
+      level: 3,
       hasChild: false
     },
   ];
