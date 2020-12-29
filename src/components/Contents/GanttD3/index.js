@@ -28,7 +28,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
 
     {
@@ -44,7 +45,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
 
     {
@@ -60,7 +62,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
+      collapsed: false,
     },
 
     {
@@ -76,7 +79,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
 
     {
@@ -92,7 +96,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: false
+      hasChild: false,
+      collapsed: false,
     },
 
     {
@@ -108,7 +113,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
 
     {
@@ -124,7 +130,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: false
+      hasChild: false,
+      collapsed: false,
     },
     {
       id: 8,
@@ -139,7 +146,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
 
     {
@@ -155,7 +163,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: true
+      hasChild: true,
+      collapsed: false,
     },
     {
       id: 10,
@@ -170,7 +179,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
+      collapsed: false,
     },
     {
       id: 11,
@@ -185,7 +195,8 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
+      collapsed: false,
     },
   ];
   const [width, setWidth] = useState();
