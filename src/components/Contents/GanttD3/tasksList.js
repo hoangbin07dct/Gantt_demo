@@ -22,20 +22,16 @@ export default class TasksList {
       let x = this.timeScale(minDate);
       let y = i * this.gap + 2;
       let currentStart = this.timeScale(dateFormat(d.startTimeCurrent))
-      let currentEnd = this.timeScale(dateFormat(d.endTimeCurrent))
       let planStart = this.timeScale(dateFormat(d.startTimePlan))
-      let planEnd = this.timeScale(dateFormat(d.endTimePlan))
       let initialPlanStart = this.timeScale(dateFormat(d.startTimeInitialPlan))
-      let initialPlanEnd = this.timeScale(dateFormat(d.endTimeInitialPlan))
       let currentWidth = this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent));
       let planWidth = this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan));
       let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
-      let height = this.gap/4;
+      let height = 20;
       let progress = planWidth * d.progress/100;
-      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, x, y , height, progress).render();
+      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress).render();
     });
 
-    // console.log(this.tasksListContainer.selectAll('g')); 
     new DragChart(tasksList, this.tasksListContainer);
 
     return this.tasksListContainer.node();
@@ -43,18 +39,29 @@ export default class TasksList {
   changeScale(timeScale) {
     let dateFormat = d3.timeParse('%Y-%m-%d');
     this.timeScale = timeScale;
-    let tasksList = this.tasksListContainer
-      .selectAll('.task')
+
+    this.tasksListContainer
+      .selectAll('.init-plans')
       .data(this.data)
-      .attr('transform', (d,i) => `translate(${this.timeScale(dateFormat(d.startTime))},${i * this.gap + 2})`);
+      .attr('x', d => this.timeScale(dateFormat(d.startTimeInitialPlan)))
+      .attr('width', (d) => this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan)));
+
     this.tasksListContainer
       .selectAll('.plans')
       .data(this.data)
-      .attr('width', (d) => this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime)));
+      .attr('x', d => this.timeScale(dateFormat(d.startTimePlan)))
+      .attr('width', (d) => this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan)));
 
     this.tasksListContainer
       .selectAll('.progress')
       .data(this.data)
-      .attr('width', (d) => (this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime))) * d.progress/100);
+      .attr('x', d => this.timeScale(dateFormat(d.startTimePlan)))
+      .attr('width', (d) => (this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan))) * d.progress/100);
+
+    this.tasksListContainer
+      .selectAll('.current')
+      .data(this.data)
+      .attr("x1", d => this.timeScale(dateFormat(d.startTimeCurrent)))
+      .attr("x2", d => this.timeScale(dateFormat(d.endTimeCurrent)));
   }
 }

@@ -221,13 +221,13 @@ const GanttD3 = (props) => {
     ganttChart.current.render(data);
   }, [width]);
   useEffect(() => {
-       // ganttChart.current.changeScale(from, to);
-       if (chartRef.current) {
-        chartRef.current.innerHTML = '';
-      }
-      ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
-      ganttChart.current.render(data);
-      ganttChart.current.changeScale(from, to);
+       ganttChart.current.changeScale(from, to);
+      //  if (chartRef.current) {
+      //   chartRef.current.innerHTML = '';
+      // }
+      // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
+      // ganttChart.current.render(data);
+      // ganttChart.current.changeScale(from, to);
       // if (chartRef.current) {
       //   chartRef.current.innerHTML = '';
       // }
