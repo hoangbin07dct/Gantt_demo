@@ -28,6 +28,27 @@ export default class GanttChart {
     this.timeScale = null;
     this.groupTasks = null;
     this.tasksList = null;
+    
+     // Define the div for the tooltip
+     if (document.querySelector('.tooltip')) {
+       document.querySelector('.tooltip').remove();
+     }
+     this.tooltip = d3.select("body").append("div")
+     .attr("class", "tooltip")	
+     this.tooltipInner = d3.select("body .tooltip")
+     .append("div")
+     .attr("class", "tooltipInner")	
+
+
+     d3.select(".tooltip")
+
+
+     .style("opacity", 0)
+     .style("top", 0)
+     .style("position", 'absolute')
+   
+
+
   }
   render(data) {
     let categories = data.map((d) => d.type);
