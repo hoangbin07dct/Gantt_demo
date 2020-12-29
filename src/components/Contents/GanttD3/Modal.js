@@ -3,7 +3,19 @@ import ReactDOM from 'react-dom';
 import common from '../../../styles/Common.module.scss';
 import Datetime from 'react-datetime';
 
-const Modal = ({ isShowing, hide, handleSubmit, InputChange, infoForm, InputStartTime, InputEndTime }) =>
+const Modal = ({
+  isShowing,
+  hide,
+  handleSubmit,
+  InputChange,
+  infoForm,
+  getStartTimeCurrent,
+  getEndTimeCurrent,
+  getStartTimePlan,
+  getEndTimePlan,
+  getStartTimeInitialPlan,
+  getEndTimeInitialPlan,
+}) =>
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
@@ -32,20 +44,20 @@ const Modal = ({ isShowing, hide, handleSubmit, InputChange, infoForm, InputStar
                   <input className={common.ip} type='text' onChange={InputChange} name='type' value={infoForm.type} />
                 </div>
 
-                <p>Start Time</p>
+                <p>Start Time Current</p>
                 <div>
                   <Datetime
                     // ref={dateFromRef}
                     locale='ja-JP'
-                    value={infoForm.startTime}
+                    value={infoForm.startTimeCurrent}
                     dateFormat='YYYY-MM-DD'
                     timeFormat={false}
-                    onChange={(e) => InputStartTime(e)}
+                    onChange={(e) => getStartTimeCurrent(e)}
                     closeOnSelect={true}
                     className={common.time}
                   />
                 </div>
-                <p>End Time</p>
+                <p>End Time Current</p>
                 <div>
                   {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
                   <Datetime
@@ -54,7 +66,63 @@ const Modal = ({ isShowing, hide, handleSubmit, InputChange, infoForm, InputStar
                     value={infoForm.endTime}
                     dateFormat='YYYY-MM-DD'
                     timeFormat={false}
-                    onChange={(e) => InputEndTime(e)}
+                    onChange={(e) => getEndTimeCurrent(e)}
+                    closeOnSelect={true}
+                    className={common.time}
+                  />
+                </div>
+                <p>Start Time Plan</p>
+                <div>
+                  {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale='ja-JP'
+                    value={infoForm.endTime}
+                    dateFormat='YYYY-MM-DD'
+                    timeFormat={false}
+                    onChange={(e) => getStartTimePlan(e)}
+                    closeOnSelect={true}
+                    className={common.time}
+                  />
+                </div>
+                <p>End Time Plan</p>
+                <div>
+                  {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale='ja-JP'
+                    value={infoForm.endTime}
+                    dateFormat='YYYY-MM-DD'
+                    timeFormat={false}
+                    onChange={(e) => getEndTimePlan(e)}
+                    closeOnSelect={true}
+                    className={common.time}
+                  />
+                </div>
+                <p>Start Time Initial Plan</p>
+                <div>
+                  {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale='ja-JP'
+                    value={infoForm.endTime}
+                    dateFormat='YYYY-MM-DD'
+                    timeFormat={false}
+                    onChange={(e) => getStartTimeInitialPlan(e)}
+                    closeOnSelect={true}
+                    className={common.time}
+                  />
+                </div>
+                <p>End Time Initial Plan</p>
+                <div>
+                  {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale='ja-JP'
+                    value={infoForm.endTime}
+                    dateFormat='YYYY-MM-DD'
+                    timeFormat={false}
+                    onChange={(e) => getEndTimeInitialPlan(e)}
                     closeOnSelect={true}
                     className={common.time}
                   />

@@ -28,7 +28,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
     },
 
     {
@@ -44,7 +44,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: true
+      hasChild: true,
     },
 
     {
@@ -60,7 +60,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
     },
 
     {
@@ -76,7 +76,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
     },
 
     {
@@ -92,7 +92,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: false
+      hasChild: false,
     },
 
     {
@@ -108,7 +108,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
     },
 
     {
@@ -124,7 +124,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: false
+      hasChild: false,
     },
     {
       id: 8,
@@ -139,7 +139,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 1,
-      hasChild: true
+      hasChild: true,
     },
 
     {
@@ -155,7 +155,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
-      hasChild: true
+      hasChild: true,
     },
     {
       id: 10,
@@ -170,7 +170,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
     },
     {
       id: 11,
@@ -185,7 +185,7 @@ const GanttD3 = (props) => {
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
-      hasChild: false
+      hasChild: false,
     },
   ];
   const [width, setWidth] = useState();
@@ -237,10 +237,16 @@ const GanttD3 = (props) => {
   const [infoForm, setInfoForm] = useState({
     task: '',
     type: '',
-    startTime: '',
-    endTime: '',
+    startTimeCurrent: '', //year/month/day
+    endTimeCurrent: '',
+    startTimePlan: '', //year/month/day
+    endTimePlan: '',
+    startTimeInitialPlan: '', //year/month/day
+    endTimeInitialPlan: '',
     details: '',
     progress: '',
+    level: 3,
+    hasChild: false,
   });
 
   const [value, setValue] = React.useState('');
@@ -263,20 +269,45 @@ const GanttD3 = (props) => {
     });
   };
 
-  const InputStartTime = (e) => {
+  const getStartTimeCurrent = (e) => {
     setInfoForm({
       ...infoForm,
-      startTime: e.format('YYYY-MM-DD'),
-    });
-  };
-  
-  const InputEndTime = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTime: e.format('YYYY-MM-DD'),
+      startTimeCurrent: e.format('YYYY-MM-DD'),
     });
   };
 
+  const getEndTimeCurrent = (e) => {
+    setInfoForm({
+      ...infoForm,
+      endTimeCurrent: e.format('YYYY-MM-DD'),
+    });
+  };
+
+  const getStartTimePlan = (e) => {
+    setInfoForm({
+      ...infoForm,
+      startTimePlan: e.format('YYYY-MM-DD'),
+    });
+  };
+
+  const getEndTimePlan = (e) => {
+    setInfoForm({
+      ...infoForm,
+      endTimePlan: e.format('YYYY-MM-DD'),
+    });
+  };
+  const getStartTimeInitialPlan = (e) => {
+    setInfoForm({
+      ...infoForm,
+      startTimeInitialPlan: e.format('YYYY-MM-DD'),
+    });
+  };
+  const getEndTimeInitialPlan = (e) => {
+    setInfoForm({
+      ...infoForm,
+      endTimeInitialPlan: e.format('YYYY-MM-DD'),
+    });
+  };
   const updateFrom = (e) => {
     setFrom(e);
   };
@@ -322,8 +353,12 @@ const GanttD3 = (props) => {
             handleSubmit={handleSubmit}
             InputChange={InputChange}
             infoForm={infoForm}
-            InputStartTime={InputStartTime}
-            InputEndTime={InputEndTime}
+            getStartTimeCurrent={getStartTimeCurrent}
+            getEndTimeCurrent={getEndTimeCurrent}
+            getStartTimePlan={getStartTimePlan}
+            getEndTimePlan={getEndTimePlan}
+            getStartTimeInitialPlan={getStartTimeInitialPlan}
+            getEndTimeInitialPlan={getEndTimeInitialPlan}
           />
 
           <GanttTable data={data}></GanttTable>
