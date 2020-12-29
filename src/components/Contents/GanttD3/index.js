@@ -17,8 +17,8 @@ const GanttD3 = (props) => {
   var initData = [
     {
       id: 1,
-      task: 'conceptualize',
-      type: 'development',
+      task: 'Task1',
+      type: 'Group1',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -34,8 +34,8 @@ const GanttD3 = (props) => {
 
     {
       id: 2,
-      task: 'sketch',
-      type: 'development',
+      task: 'Task2',
+      type: 'Group1',
       startTimeCurrent: '2020-12-15', //year/month/day
       endTimeCurrent: '2020-12-20',
       startTimePlan: '2020-12-20', //year/month/day
@@ -51,8 +51,8 @@ const GanttD3 = (props) => {
 
     {
       id: 3,
-      task: 'color profiles',
-      type: 'development',
+      task: 'Task3',
+      type: 'Group1',
       startTimeCurrent: '2020-12-05', //year/month/day
       endTimeCurrent: '2020-12-15',
       startTimePlan: '2020-12-02', //year/month/day
@@ -68,16 +68,16 @@ const GanttD3 = (props) => {
 
     {
       id: 4,
-      task: 'HTML',
-      type: 'coding',
-      startTimeCurrent: '2020-12-03', //year/month/day
+      task: 'Task4',
+      type: 'Group2',
+      startTimeCurrent: '2020-11-30', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
-      endTimePlan: '2020-12-07',
+      endTimePlan: '2020-12-12',
       startTimeInitialPlan: '2020-12-01', //year/month/day
-      endTimeInitialPlan: '2020-12-05',
+      endTimeInitialPlan: '2020-12-10',
       details: "This actually didn't take any conceptualization",
-      progress: 90,
+      progress: 10,
       level: 1,
       hasChild: true,
       collapsed: false,
@@ -85,16 +85,16 @@ const GanttD3 = (props) => {
 
     {
       id: 5,
-      task: 'write the JS',
-      type: 'coding',
-      startTimeCurrent: '2020-12-03', //year/month/day
-      endTimeCurrent: '2020-12-10',
-      startTimePlan: '2020-12-02', //year/month/day
-      endTimePlan: '2020-12-07',
-      startTimeInitialPlan: '2020-12-01', //year/month/day
-      endTimeInitialPlan: '2020-12-05',
+      task: 'Task5',
+      type: 'Group2',
+      startTimeCurrent: '2020-12-05', //year/month/day
+      endTimeCurrent: '2020-12-21',
+      startTimePlan: '2020-12-15', //year/month/day
+      endTimePlan: '2020-12-24',
+      startTimeInitialPlan: '2020-12-14', //year/month/day
+      endTimeInitialPlan: '2020-12-21',
       details: "This actually didn't take any conceptualization",
-      progress: 90,
+      progress: 40,
       level: 2,
       hasChild: false,
       collapsed: false,
@@ -102,8 +102,8 @@ const GanttD3 = (props) => {
 
     {
       id: 6,
-      task: 'advertise',
-      type: 'promotion',
+      task: 'Task6',
+      type: 'Group3',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -119,8 +119,8 @@ const GanttD3 = (props) => {
 
     {
       id: 7,
-      task: 'spam links',
-      type: 'promotion',
+      task: 'Task7',
+      type: 'Group3',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -135,8 +135,8 @@ const GanttD3 = (props) => {
     },
     {
       id: 8,
-      task: 'eat',
-      type: 'celebration',
+      task: 'Task8',
+      type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -152,8 +152,8 @@ const GanttD3 = (props) => {
 
     {
       id: 9,
-      task: 'crying',
-      type: 'celebration',
+      task: 'Task9',
+      type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -168,8 +168,8 @@ const GanttD3 = (props) => {
     },
     {
       id: 10,
-      task: 'crying',
-      type: 'celebration',
+      task: 'Task10',
+      type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
@@ -184,8 +184,8 @@ const GanttD3 = (props) => {
     },
     {
       id: 11,
-      task: 'crying',
-      type: 'celebration',
+      task: 'Task11',
+      type: 'Group4',
       startTimeCurrent: '2020-12-03', //year/month/day
       endTimeCurrent: '2020-12-10',
       startTimePlan: '2020-12-02', //year/month/day
