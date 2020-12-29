@@ -18,12 +18,21 @@ export default class TasksList {
       .data(this.data)
       .enter();
     let task = tasksList.append((d,i) => {
-      let x = this.timeScale(dateFormat(d.startTime));
+      const minDate = d3.min([dateFormat(d.startTimeCurrent), dateFormat(d.startTimePlan), dateFormat(d.startTimeInitialPlan)]);
+      let x = this.timeScale(minDate);
       let y = i * this.gap + 2;
-      let width = this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime));
-      let height = this.gap - 4;
-      let progress = width * d.progress/100;
-      return new Task(x, y, width, height, progress).render();
+      let currentStart = this.timeScale(dateFormat(d.startTimeCurrent))
+      let currentEnd = this.timeScale(dateFormat(d.endTimeCurrent))
+      let planStart = this.timeScale(dateFormat(d.startTimePlan))
+      let planEnd = this.timeScale(dateFormat(d.endTimePlan))
+      let initialPlanStart = this.timeScale(dateFormat(d.startTimeInitialPlan))
+      let initialPlanEnd = this.timeScale(dateFormat(d.endTimeInitialPlan))
+      let currentWidth = this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent));
+      let planWidth = this.timeScale(dateFormat(d.endTimePlan)) - this.timeScale(dateFormat(d.startTimePlan));
+      let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
+      let height = this.gap/4;
+      let progress = planWidth * d.progress/100;
+      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, x, y , height, progress).render();
     });
 
     // console.log(this.tasksListContainer.selectAll('g')); 

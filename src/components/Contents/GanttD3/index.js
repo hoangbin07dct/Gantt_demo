@@ -176,7 +176,7 @@ const GanttD3 = (props) => {
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
     }
-    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
     ganttChart.current.render(data);
   }, [width]);
   useEffect(() => {
@@ -184,7 +184,7 @@ const GanttD3 = (props) => {
        if (chartRef.current) {
         chartRef.current.innerHTML = '';
       }
-      ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+      ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
       ganttChart.current.render(data);
       ganttChart.current.changeScale(from, to);
       // if (chartRef.current) {

@@ -27,7 +27,7 @@ export default class GanttChart {
     this.tasksList = null;
   }
   render(data) {
-    let gap = 24;
+    let gap = 54;
     let categories = data.map((d) => d.type);
     categories = checkUnique(categories);
 
