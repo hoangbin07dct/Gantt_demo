@@ -21,6 +21,7 @@ export default class GanttChart {
       .attr('height', height)
       .append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+    this.mainChart = null;
     this.timeScale = null;
     this.groupTasks = null;
     this.tasksList = null;
@@ -46,13 +47,22 @@ export default class GanttChart {
     // render axis X
     this.svg.append('g').attr('class', 'axisX').transition().duration(1000).call(this.axisX);
 
+    this.mainChart = this.svg.append('g').attr('class', 'main-chart');
+
     // render groupTasks
     this.groupTasks = new GroupTasks(this.width, gap, data, categories);
-    let groupTasks = this.svg.node().appendChild(this.groupTasks.render());
+    let groupTasks = this.mainChart.node().appendChild(this.groupTasks.render());
 
     // render TasksList
     this.tasksList = new TasksList(gap, data, categories, this.timeScale);
-    let tasksList = this.svg.node().appendChild(this.tasksList.render());
+    let tasksList = this.mainChart.node().appendChild(this.tasksList.render());
+
+    //add clip path to the svg
+    this.mainChart.append('defs').append('clipPath').attr('id', 'clip')
+      .append('rect').attr('width', this.width).attr('height', this.height)
+      .attr('x', 0)
+      .attr('y', 0);
+    this.mainChart.selectAll('*').attr('clip-path', 'url(#clip)');
 
     function checkUnique(arr) {
       let hash = {},
