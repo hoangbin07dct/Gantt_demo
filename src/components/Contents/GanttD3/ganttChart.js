@@ -79,7 +79,8 @@ export default class GanttChart {
       .duration(1000)
       .call(this.axisX)
       .call((g) => {
-        g.selectAll('line').attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
         g.selectAll('text').attr('transform', 'translate(10,0)');
       });
     let grid = this.svg.append('g');

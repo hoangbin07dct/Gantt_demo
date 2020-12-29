@@ -36,12 +36,12 @@ const GanttD3 = (props) => {
       id: 2,
       task: 'sketch',
       type: 'development',
-      startTimeCurrent: '2020-11-15', //year/month/day
-      endTimeCurrent: '2020-12-10',
+      startTimeCurrent: '2020-12-15', //year/month/day
+      endTimeCurrent: '2020-12-20',
       startTimePlan: '2020-12-20', //year/month/day
       endTimePlan: '2020-12-25',
-      startTimeInitialPlan: '2020-12-05', //year/month/day
-      endTimeInitialPlan: '2020-12-15',
+      startTimeInitialPlan: '2020-12-20', //year/month/day
+      endTimeInitialPlan: '2020-12-30',
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 2,
@@ -53,12 +53,12 @@ const GanttD3 = (props) => {
       id: 3,
       task: 'color profiles',
       type: 'development',
-      startTimeCurrent: '2020-12-03', //year/month/day
-      endTimeCurrent: '2020-12-10',
+      startTimeCurrent: '2020-12-05', //year/month/day
+      endTimeCurrent: '2020-12-15',
       startTimePlan: '2020-12-02', //year/month/day
       endTimePlan: '2020-12-07',
-      startTimeInitialPlan: '2020-12-01', //year/month/day
-      endTimeInitialPlan: '2020-12-05',
+      startTimeInitialPlan: '2020-12-13', //year/month/day
+      endTimeInitialPlan: '2020-12-25',
       details: "This actually didn't take any conceptualization",
       progress: 90,
       level: 3,
