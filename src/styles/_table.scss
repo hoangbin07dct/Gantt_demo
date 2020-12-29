@@ -2,6 +2,11 @@
   padding: 5px;
   border: 1px solid #ccc;
 }
+tbody {
+  td {
+    height: 51px;
+  }
+}
 .taskTable {
   border-spacing: 0;
   border-collapse: collapse;
@@ -13,6 +18,7 @@
 .flexCenter {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 .expController {
   display: inline-block;

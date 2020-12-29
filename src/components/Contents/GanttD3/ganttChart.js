@@ -9,7 +9,7 @@ export default class GanttChart {
       top: 50,
       right: 40,
       bottom: 50,
-      left: 40,
+      left: 5,
     };
     this.width = width - this.margin.left - this.margin.right;
     this.height = height - this.margin.top - this.margin.bottom;
