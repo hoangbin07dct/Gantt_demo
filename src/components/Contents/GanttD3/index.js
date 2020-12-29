@@ -256,7 +256,7 @@ const GanttD3 = (props) => {
     endTimeInitialPlan: '',
     details: '',
     progress: '',
-    level: 3,
+    level: 1,
     hasChild: false,
   });
 
