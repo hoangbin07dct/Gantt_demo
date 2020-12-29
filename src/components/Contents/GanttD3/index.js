@@ -219,7 +219,7 @@ const GanttD3 = (props) => {
     }
     ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
     ganttChart.current.render(data);
-  }, [width]);
+  }, [width, data]);
   useEffect(() => {
        ganttChart.current.changeScale(from, to);
       //  if (chartRef.current) {
@@ -267,11 +267,7 @@ const GanttD3 = (props) => {
     e.preventDefault();
     initData.push(infoForm);
     setData(initData);
-    console.log(initData);
     toggle();
-    document.querySelector('#dom svg').remove();
-    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
-    ganttChart.current.render(data);
   };
 
   const InputChange = (e) => {
