@@ -122,12 +122,12 @@ const GanttD3 = (props) => {
     ganttChart.current.render(data);
   }, [width]);
   useEffect(() => {
-    // ganttChart.current.changeScale(from, to);
-    if (chartRef.current) {
-      chartRef.current.innerHTML = '';
-    }
-    ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
-    ganttChart.current.render(data);
+    ganttChart.current.changeScale(from, to);
+    // if (chartRef.current) {
+    //   chartRef.current.innerHTML = '';
+    // }
+    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+    // ganttChart.current.render(data);
   }, [from, to]);
 
   useEffect(() => {

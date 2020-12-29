@@ -22,6 +22,8 @@ export default class GanttChart {
       .append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
     this.timeScale = null;
+    this.groupTasks = null;
+    this.tasksList = null;
   }
   render(data) {
     let gap = 24;
@@ -45,10 +47,12 @@ export default class GanttChart {
     this.svg.append('g').attr('class', 'axisX').transition().duration(1000).call(this.axisX);
 
     // render groupTasks
-    let groupTasks = this.svg.node().appendChild(new GroupTasks(this.width, gap, data, categories).render());
+    this.groupTasks = new GroupTasks(this.width, gap, data, categories);
+    let groupTasks = this.svg.node().appendChild(this.groupTasks.render());
 
     // render TasksList
-    let tasksList = this.svg.node().appendChild(new TasksList(gap, data, categories, this.timeScale).render());
+    this.tasksList = new TasksList(gap, data, categories, this.timeScale);
+    let tasksList = this.svg.node().appendChild(this.tasksList.render());
 
     function checkUnique(arr) {
       let hash = {},
@@ -68,5 +72,6 @@ export default class GanttChart {
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg.select('.axisX')
         .call(this.axisX.scale(this.timeScale));
+    this.tasksList.changeScale(this.timeScale);
   }
 }

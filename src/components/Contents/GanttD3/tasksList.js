@@ -7,14 +7,14 @@ export default class TasksList {
     this.data = data;
     this.categories = categories;
     this.timeScale = timeScale;
-    
+    this.tasksListContainer = null;
   }
   render() {
     let dateFormat = d3.timeParse('%Y-%m-%d');
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
-    let tasksListContainer = d3.select(containElement).attr('class', 'tasks-list-container');
-    let tasksList = tasksListContainer
-      .selectAll('rect')
+    this.tasksListContainer = d3.select(containElement).attr('class', 'tasks-list-container');
+    let tasksList = this.tasksListContainer
+      .selectAll('g')
       .data(this.data)
       .enter();
     let task = tasksList.append((d,i) => {
@@ -26,8 +26,26 @@ export default class TasksList {
       return new Task(x, y, width, height, progress).render();
     });
 
-    new DragChart(tasksList, tasksListContainer);
+    // console.log(this.tasksListContainer.selectAll('g')); 
+    new DragChart(tasksList, this.tasksListContainer);
 
-    return tasksListContainer.node();
+    return this.tasksListContainer.node();
+  }
+  changeScale(timeScale) {
+    let dateFormat = d3.timeParse('%Y-%m-%d');
+    this.timeScale = timeScale;
+    let tasksList = this.tasksListContainer
+      .selectAll('.task')
+      .data(this.data)
+      .attr('transform', (d,i) => `translate(${this.timeScale(dateFormat(d.startTime))},${i * this.gap + 2})`);
+    this.tasksListContainer
+      .selectAll('.plans')
+      .data(this.data)
+      .attr('width', (d) => this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime)));
+
+    this.tasksListContainer
+      .selectAll('.progress')
+      .data(this.data)
+      .attr('width', (d) => (this.timeScale(dateFormat(d.endTime)) - this.timeScale(dateFormat(d.startTime))) * d.progress/100);
   }
 }

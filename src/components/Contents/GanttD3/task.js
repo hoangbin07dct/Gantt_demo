@@ -13,6 +13,7 @@ export default class Task {
       .attr('class', 'task')
       .attr('transform', `translate(${this.x},${this.y})`);
     let task = taskContainer.append('rect')
+      .attr('class', 'plans')
       .attr('rx', 3)
       .attr('ry', 3)
       .attr('width', 0)
@@ -25,6 +26,7 @@ export default class Task {
 
     // render progress bar
     let progress = taskContainer.append('rect')
+      .attr('class', 'progress')
       .attr('rx', 3)
       .attr('ry', 3)
       .attr('width', 0)
