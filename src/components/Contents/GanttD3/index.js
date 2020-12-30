@@ -54,23 +54,29 @@ const GanttD3 = (props) => {
 
   const handleCreateTask = (e, form, appendIndex) => {
     e.preventDefault();
+    let obj = {
+      ...form,
+      startTimeInitialPlan: form.startTimePlan,
+      endTimeInitialPlan: form.endTimePlan,
+      isUpdated: false
+    }
     setData((data) => {
       const temp = [...data];
       if (!appendIndex) {
         let index = temp
           .slice()
           .reverse()
-          .findIndex((el) => el.type === form.type);
+          .findIndex((el) => el.type === obj.type);
         if (index > -1) {
-          temp.splice(index - 1, 0, form);
+          temp.splice(index - 1, 0, obj);
           return temp;
         }
-        temp.push(form);
+        temp.push(obj);
         return temp;
       }
       const index = temp.findIndex((el) => el.id === appendIndex);
       temp[index].hasChild = true;
-      temp.splice(index + 1, 0, form);
+      temp.splice(index + 1, 0, obj);
       return temp;
     });
     toggleModal(e);
@@ -78,10 +84,14 @@ const GanttD3 = (props) => {
 
   const handleUpdateTask = (e, form, appendIndex) => {
     e.preventDefault();
+    let obj = {
+      ...form,
+      isUpdated: true
+    }
     setData((data) => {
       const temp = [...data];
       const index = temp.findIndex((el) => el.id === appendIndex);
-      temp.splice(index, 1, form);
+      temp.splice(index, 1, obj);
       return temp;
     });
     toggleModal(e);

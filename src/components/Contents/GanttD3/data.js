@@ -7,7 +7,7 @@ export const initData = [
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-24',
+    endTimePlan: '2020-12-25',
     startTimeInitialPlan: '2020-12-01', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
@@ -15,7 +15,8 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    dependence: [2, 3]
+    isUpdated: true,
+    dependence: [4, 6]
   },
 
   {
@@ -34,6 +35,7 @@ export const initData = [
     level: 2,
     hasChild: true,
     collapsed: false,
+    isUpdated: true,
   },
 
   {
@@ -52,6 +54,7 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
+    isUpdated: true,
   },
 
   {
@@ -61,8 +64,8 @@ export const initData = [
     type: 'Group2',
     startTimeCurrent: '2020-11-30', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-12',
+    startTimePlan: '2020-11-25', //year/month/day
+    endTimePlan: '2020-12-24',
     startTimeInitialPlan: '2020-12-01', //year/month/day
     endTimeInitialPlan: '2020-12-10',
     details: "This actually didn't take any conceptualization",
@@ -70,7 +73,8 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    dependence: [5, 6, 7, 8, 9]
+    isUpdated: true,
+    dependence: [10, 11]
   },
 
   {
@@ -89,6 +93,7 @@ export const initData = [
     level: 2,
     hasChild: false,
     collapsed: false,
+    isUpdated: true,
   },
 
   {
@@ -96,17 +101,18 @@ export const initData = [
     isShow: true,
     task: 'Task6',
     type: 'Group3',
-    startTimeCurrent: '2020-12-03', //year/month/day
+    startTimeCurrent: '2020-11-25', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
-    endTimeInitialPlan: '2020-12-05',
+    startTimePlan: '2020-11-25', //year/month/day
+    endTimePlan: '2020-12-10',
+    startTimeInitialPlan: '2020-11-26', //year/month/day
+    endTimeInitialPlan: '2020-12-09',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 1,
     hasChild: true,
     collapsed: false,
+    isUpdated: true,
   },
 
   {
@@ -125,6 +131,7 @@ export const initData = [
     level: 2,
     hasChild: false,
     collapsed: false,
+    isUpdated: true,
   },
   {
     id: 8,
@@ -134,7 +141,7 @@ export const initData = [
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
+    endTimePlan: '2020-12-29',
     startTimeInitialPlan: '2020-12-01', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
@@ -142,6 +149,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
+    isUpdated: true,
   },
 
   {
@@ -160,6 +168,7 @@ export const initData = [
     level: 2,
     hasChild: true,
     collapsed: false,
+    isUpdated: true,
   },
   {
     id: 10,
@@ -177,6 +186,7 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
+    isUpdated: true,
   },
   {
     id: 11,
@@ -194,5 +204,6 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
+    isUpdated: true,
   },
 ];

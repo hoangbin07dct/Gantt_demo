@@ -14,7 +14,6 @@ export default class Task {
     this.initialPlanWidth = initialPlanWidth;
     this.height = height;
     this.progress = progress;
-    // this.x = isNaN(x) ? 0 : x;
     this.y = y;
     this.taskDetail = d;
     this.dependence = dependence;
@@ -42,7 +41,9 @@ export default class Task {
     let plans = taskContainer.append(d => new PlansBar(this.planStart, this.planWidth, this.height, this.taskDetail).render());
 
     // render init plan
-    let initPlan = taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
+    if(this.taskDetail.isUpdated) {
+      let initPlan = taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
+    }
 
     // render progress bar
     // let progress = taskContainer.append('rect')
@@ -71,7 +72,6 @@ export default class Task {
         let endX = this.arrDepend[i][0];
         let endY = this.arrDepend[i][2];
         let end = [endX, this.arrDepend[i][2]];
-        // console.log(this);
         endX && endY && this.drawBaseline(start, end, taskContainer);
       });
     }
@@ -80,20 +80,6 @@ export default class Task {
     taskContainer
       .on('mouseout', mouseoutHandle)
       .on('mousemove', mouseMoveHandle);
-    // taskContainer.on('mouseover', () => {
-    //    // taskContainer.style("cursor", "move");
-    //   //  taskContainer.style('opacity', 0.7);
-    //    let tooltip = d3.select(".tooltip");
-    //    tooltip.style('opacity', 1)
-    //    d3.select(".tooltipInner").html(this.taskDetail.task);
-    //    d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
-    //    .style("top", (d3.event.pageY - 80) + "px");  
-
-
-    // });
-    // taskContainer.on('mouseout', () => {
-    //   taskContainer.style('opacity', 1);
-    // });
 
     function mouseoutHandle() {
       // hidden toolTip

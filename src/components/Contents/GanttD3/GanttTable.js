@@ -13,9 +13,9 @@ const GanttTable = ({ ...props }) => {
     <table className={table.taskTable}>
       <thead>
         <tr>
-          <th>Group</th>
-          <th>Task Name</th>
-          <th>Progress</th>
+          <th>グループ</th>
+          <th>タスク</th>
+          <th>進捗</th>
           <td>
             <div className={`${table.flexCenter} ${table.justifyCenter}`}>
               <img

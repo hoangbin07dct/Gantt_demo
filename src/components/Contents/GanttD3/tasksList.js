@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import Task from './task';
 import DragChart from './dragChart';
+import moment from 'moment';
 export default class TasksList {
   constructor(gap, data, categories, timeScale) {
     this.gap = gap;
@@ -33,9 +34,9 @@ export default class TasksList {
       let currentStart = this.timeScale(this.dateFormat(d.startTimeCurrent))
       let planStart = this.timeScale(this.dateFormat(d.startTimePlan))
       let initialPlanStart = this.timeScale(this.dateFormat(d.startTimeInitialPlan))
-      let currentWidth = this.timeScale(this.dateFormat(d.endTimeCurrent)) - this.timeScale(this.dateFormat(d.startTimeCurrent));
-      let planWidth = this.timeScale(this.dateFormat(d.endTimePlan)) - this.timeScale(this.dateFormat(d.startTimePlan));
-      let initialPlanWidth = this.timeScale(this.dateFormat(d.endTimeInitialPlan)) - this.timeScale(this.dateFormat(d.startTimeInitialPlan));
+      let currentWidth = this.timeScale(d3.timeDay.offset(this.dateFormat(d.endTimeCurrent), 1)) - this.timeScale(this.dateFormat(d.startTimeCurrent));
+      let planWidth = this.timeScale(d3.timeDay.offset(this.dateFormat(d.endTimePlan), 1)) - this.timeScale(this.dateFormat(d.startTimePlan));
+      let initialPlanWidth = this.timeScale(d3.timeDay.offset(this.dateFormat(d.endTimeInitialPlan), 1)) - this.timeScale(this.dateFormat(d.startTimeInitialPlan));
       let height = 20;
       let progress = planWidth * d.progress/100;
       let dependence = null;
@@ -46,14 +47,10 @@ export default class TasksList {
       if (d.dependence) {
         dependence = d.dependence;
         dependence.forEach((d, i) => {
-          const test = this.data.find((a) => {
-            if(a.id === d) {
-              return a;
-            }
-          });
+          const test = this.data.find((a) => a.id === d);
           planStartChild = test && this.timeScale(this.dateFormat(test.startTimePlan));
-          planWidthChild = test && this.timeScale(this.dateFormat(test.endTimePlan)) - this.timeScale(this.dateFormat(test.startTimePlan));
-          yChild = test && ((test.id - 1) * this.gap + 4) - y;
+          planWidthChild = test && this.timeScale(d3.timeDay.offset(this.dateFormat(test.endTimePlan), 1)) - this.timeScale(this.dateFormat(test.startTimePlan));
+          yChild = test && (this.data.indexOf(test) * this.gap + 4) - y;
           arrDepend.push([planStartChild, planWidthChild, yChild]);
         });
       }

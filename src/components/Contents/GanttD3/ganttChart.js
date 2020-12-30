@@ -1,8 +1,6 @@
 import * as d3 from 'd3';
-import GroupTasks from './groupTasks';
 import TasksList from './tasksList';
 import moment from 'moment';
-import ToolTip from './toolTip';
 
 export default class GanttChart {
   constructor(containerElement, width, length, from, to) {
@@ -48,7 +46,7 @@ export default class GanttChart {
       .axisTop()
       .scale(this.timeScale)
       .ticks(d3.timeMonth.every(1))
-      .tickFormat((date) => d3.timeFormat('%Y/%m')(date));
+      .tickFormat((date) => d3.timeFormat('%Y年%m月')(date));
 
     d3.select(this.containerElement).select('svg').append('rect')
       .attr('stroke','#ccc')
@@ -97,10 +95,6 @@ export default class GanttChart {
 
     this.mainChart = this.svg.append('g').attr('class', 'main-chart');
 
-    // render groupTasks
-    // this.groupTasks = new GroupTasks(this.width, this.gap, data, categories);
-    // let groupTasks = this.mainChart.node().appendChild(this.groupTasks.render());
-
     // render TasksList
     this.tasksList = new TasksList(this.gap, data, categories, this.timeScale);
     let tasksList = this.mainChart.node().appendChild(this.tasksList.render());
@@ -148,7 +142,7 @@ export default class GanttChart {
 
     this.initLegend();
     this.createLegend('計画工程（当初）', '#ffffff');
-    this.createLegend('計画工程（変更）', 'orange');
+    this.createLegend('計画工程（現在）', 'orange');
     this.createLegend('実際', '#2b3a6a');
     function checkUnique(arr) {
       let hash = {},
@@ -162,6 +156,7 @@ export default class GanttChart {
       return result;
     }
   }
+
   changeScale(from, to) {
     this.from = from.format('YYYY-MM-DD');
     this.to = moment(to).add(1,'days').format('YYYY-MM-DD');
@@ -179,14 +174,13 @@ export default class GanttChart {
     this.svg.select('.current-date').attr('x', this.timeScale(moment().startOf('day'))).attr('width', transX * 2);
     this.tasksList.changeScale(this.timeScale);
   }
+
   initLegend = () => {
     const legend = d3
       .select('#dom')
       .append('div')
       .attr('class', 'legend');
-
     legend.append('ul').attr('class', 'legend-list');
-
   };
 
   createLegend = (type, color) => {
