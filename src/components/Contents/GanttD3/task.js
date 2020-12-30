@@ -102,10 +102,16 @@ export default class Task {
   }
 
   drawBaseline = (start, end, taskContainer) => {
-    taskContainer.append('path').datum([start, end])
+    taskContainer.append('path').datum([start, [(start[0]+5), start[1]], [(end[0]-5), end[1]-5], [(end[0]), end[1]+10]])
       .classed('baseline', true)
       .style("stroke", "#000")
       .style("stroke-width", "2")
-      .attr('d', d3.line());
+      .style("fill","none")
+      .attr('d', 
+        d3.line()
+          .x((d) => {return d[0];})
+          .y((d) => {return d[1];})
+          .curve(d3.curveStepBefore)
+      );
   }
 }
