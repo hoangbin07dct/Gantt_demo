@@ -73,6 +73,20 @@ export default class GanttChart {
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)');
       });
 
+    // render current date
+    const currentDate = this.svg
+      .append('rect')
+      .attr('class', 'current-date')
+      .attr('x', this.timeScale(moment().startOf('day')))
+      .attr('y', 0)
+      .attr('height', this.height)
+      .attr('stroke', 'none')
+      .attr('fill', '#ffec6e')
+      .style('pointer-events', 'none')
+      .attr('width', transX * 2)
+      .attr('transform', `translate(0,-19)`)
+      .attr('opacity', 1);
+
     // axisX
     this.axisX = d3
       .axisTop()
@@ -93,32 +107,17 @@ export default class GanttChart {
 
     // render axis X
     const timeText = this.svg
-      .append('g')
-      .attr('class', 'axisX')
-      .style('pointer-events', 'none')
-      // .transition()
-      // .duration(1000)
-      .call(this.axisX)
-      .call((g) => {
-        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
-        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
-        g.selectAll('text').attr('transform', `translate(${transX},0)`);
-      });
-    // this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
-
-    // render current date
-    const currentDate = this.svg
-      .append('rect')
-      .attr('class', 'current-date')
-      .attr('x', this.timeScale(moment().startOf('day')))
-      .attr('y', 0)
-      .attr('height', this.height)
-      .attr('stroke', 'none')
-      .attr('fill', 'rgba(0, 0, 0, 0.5)')
-      .style('pointer-events', 'none')
-      .attr('width', transX * 2)
-      .attr('opacity', 1);
-
+    .append('g')
+    .attr('class', 'axisX')
+    .style('pointer-events', 'none')
+    // .transition()
+    // .duration(1000)
+    .call(this.axisX)
+    .call((g) => {
+      g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
+      g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
+      g.selectAll('text').attr('transform', `translate(${transX},-3)`);
+    });
     let grid = this.svg.append('g');
     grid
       .selectAll('.horizon-grid')
@@ -170,7 +169,7 @@ export default class GanttChart {
       .call((g) => {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
-        g.selectAll('text').attr('transform', `translate(${transX},0)`);
+        g.selectAll('text').attr('transform', `translate(${transX},-3)`);
       });
     this.svg.select('.subAxisX').call(this.subAxisX.scale(this.timeScale));
     this.svg.select('.current-date').attr('x', this.timeScale(moment().startOf('day'))).attr('width', transX * 2);
