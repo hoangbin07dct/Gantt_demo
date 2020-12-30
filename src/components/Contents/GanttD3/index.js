@@ -31,9 +31,8 @@ const GanttD3 = (props) => {
       level: 1,
       hasChild: true,
       collapsed: false,
-      group: [2, 3]
+      group: [2, 3],
     },
-
     {
       id: 2,
       isShow: true,
@@ -86,7 +85,7 @@ const GanttD3 = (props) => {
       level: 1,
       hasChild: true,
       collapsed: false,
-      group: [5, 6]
+      group: [5, 6],
     },
 
     {
@@ -227,13 +226,15 @@ const GanttD3 = (props) => {
   );
 
   useEffect(() => {
+    console.log(data);
     if (chartRef.current) {
       chartRef.current.innerHTML = '';
     }
-    const dataRender = [...data].filter(d => d.isShow === true);
+    const dataRender = [...data].filter((d) => d.isShow === true);
     ganttChart.current = new GanttChart(chartRef.current, width, dataRender.length, from, to);
     ganttChart.current.render(dataRender);
   }, [width, data]);
+
   useEffect(() => {
     ganttChart.current.changeScale(from, to);
     //  if (chartRef.current) {
@@ -259,77 +260,20 @@ const GanttD3 = (props) => {
     };
   }, []);
 
-  const [infoForm, setInfoForm] = useState({
-    task: '',
-    type: '',
-    startTimeCurrent: '', //year/month/day
-    endTimeCurrent: '',
-    startTimePlan: '', //year/month/day
-    endTimePlan: '',
-    startTimeInitialPlan: '', //year/month/day
-    endTimeInitialPlan: '',
-    details: '',
-    progress: '',
-    level: 1,
-    hasChild: false,
-  });
-
-  const [value, setValue] = React.useState('');
-  const addTodo = (text) => {};
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, form, appendIndex) => {
     e.preventDefault();
-    initData.push(infoForm);
-    setData(initData);
+    setData((data) => {
+      const temp = [...data];
+      if (!appendIndex) {
+        temp.push(form);
+      } else {
+        temp.splice(appendIndex, 0, form);
+      }
+      return temp;
+    });
     toggle();
   };
 
-  const InputChange = (e) => {
-    setInfoForm({
-      ...infoForm,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const getStartTimeCurrent = (e) => {
-    setInfoForm({
-      ...infoForm,
-      startTimeCurrent: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getEndTimeCurrent = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimeCurrent: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getStartTimePlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      startTimePlan: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getEndTimePlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimePlan: e.format('YYYY-MM-DD'),
-    });
-  };
-  const getStartTimeInitialPlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      startTimeInitialPlan: e.format('YYYY-MM-DD'),
-    });
-  };
-  const getEndTimeInitialPlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimeInitialPlan: e.format('YYYY-MM-DD'),
-    });
-  };
   const updateFrom = (e) => {
     setFrom(e);
   };
@@ -340,12 +284,11 @@ const GanttD3 = (props) => {
   const handleCollapse = (e) => {
     const target = e.currentTarget;
     let temp = [...data];
-    const index = temp.findIndex((el) => el.id == Number(target.id));
+    const index = temp.findIndex((el) => el.id === Number(target.id));
     for (let i = index + 1; i < temp.length; i++) {
       if (temp[i].level > temp[index].level) {
         temp[i].isShow = temp[index].collapsed;
       } else break;
-      
     }
     if (index > -1) {
       temp[index].collapsed = !temp[index].collapsed;
@@ -385,20 +328,7 @@ const GanttD3 = (props) => {
               </button>
             </li>
           </ul>
-          <Modal
-            isShowing={isShowing}
-            hide={toggle}
-            handleSubmit={handleSubmit}
-            InputChange={InputChange}
-            infoForm={infoForm}
-            getStartTimeCurrent={getStartTimeCurrent}
-            getEndTimeCurrent={getEndTimeCurrent}
-            getStartTimePlan={getStartTimePlan}
-            getEndTimePlan={getEndTimePlan}
-            getStartTimeInitialPlan={getStartTimeInitialPlan}
-            getEndTimeInitialPlan={getEndTimeInitialPlan}
-          />
-
+          {isShowing && <Modal hide={toggle} handleSubmit={handleSubmit} />}
           <GanttTable data={data} handleCollapse={handleCollapse}></GanttTable>
         </div>
         <div id="dom" className={common.dom} ref={chartRef}></div>
