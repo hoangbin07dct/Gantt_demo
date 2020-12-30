@@ -20,6 +20,7 @@ export default class InitPlansBar {
       .attr('stroke-width', '1')
       .attr('stroke-dasharray', '5,5')
       .attr('fill', 'none')
+      .style('pointer-events', 'none')
       .attr('width', (d) => this.initialPlanWidth)
       .attr('opacity', 1);
 

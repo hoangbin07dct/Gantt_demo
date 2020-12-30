@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import PlansBar from './plansBar';
 import InitPlansBar from './initPlansBar';
 import CurrentBar from './currentBar';
+import ToolTip from './toolTip';
 export default class Task {
   constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend) {
     
@@ -18,8 +19,12 @@ export default class Task {
     this.taskDetail = d;
     this.dependence = dependence;
     this.arrDepend = arrDepend;
+    this.toolTip = new ToolTip(this.taskDetail, 0, 0);
+    document.getElementById('dom').appendChild(this.toolTip.render());
   }
   render() {
+    let _y = this.y;
+    let _toolTip = this.toolTip;
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
     let taskContainer = d3.select(containElement)
       .attr('class', 'task')
@@ -63,21 +68,36 @@ export default class Task {
     }
 
     // event hover
-    taskContainer.on('mouseover', () => {
-       // taskContainer.style("cursor", "move");
-      //  taskContainer.style('opacity', 0.7);
-       let tooltip = d3.select(".tooltip");
-       tooltip.style('opacity', 1)
-       d3.select(".tooltipInner").html(this.taskDetail.task);
-       d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
-       .style("top", (d3.event.pageY - 80) + "px");  
+    taskContainer
+      .on('mouseout', mouseoutHandle)
+      .on('mousemove', mouseMoveHandle);
+    // taskContainer.on('mouseover', () => {
+    //    // taskContainer.style("cursor", "move");
+    //   //  taskContainer.style('opacity', 0.7);
+    //    let tooltip = d3.select(".tooltip");
+    //    tooltip.style('opacity', 1)
+    //    d3.select(".tooltipInner").html(this.taskDetail.task);
+    //    d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
+    //    .style("top", (d3.event.pageY - 80) + "px");  
 
 
-    });
+    // });
     // taskContainer.on('mouseout', () => {
     //   taskContainer.style('opacity', 1);
     // });
 
+    function mouseoutHandle() {
+      // hidden toolTip
+      _toolTip.visible = false;
+      _toolTip.render();
+    }
+    function mouseMoveHandle() {
+      let mouse = d3.mouse(this);
+      // update toolTip
+      _toolTip.setPosition(mouse[0], _y + 50);
+      _toolTip.visible = true;
+      _toolTip.render();
+    }
     return taskContainer.node();
   }
 

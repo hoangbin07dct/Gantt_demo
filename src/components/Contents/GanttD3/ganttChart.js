@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import GroupTasks from './groupTasks';
 import TasksList from './tasksList';
 import moment from 'moment';
+import ToolTip from './toolTip';
 
 export default class GanttChart {
   constructor(containerElement, width, length, from, to) {
@@ -30,22 +31,22 @@ export default class GanttChart {
     this.tasksList = null;
     
      // Define the div for the tooltip
-     if (document.querySelector('.tooltip')) {
-       document.querySelector('.tooltip').remove();
-     }
-     this.tooltip = d3.select("body").append("div")
-     .attr("class", "tooltip")	
-     this.tooltipInner = d3.select("body .tooltip")
-     .append("div")
-     .attr("class", "tooltipInner")	
+    //  if (document.querySelector('.tooltip')) {
+    //    document.querySelector('.tooltip').remove();
+    //  }
+    //  this.tooltip = d3.select("body").append("div")
+    //  .attr("class", "tooltip")	
+    //  this.tooltipInner = d3.select("body .tooltip")
+    //  .append("div")
+    //  .attr("class", "tooltipInner")
 
 
-     d3.select(".tooltip")
+    //  d3.select(".tooltip")
 
 
-     .style("opacity", 0)
-     .style("top", 0)
-     .style("position", 'absolute')
+    //  .style("opacity", 0)
+    //  .style("top", 0)
+    //  .style("position", 'absolute')
    
 
 
@@ -99,6 +100,7 @@ export default class GanttChart {
     const timeText = this.svg
       .append('g')
       .attr('class', 'axisX')
+      .style('pointer-events', 'none')
       // .transition()
       // .duration(1000)
       .call(this.axisX)
@@ -133,7 +135,7 @@ export default class GanttChart {
       .attr('height', this.height)
       .attr('x', 0)
       .attr('y', 0);
-    this.mainChart.selectAll('*').attr('clip-path', 'url(#clip)');
+    this.mainChart.selectAll('*:not(.tool-tip)').attr('clip-path', 'url(#clip)');
 
     function checkUnique(arr) {
       let hash = {},
