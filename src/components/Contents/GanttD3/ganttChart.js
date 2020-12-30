@@ -9,7 +9,7 @@ export default class GanttChart {
     this.containerElement = containerElement;
     this.margin = {
       top: 40,
-      right: 20,
+      right: 0,
       bottom: 0,
       left: 0,
     };
@@ -107,7 +107,7 @@ export default class GanttChart {
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
         g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
-    this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
+    // this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
     let grid = this.svg.append('g');
     grid
       .selectAll('line')
