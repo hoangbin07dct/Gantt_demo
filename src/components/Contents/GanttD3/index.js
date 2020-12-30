@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import GanttChart from './ganttChart';
 import GanttTable from './GanttTable';
 import common from '../../../styles/Common.module.scss';
+import modal from '../../../styles/Modal.module.scss';
 import Modal from './Modal';
 import useModal from './useModal';
 import moment from 'moment';
