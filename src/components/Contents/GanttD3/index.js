@@ -95,6 +95,7 @@ const GanttD3 = (props) => {
 
   const handleCollapse = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const target = e.currentTarget;
     let temp = [...data];
     const index = temp.findIndex((el) => el.id == target.id);

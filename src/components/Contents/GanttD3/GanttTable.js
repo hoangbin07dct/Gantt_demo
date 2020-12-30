@@ -18,7 +18,12 @@ const GanttTable = ({ ...props }) => {
           <th>Progress</th>
           <td>
             <div className={`${table.flexCenter} ${table.justifyCenter}`}>
-              <img className={table.pointerCursor} src={plus_sign} alt="Add Task" onClick={() => props.toggleModal()} />
+              <img
+                className={table.pointerCursor}
+                src={plus_sign}
+                alt="Add Task"
+                onClick={(e) => props.toggleModal(e,'create')}
+              />
             </div>
           </td>
         </tr>
@@ -41,9 +46,12 @@ const GanttTable = ({ ...props }) => {
               <tr key={key} className={table.hoverRow}>
                 {td}
                 <td style={{ paddingLeft: (element.level - 1) * 20 + 5 + 'px' }}>
-                  <div className={table.flexCenter} onDoubleClick={() => props.toggleModal(element.id)}>
+                  <div className={table.flexCenter} onDoubleClick={(e) => props.toggleModal(e,'update', element.id)}>
                     {element.hasChild ? (
-                      <span id={element.id} className={table.expController} onClick={props.handleCollapse}>
+                      <span
+                        id={element.id}
+                        className={table.expController}
+                        onClick={props.handleCollapse}>
                         <img src={!element.collapsed ? exp_collapse : exp_expand} alt="expController" />
                       </span>
                     ) : (
@@ -59,7 +67,7 @@ const GanttTable = ({ ...props }) => {
                       className={table.pointerCursor}
                       src={plus_sign}
                       alt="Add Task"
-                      onClick={() => props.toggleModal(element.id)}
+                      onClick={(e) => props.toggleModal(e, 'create', element.id)}
                     />
                   </div>
                 </td>

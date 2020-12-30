@@ -1,0 +1,19 @@
+diff a/src/components/Contents/GanttD3/index.js b/src/components/Contents/GanttD3/index.js	(rejected hunks)
+@@ -39,17 +39,6 @@
+ 
+   useEffect(() => {
+     ganttChart.current.changeScale(from, to);
+-    //  if (chartRef.current) {
+-    //   chartRef.current.innerHTML = '';
+-    // }
+-    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight, from, to);
+-    // ganttChart.current.render(data);
+-    // ganttChart.current.changeScale(from, to);
+-    // if (chartRef.current) {
+-    //   chartRef.current.innerHTML = '';
+-    // }
+-    // ganttChart.current = new GanttChart(chartRef.current, width, window.innerHeight / 1.9, from, to);
+-    // ganttChart.current.render(data);
+   }, [from, to]);
+ 
+   useEffect(() => {

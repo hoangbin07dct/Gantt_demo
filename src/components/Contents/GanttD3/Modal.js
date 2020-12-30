@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import modal from '../../../styles/Modal.module.scss';
 import Datetime from 'react-datetime';
@@ -24,19 +24,41 @@ const Modal = (props) => {
     group: [],
   });
   let allGroup = new Set(props.data.map((item) => item.type));
+  let handleSubmit = useRef();
 
   useEffect(() => {
     if (props.modal.contextId) {
       const index = props.data.findIndex((el) => el.id === props.modal.contextId);
-      setInfoForm({
-        ...infoForm,
-        type: props.data[index].type,
-        level: props.data[index].level + 1,
-      });
+      if (props.modal.type === 'create') {
+        setInfoForm({
+          ...infoForm,
+          type: props.data[index].type,
+          level: props.data[index].level + 1,
+        });
+      }
+      if (props.modal.type === 'update') {
+        setInfoForm({
+          ...props.data[index],
+        });
+      }
+    }
+    if (props.modal.type === 'create') {
+      handleSubmit.current = props.handleCreateTask;
+    }
+    if (props.modal.type === 'update') {
+      handleSubmit.current = props.handleUpdateTask;
     }
   }, []);
 
   const InputChange = (e) => {
+    if (e.target.name === 'progress') {
+      if (e.target.value > 100) {
+        e.target.value = 100;
+      }
+      if (e.target.value < 0) {
+        e.target.value = 0;
+      }
+    }
     setInfoForm({
       ...infoForm,
       [e.target.name]: e.target.value,
@@ -61,7 +83,7 @@ const Modal = (props) => {
               className={modal.modal_close_button}
               data-dismiss="modal"
               aria-label="Close"
-              onClick={() => props.toggleModal()}>
+              onClick={(e) => props.toggleModal(e)}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -92,7 +114,17 @@ const Modal = (props) => {
                 </div>
               </div>
               <div className={modal.flexItem}>
-                <p>Progress {infoForm.progress}%</p>
+                <p>
+                  Progress
+                  <input
+                    className={modal.inputSlider}
+                    type="number"
+                    onChange={InputChange}
+                    name="progress"
+                    value={infoForm.progress}
+                  />
+                  %
+                </p>
                 <div>
                   <input
                     className={modal.slider}
@@ -117,7 +149,7 @@ const Modal = (props) => {
                     value={infoForm.startTimeCurrent}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => handleChangeTime(e,'startTimeCurrent')}
+                    onChange={(e) => handleChangeTime(e, 'startTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -132,7 +164,7 @@ const Modal = (props) => {
                     value={infoForm.endTimeCurrent}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => handleChangeTime(e,'endTimeCurrent')}
+                    onChange={(e) => handleChangeTime(e, 'endTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -150,7 +182,7 @@ const Modal = (props) => {
                     value={infoForm.startTimePlan}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => handleChangeTime(e,'startTimePlan')}
+                    onChange={(e) => handleChangeTime(e, 'startTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -166,7 +198,7 @@ const Modal = (props) => {
                     value={infoForm.endTimePlan}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => handleChangeTime(e,'endTimePlan')}
+                    onChange={(e) => handleChangeTime(e, 'endTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -206,7 +238,11 @@ const Modal = (props) => {
               <textarea className={modal.textarea} onChange={InputChange} name="details" value={infoForm.details} />
             </div>
             <div>
-              <span className={modal.form_btn} onClick={(e) => props.handleSubmit(e, infoForm, props.modal.contextId)}>
+              <span
+                className={modal.form_btn}
+                onClick={(e) => {
+                  handleSubmit.current(e, infoForm, props.modal.contextId);
+                }}>
                 Add
               </span>
             </div>
