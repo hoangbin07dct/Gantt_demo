@@ -43,43 +43,10 @@ const Modal = (props) => {
     });
   };
 
-  const getStartTimeCurrent = (e) => {
+  const handleChangeTime = (e, type) => {
     setInfoForm({
       ...infoForm,
-      startTimeCurrent: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getEndTimeCurrent = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimeCurrent: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getStartTimePlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      startTimePlan: e.format('YYYY-MM-DD'),
-    });
-  };
-
-  const getEndTimePlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimePlan: e.format('YYYY-MM-DD'),
-    });
-  };
-  const getStartTimeInitialPlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      startTimeInitialPlan: e.format('YYYY-MM-DD'),
-    });
-  };
-  const getEndTimeInitialPlan = (e) => {
-    setInfoForm({
-      ...infoForm,
-      endTimeInitialPlan: e.format('YYYY-MM-DD'),
+      [type]: e.format('YYYY-MM-DD'),
     });
   };
 
@@ -150,7 +117,7 @@ const Modal = (props) => {
                     value={infoForm.startTimeCurrent}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => getStartTimeCurrent(e)}
+                    onChange={(e) => handleChangeTime(e,'startTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -162,10 +129,10 @@ const Modal = (props) => {
                   <Datetime
                     // ref={dateFromRef}
                     locale="ja-JP"
-                    value={infoForm.endTime}
+                    value={infoForm.endTimeCurrent}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => getEndTimeCurrent(e)}
+                    onChange={(e) => handleChangeTime(e,'endTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -180,10 +147,10 @@ const Modal = (props) => {
                   <Datetime
                     // ref={dateFromRef}
                     locale="ja-JP"
-                    value={infoForm.endTime}
+                    value={infoForm.startTimePlan}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => getStartTimePlan(e)}
+                    onChange={(e) => handleChangeTime(e,'startTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
@@ -196,10 +163,10 @@ const Modal = (props) => {
                   <Datetime
                     // ref={dateFromRef}
                     locale="ja-JP"
-                    value={infoForm.endTime}
+                    value={infoForm.endTimePlan}
                     dateFormat="YYYY-MM-DD"
                     timeFormat={false}
-                    onChange={(e) => getEndTimePlan(e)}
+                    onChange={(e) => handleChangeTime(e,'endTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
                   />
