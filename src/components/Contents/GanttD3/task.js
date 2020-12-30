@@ -1,4 +1,7 @@
 import * as d3 from 'd3';
+import PlansBar from './plansBar';
+import InitPlansBar from './initPlansBar';
+import CurrentBar from './currentBar';
 export default class Task {
   constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, group) {
     
@@ -22,36 +25,11 @@ export default class Task {
       .attr('transform', `translate(0,${this.y})`);
 
     // render plans
-    let plans = taskContainer.append('rect')
-      .attr('class', 'plans')
-      .attr('x',`${this.planStart}`)
-      .attr('rx', 3)
-      .attr('ry', 3)
-      // .attr('width', 0)
-      .attr('height', this.height)
-      .attr('stroke', 'orange')
-      .attr('fill', 'orange')
-      .attr('opacity', 1)
-      // .attr('transform', `translate(0,${this.height + 2})`)
-      // .transition().duration(1000)
-      .attr('width', (d) => this.planWidth);
+    let plans = taskContainer.append(d => new PlansBar(this.planStart, this.planWidth, this.height, this.taskDetail).render());
 
-      // render init plan
-    let initPlan = taskContainer.append('rect')
-    .attr('class', 'init-plans')
-    .attr('x',`${this.initialPlanStart}`)
-    .attr('rx', 3)
-    .attr('ry', 3)
-    // .attr('width', 0)
-    .attr('height', this.height)
-    .attr('stroke', '#000000')
-    .attr('stroke-width', '1')
-    .attr('stroke-dasharray', '5,5')
-    .attr('fill', 'none')
-    // .attr('transform', `translate(0,${this.height + 2})`)
-    // .transition().duration(1000)
-    .attr('width', (d) => this.initialPlanWidth)
-    .attr('opacity', 1);
+    // render init plan
+    let initPlan = taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
+
     // render progress bar
     // let progress = taskContainer.append('rect')
     //   .attr('class', 'progress')
@@ -67,34 +45,7 @@ export default class Task {
     //   .attr('width', (d) => this.progress);
 
     // render current
-    let current = taskContainer.append('rect')
-      .attr('class', 'current')
-      .attr('x',`${this.currentStart}`)
-      .attr('rx', 3)
-      .attr('ry', 3)
-      // .attr('width', 0)
-      .attr('height', this.height)
-      .attr('stroke', '#2b3a6a')
-      .attr('stroke-width', '1')
-      .attr('fill', '#2b3a6a')
-      .attr('transform', `translate(0,${this.height + 4})`)
-      // .transition().duration(1000)
-      .attr('width', (d) => this.currentWidth)
-      .attr('opacity', 1);
-
-    // let current = taskContainer.append('line')
-    //   .attr('class', 'current')
-    //   .attr('stroke', '#2b3a6a')
-    //   .attr('stroke-width', '10')
-    //   // .attr('stroke-dasharray', '5,5')
-    //   .attr("x1", `${this.currentStart}`)
-    //   .attr("y1", 0)
-    //   .attr("x2", `${this.currentStart}`)
-    //   .attr("y2", 0)
-    //   .attr('shape-rendering','crispEdges')
-    //   .attr('transform', `translate(0,${2*this.height + 4})`)
-    //   .transition().duration(1000)
-    //   .attr("x2", `${this.currentStart + this.currentWidth}`);
+    let current = taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
 
     // if (this.group) {
     //   // console.log(taskContainer);
@@ -114,7 +65,6 @@ export default class Task {
     // event hover
     taskContainer.on('mouseover', () => {
        // taskContainer.style("cursor", "move");
-       taskContainer.style("cursor", "move");
        taskContainer.style('opacity', 0.7);
        let tooltip = d3.select(".tooltip");
        tooltip.style('opacity', 1)

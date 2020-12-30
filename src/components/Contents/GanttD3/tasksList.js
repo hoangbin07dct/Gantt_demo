@@ -64,10 +64,5 @@ export default class TasksList {
       .data(this.data)
       .attr('x', d => this.timeScale(dateFormat(d.startTimeCurrent)))
       .attr('width', (d) => this.timeScale(dateFormat(d.endTimeCurrent)) - this.timeScale(dateFormat(d.startTimeCurrent)));
-  //   this.tasksListContainer
-  //     .selectAll('.current')
-  //     .data(this.data)
-  //     .attr("x1", d => this.timeScale(dateFormat(d.startTimeCurrent)))
-  //     .attr("x2", d => this.timeScale(dateFormat(d.endTimeCurrent)));
   }
 }
