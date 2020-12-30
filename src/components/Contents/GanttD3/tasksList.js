@@ -29,8 +29,21 @@ export default class TasksList {
       let initialPlanWidth = this.timeScale(dateFormat(d.endTimeInitialPlan)) - this.timeScale(dateFormat(d.startTimeInitialPlan));
       let height = 20;
       let progress = planWidth * d.progress/100;
-      let group = d.group;
-      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, group).render();
+      let dependence = null;
+      let arrDepend = [];
+      let planStartChild = null;
+      let planWidthChild = null;
+      let yChild = null;
+      if (d.dependence) {
+        dependence = d.dependence;
+        dependence.forEach((d, i) => {
+          planStartChild = this.timeScale(dateFormat(this.data[d-1].startTimePlan));
+          planWidthChild = this.timeScale(dateFormat(this.data[d-1].endTimePlan)) - this.timeScale(dateFormat(this.data[d-1].startTimePlan));
+          yChild = ((d-1) * this.gap + 4) - y;
+          arrDepend.push([planStartChild, planWidthChild, yChild]);
+        });
+      }
+      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend).render();
     });
 
     // new DragChart(tasksList, this.tasksListContainer);

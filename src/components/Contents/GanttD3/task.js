@@ -3,7 +3,7 @@ import PlansBar from './plansBar';
 import InitPlansBar from './initPlansBar';
 import CurrentBar from './currentBar';
 export default class Task {
-  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, group) {
+  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend) {
     
     this.currentStart = currentStart;
     this.currentWidth = currentWidth;
@@ -16,7 +16,8 @@ export default class Task {
     // this.x = isNaN(x) ? 0 : x;
     this.y = y;
     this.taskDetail = d;
-    this.group = group;
+    this.dependence = dependence;
+    this.arrDepend = arrDepend;
   }
   render() {
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
@@ -47,20 +48,19 @@ export default class Task {
     // render current
     let current = taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
 
-    // if (this.group) {
-    //   // console.log(taskContainer);
-    //   console.log(containElement.getBoundingClientRect().width);
-    //   let arr = [this.currentStart, this.currentWidth, this.initialPlanStart, this.initialPlanWidth, this.planStart, this.planWidth];
-    //   let startX = d3.max(arr) - d3.min(arr);
-    //   let startW = d3.max(arr) + (d3.max(arr) - startX);
-    //   console.log(startW);
-    //   let start = [271, 22];
-    //   let end = [57, 78];
-    //   this.group.forEach((d, i) => {
-    //     // console.log(this);
-    //     this.drawBaseline(start, end, taskContainer);
-    //   });
-    // }
+    if (this.dependence) {
+      let x = parseFloat(containElement.children[0].getAttribute('x'));
+      let w = parseFloat(containElement.children[0].getAttribute('width'));
+      let h = parseFloat(containElement.children[0].getAttribute('height'));
+      let startX = x + w;
+      let start = [startX, h/2];
+      this.dependence.forEach((d, i) => {
+        let endX = this.arrDepend[i][0];
+        let end = [endX, this.arrDepend[i][2]];
+        // console.log(this);
+        this.drawBaseline(start, end, taskContainer);
+      });
+    }
 
     // event hover
     taskContainer.on('mouseover', () => {
