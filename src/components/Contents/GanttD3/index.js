@@ -31,6 +31,7 @@ const GanttD3 = (props) => {
       level: 1,
       hasChild: true,
       collapsed: false,
+      group: [2, 3]
     },
 
     {
@@ -85,6 +86,7 @@ const GanttD3 = (props) => {
       level: 1,
       hasChild: true,
       collapsed: false,
+      group: [5, 6]
     },
 
     {

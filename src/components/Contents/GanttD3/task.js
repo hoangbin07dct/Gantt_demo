@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 export default class Task {
-  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress,d) {
+  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, group) {
     
     this.currentStart = currentStart;
     this.currentWidth = currentWidth;
@@ -13,6 +13,7 @@ export default class Task {
     // this.x = isNaN(x) ? 0 : x;
     this.y = y;
     this.taskDetail = d;
+    this.group = group;
   }
   render() {
     let containElement = document.createElementNS(d3.namespaces.svg, 'g');
@@ -95,6 +96,21 @@ export default class Task {
     //   .transition().duration(1000)
     //   .attr("x2", `${this.currentStart + this.currentWidth}`);
 
+    // if (this.group) {
+    //   // console.log(taskContainer);
+    //   console.log(containElement.getBoundingClientRect().width);
+    //   let arr = [this.currentStart, this.currentWidth, this.initialPlanStart, this.initialPlanWidth, this.planStart, this.planWidth];
+    //   let startX = d3.max(arr) - d3.min(arr);
+    //   let startW = d3.max(arr) + (d3.max(arr) - startX);
+    //   console.log(startW);
+    //   let start = [271, 22];
+    //   let end = [57, 78];
+    //   this.group.forEach((d, i) => {
+    //     // console.log(this);
+    //     this.drawBaseline(start, end, taskContainer);
+    //   });
+    // }
+
     // event hover
     taskContainer.on('mouseover', () => {
        // taskContainer.style("cursor", "move");
@@ -102,7 +118,7 @@ export default class Task {
        taskContainer.style('opacity', 0.7);
        let tooltip = d3.select(".tooltip");
        tooltip.style('opacity', 1)
-       d3.select(".tooltipInner")    .html(this.taskDetail.task)    ;
+       d3.select(".tooltipInner").html(this.taskDetail.task);
        d3.select(".tooltip").style("left", (d3.event.pageX) + "px")        
        .style("top", (d3.event.pageY - 80) + "px");  
 
@@ -113,5 +129,13 @@ export default class Task {
     });
 
     return taskContainer.node();
+  }
+
+  drawBaseline = (start, end, taskContainer) => {
+    taskContainer.append('path').datum([start, end])
+      .classed('baseline', true)
+      .style("stroke", "#000")
+      .style("stroke-width", "2")
+      .attr('d', d3.line());
   }
 }

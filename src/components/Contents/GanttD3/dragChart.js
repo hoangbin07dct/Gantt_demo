@@ -4,7 +4,7 @@ export default class DragChart {
     this.tasksList = tasksList;
     this.tasksListContainer = tasksListContainer;
     this.target = this.tasksList.selectAll('.task')._groups[0];
-    this.resizeMargin = 20;
+    this.resizeMargin = 10;
     this.resize = true;
     this.drag = true;
     this.tasksListContainer.selectAll('.task')
@@ -40,14 +40,14 @@ export default class DragChart {
   };
 
   typeHandle = (d, i) => {
-    let x = this.target[i].transform.baseVal[0].matrix.e,
-        w = this.target[i].getBoundingClientRect().width,
-        x1 = x + w;
-    if ((x + this.resizeMargin >= d3.mouse(this.target[i])[0] + x) || (x1 - this.resizeMargin <= d3.mouse(this.target[i])[0] + x)) {
-      d3.select(this.target[i]).attr("class", d.class + ((this.resize) ? " cursor-resize" : " cursor-default"));
-    } else {
-      d3.select(this.target[i]).attr("class", d.class + ((this.drag) ? " cursor-move" : " cursor-default"));
-    }
+    // let x = this.target[i].transform.baseVal[0].matrix.e,
+    //     w = this.target[i].getBoundingClientRect().width,
+    //     x1 = x + w;
+    // if ((x + this.resizeMargin >= d3.mouse(this.target[i])[0] + x) || (x1 - this.resizeMargin <= d3.mouse(this.target[i])[0] + x)) {
+    //   d3.select(this.target[i]).attr("class", d.class + ((this.resize) ? " cursor-resize" : " cursor-default"));
+    // } else {
+    //   d3.select(this.target[i]).attr("class", d.class + ((this.drag) ? " cursor-move" : " cursor-default"));
+    // }
   };
 
   resizeHandle = (x, x1, w, target, y) => {
