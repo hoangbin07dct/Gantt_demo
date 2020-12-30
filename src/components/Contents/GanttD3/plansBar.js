@@ -12,7 +12,7 @@ export default class PlansBar {
     // render plans
     let plans = d3.select(containElement)
       .attr('class', 'plans')
-      .attr('x',`${this.planStart}`)
+      .attr('x', `${this.planStart}`)
       .attr('rx', 3)
       .attr('ry', 3)
       .attr('height', this.height)
@@ -20,6 +20,13 @@ export default class PlansBar {
       .attr('fill', 'orange')
       .attr('opacity', 1)
       .attr('width', (d) => this.planWidth);
+
+    plans.on('mouseover', () => {
+      plans.style('opacity', 0.8);
+    });
+    plans.on('mouseout', () => {
+      plans.style('opacity', 1);
+    });
 
     return plans.node();
   }

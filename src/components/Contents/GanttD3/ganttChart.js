@@ -150,12 +150,14 @@ export default class GanttChart {
   changeScale(from, to) {
     this.from = from.format('YYYY-MM-DD');
     this.to = to.format('YYYY-MM-DD');
+    let transX = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays() / 2);
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg
       .select('.axisX')
       .call(this.axisX.scale(this.timeScale))
       .call((g) => {
         g.selectAll('line').attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
     this.svg.select('.subAxisX').call(this.subAxisX.scale(this.timeScale));
     this.tasksList.changeScale(this.timeScale);

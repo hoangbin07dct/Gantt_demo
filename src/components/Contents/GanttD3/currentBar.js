@@ -23,6 +23,13 @@ export default class CurrentBar {
       .attr('width', (d) => this.currentWidth)
       .attr('opacity', 1);
 
+    current.on('mouseover', () => {
+      current.style('opacity', 0.8);
+    });
+    current.on('mouseout', () => {
+      current.style('opacity', 1);
+    });
+
     return current.node();
   }
 }

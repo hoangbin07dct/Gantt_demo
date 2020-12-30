@@ -65,7 +65,7 @@ export default class Task {
     // event hover
     taskContainer.on('mouseover', () => {
        // taskContainer.style("cursor", "move");
-       taskContainer.style('opacity', 0.7);
+      //  taskContainer.style('opacity', 0.7);
        let tooltip = d3.select(".tooltip");
        tooltip.style('opacity', 1)
        d3.select(".tooltipInner").html(this.taskDetail.task);
@@ -74,9 +74,9 @@ export default class Task {
 
 
     });
-    taskContainer.on('mouseout', () => {
-      taskContainer.style('opacity', 1);
-    });
+    // taskContainer.on('mouseout', () => {
+    //   taskContainer.style('opacity', 1);
+    // });
 
     return taskContainer.node();
   }
