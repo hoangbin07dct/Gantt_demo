@@ -36,6 +36,11 @@ tbody {
     }
   }
 }
+.hoverRow {
+  &:hover {
+    background-color: aliceblue;
+  }
+}
 .vertAlign {
   vertical-align: middle;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import common from '../../../styles/Common.module.scss';
+import modal from '../../../styles/Modal.module.scss';
 import Datetime from 'react-datetime';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,18 +17,17 @@ const Modal = (props) => {
     startTimeInitialPlan: '', //year/month/day
     endTimeInitialPlan: '',
     details: '',
-    progress: '',
+    progress: 50,
     level: 1,
     hasChild: false,
     collapsed: false,
     group: [],
   });
+  let allGroup = new Set(props.data.map((item) => item.type));
 
   useEffect(() => {
-    console.log(props.modal);
     if (props.modal.contextId) {
       const index = props.data.findIndex((el) => el.id === props.modal.contextId);
-      console.log(index);
       setInfoForm({
         ...infoForm,
         type: props.data[index].type,
@@ -86,13 +85,13 @@ const Modal = (props) => {
 
   return ReactDOM.createPortal(
     <React.Fragment>
-      <div className={common.modal_overlay} />
-      <div className={common.modal_wrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
-        <div className={common.modal}>
-          <div className={common.modal_header}>
+      <div className={modal.modal_overlay} />
+      <div className={modal.modal_wrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
+        <div className={modal.modal}>
+          <div className={modal.modal_header}>
             <button
               type="button"
-              className={common.modal_close_button}
+              className={modal.modal_close_button}
               data-dismiss="modal"
               aria-label="Close"
               onClick={() => props.toggleModal()}>
@@ -100,80 +99,116 @@ const Modal = (props) => {
             </button>
           </div>
           <form>
-            <h3 className={common.form_ttl}>Add New Task</h3>
+            <h3 className={modal.form_ttl}>Add New Task</h3>
             <p>Task</p>
             <div>
-              <input className={common.ip} type="text" onChange={InputChange} name="task" value={infoForm.task} />
+              <input className={modal.ip} type="text" onChange={InputChange} name="task" value={infoForm.task} />
             </div>
-            <p>Type</p>
-            <div>
-              <input
-                className={common.ip}
-                type="text"
-                onChange={!props.modal.contextId ? InputChange : undefined}
-                name="type"
-                value={infoForm.type}
-                readOnly={!!props.modal.contextId}
-              />
+            <div className={modal.dateGroup}>
+              <div className={modal.flexItem}>
+                <p>Type</p>
+                <div>
+                  <input
+                    className={modal.ip}
+                    type="text"
+                    onChange={!props.modal.contextId ? InputChange : undefined}
+                    name="type"
+                    value={infoForm.type}
+                    readOnly={!!props.modal.contextId}
+                    list="type-options"
+                  />
+                  <datalist id="type-options">
+                    {Array.from(allGroup).map((el, key) => (
+                      <option key={key}>{el}</option>
+                    ))}
+                  </datalist>
+                </div>
+              </div>
+              <div className={modal.flexItem}>
+                <p>Progress {infoForm.progress}%</p>
+                <div>
+                  <input
+                    className={modal.slider}
+                    type="range"
+                    min="0"
+                    max="100"
+                    onChange={InputChange}
+                    name="progress"
+                    value={infoForm.progress}
+                  />
+                </div>
+              </div>
             </div>
-            <p>Start Time Current</p>
-            <div>
-              <Datetime
-                // ref={dateFromRef}
-                locale="ja-JP"
-                value={infoForm.startTimeCurrent}
-                dateFormat="YYYY-MM-DD"
-                timeFormat={false}
-                onChange={(e) => getStartTimeCurrent(e)}
-                closeOnSelect={true}
-                className={common.time}
-              />
+
+            <div className={modal.dateGroup}>
+              <div className={modal.flexItem}>
+                <p>Start Time Current</p>
+                <div className={modal.dateItem}>
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale="ja-JP"
+                    value={infoForm.startTimeCurrent}
+                    dateFormat="YYYY-MM-DD"
+                    timeFormat={false}
+                    onChange={(e) => getStartTimeCurrent(e)}
+                    closeOnSelect={true}
+                    className={modal.time}
+                  />
+                </div>
+              </div>
+              <div className={modal.flexItem}>
+                <p>End Time Current</p>
+                <div className={modal.dateItem}>
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale="ja-JP"
+                    value={infoForm.endTime}
+                    dateFormat="YYYY-MM-DD"
+                    timeFormat={false}
+                    onChange={(e) => getEndTimeCurrent(e)}
+                    closeOnSelect={true}
+                    className={modal.time}
+                  />
+                </div>
+              </div>
             </div>
-            <p>End Time Current</p>
-            <div>
-              {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
-              <Datetime
-                // ref={dateFromRef}
-                locale="ja-JP"
-                value={infoForm.endTime}
-                dateFormat="YYYY-MM-DD"
-                timeFormat={false}
-                onChange={(e) => getEndTimeCurrent(e)}
-                closeOnSelect={true}
-                className={common.time}
-              />
+            <div className={modal.dateGroup}>
+              <div className={modal.flexItem}>
+                <p>Start Time Plan</p>
+                <div className={modal.dateItem}>
+                  {/* <input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale="ja-JP"
+                    value={infoForm.endTime}
+                    dateFormat="YYYY-MM-DD"
+                    timeFormat={false}
+                    onChange={(e) => getStartTimePlan(e)}
+                    closeOnSelect={true}
+                    className={modal.time}
+                  />
+                </div>
+              </div>
+              <div className={modal.flexItem}>
+                <p>End Time Plan</p>
+                <div className={modal.dateItem}>
+                  {/* <input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+                  <Datetime
+                    // ref={dateFromRef}
+                    locale="ja-JP"
+                    value={infoForm.endTime}
+                    dateFormat="YYYY-MM-DD"
+                    timeFormat={false}
+                    onChange={(e) => getEndTimePlan(e)}
+                    closeOnSelect={true}
+                    className={modal.time}
+                  />
+                </div>
+              </div>
             </div>
-            <p>Start Time Plan</p>
+            {/* <p>Start Time Initial Plan</p>
             <div>
-              {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
-              <Datetime
-                // ref={dateFromRef}
-                locale="ja-JP"
-                value={infoForm.endTime}
-                dateFormat="YYYY-MM-DD"
-                timeFormat={false}
-                onChange={(e) => getStartTimePlan(e)}
-                closeOnSelect={true}
-                className={common.time}
-              />
-            </div>
-            <p>End Time Plan</p>
-            <div>
-              {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
-              <Datetime
-                // ref={dateFromRef}
-                locale="ja-JP"
-                value={infoForm.endTime}
-                dateFormat="YYYY-MM-DD"
-                timeFormat={false}
-                onChange={(e) => getEndTimePlan(e)}
-                closeOnSelect={true}
-                className={common.time}
-              />
-            </div>
-            <p>Start Time Initial Plan</p>
-            <div>
-              {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+              //<input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} />
               <Datetime
                 // ref={dateFromRef}
                 locale="ja-JP"
@@ -182,12 +217,12 @@ const Modal = (props) => {
                 timeFormat={false}
                 onChange={(e) => getStartTimeInitialPlan(e)}
                 closeOnSelect={true}
-                className={common.time}
+                className={modal.time}
               />
             </div>
             <p>End Time Initial Plan</p>
             <div>
-              {/* <input className={common.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
+              //<input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} />
               <Datetime
                 // ref={dateFromRef}
                 locale="ja-JP"
@@ -196,25 +231,15 @@ const Modal = (props) => {
                 timeFormat={false}
                 onChange={(e) => getEndTimeInitialPlan(e)}
                 closeOnSelect={true}
-                className={common.time}
+                className={modal.time}
               />
-            </div>
+            </div> */}
             <p>Details</p>
             <div>
-              <input className={common.ip} type="text" onChange={InputChange} name="details" value={infoForm.details} />
-            </div>
-            <p>Progress</p>
-            <div>
-              <input
-                className={common.ip}
-                type="text"
-                onChange={InputChange}
-                name="progress"
-                value={infoForm.progress}
-              />
+              <textarea className={modal.textarea} onChange={InputChange} name="details" value={infoForm.details} />
             </div>
             <div>
-              <span className={common.form_btn} onClick={(e) => props.handleSubmit(e, infoForm, props.modal.contextId)}>
+              <span className={modal.form_btn} onClick={(e) => props.handleSubmit(e, infoForm, props.modal.contextId)}>
                 Add
               </span>
             </div>

@@ -5,15 +5,8 @@ import exp_collapse from '../../../images/toggle_collapse.png';
 import exp_expand from '../../../images/toggle_expand.png';
 import plus_sign from '../../../images/plus.png';
 
-console.log(exp_collapse);
-
 const GanttTable = ({ ...props }) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
-
-  let group = props.data;
-
+  useEffect(() => {}, []);
   let currentGroup = '';
 
   return (
@@ -33,7 +26,6 @@ const GanttTable = ({ ...props }) => {
       <tbody>
         {props.data.map((element, key) => {
           let td;
-
           if (element.type !== currentGroup) {
             currentGroup = element.type;
             td = (
@@ -46,10 +38,10 @@ const GanttTable = ({ ...props }) => {
           }
           return (
             element.isShow && (
-              <tr key={key}>
+              <tr key={key} className={table.hoverRow}>
                 {td}
                 <td style={{ paddingLeft: (element.level - 1) * 20 + 5 + 'px' }}>
-                  <div className={table.flexCenter}>
+                  <div className={table.flexCenter} onDoubleClick={() => props.toggleModal(element.id)}>
                     {element.hasChild ? (
                       <span id={element.id} className={table.expController} onClick={props.handleCollapse}>
                         <img src={!element.collapsed ? exp_collapse : exp_expand} alt="expController" />
