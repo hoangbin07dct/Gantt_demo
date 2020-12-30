@@ -60,7 +60,7 @@ const GanttTable = ({ ...props }) => {
                     <span>{element.task}</span>
                   </div>
                 </td>
-                <td>{element.progress}%</td>
+                <td className={table.textCenter}>{element.progress}%</td>
                 <td>
                   <div className={`${table.flexCenter} ${table.justifyCenter}`}>
                     <img

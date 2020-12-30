@@ -21,18 +21,20 @@ tbody {
   border-spacing: 0;
   border-collapse: collapse;
   width: 400px;
-  tr {
-    > :first-child {
-      width: 20%;
-    }
-    > :nth-of-type(2) {
-      width: 50%;
-    }
-    > :nth-of-type(3) {
-      width: 20%;
-    }
-    > :nth-of-type(4) {
-      width: 10%;
+  thead {
+    tr {
+      > :first-child {
+        width: 20%;
+      }
+      > :nth-of-type(2) {
+        width: 55%;
+      }
+      > :nth-of-type(3) {
+        width: 15%;
+      }
+      > :nth-of-type(4) {
+        width: 10%;
+      }
     }
   }
 }
@@ -51,6 +53,9 @@ tbody {
 }
 .justifyCenter {
   justify-content: center;
+}
+.textCenter {
+  text-align: center;
 }
 .pointerCursor {
   cursor: pointer;
