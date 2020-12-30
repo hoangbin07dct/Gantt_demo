@@ -96,12 +96,15 @@ const GanttD3 = (props) => {
   const handleCollapse = (e) => {
     const target = e.currentTarget;
     let temp = [...data];
-    console.log(typeof target.id);
     const index = temp.findIndex((el) => el.id == target.id);
+
     for (let i = index + 1; i < temp.length; i++) {
-      if (temp[i].level === temp[index].level + 1) {
+      if (temp[i].level > temp[index].level) {
         temp[i].isShow = temp[index].collapsed;
       } else break;
+      if (temp[i].collapsed == true) {
+        break;
+      }
     }
     if (index > -1) {
       temp[index].collapsed = !temp[index].collapsed;
