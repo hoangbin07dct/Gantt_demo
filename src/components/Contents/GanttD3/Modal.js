@@ -26,6 +26,7 @@ const Modal = (props) => {
 
   useEffect(() => {
     setInfoForm({ ...infoForm, id: uuidv4() });
+    
   }, []);
 
   const InputChange = (e) => {

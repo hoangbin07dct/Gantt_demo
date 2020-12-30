@@ -1,15 +1,21 @@
 import { useState } from 'react';
 
 const useModal = () => {
-  const [isShowing, setIsShowing] = useState(false);
+  const [modal, setModal] = useState({
+    isShowing: false,
+    contextId: 23
+  });
 
-  function toggle() {
-    setIsShowing(!isShowing);
+  function toggleModal(contextId = null) {
+    setModal({
+      isShowing: !modal.isShowing,
+      contextId: contextId
+    });
   }
 
   return {
-    isShowing,
-    toggle,
+    modal,
+    toggleModal,
   }
 };
 
