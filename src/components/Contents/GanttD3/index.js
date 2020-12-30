@@ -67,10 +67,20 @@ const GanttD3 = (props) => {
     setData((data) => {
       const temp = [...data];
       if (!appendIndex) {
+        let index = temp
+          .slice()
+          .reverse()
+          .findIndex((el) => el.type === form.type);
+        if (index > -1) {
+          temp.splice(index - 1, 0, form);
+          return temp;
+        }
         temp.push(form);
-      } else {
-        temp.splice(appendIndex, 0, form);
+        return temp;
       }
+      const index = temp.findIndex((el) => el.id === appendIndex);
+      temp[index].hasChild = true;
+      temp.splice(index + 1, 0, form);
       return temp;
     });
     toggleModal();
@@ -86,7 +96,8 @@ const GanttD3 = (props) => {
   const handleCollapse = (e) => {
     const target = e.currentTarget;
     let temp = [...data];
-    const index = temp.findIndex((el) => el.id === Number(target.id));
+    console.log(typeof target.id);
+    const index = temp.findIndex((el) => el.id == target.id);
     for (let i = index + 1; i < temp.length; i++) {
       if (temp[i].level > temp[index].level) {
         temp[i].isShow = temp[index].collapsed;
@@ -123,15 +134,15 @@ const GanttD3 = (props) => {
       </div>
       <div className={common.container}>
         <div className={common.tableWrapper}>
-          <ul className={common.btnList}>
+          {/* <ul className={common.btnList}>
             <li>
               <button className={common.button_default} onClick={toggleModal}>
                 Add New Task
               </button>
             </li>
-          </ul>
-          {modal.isShowing && <Modal hide={toggleModal} handleSubmit={handleSubmit} />}
-          <GanttTable data={data} handleCollapse={handleCollapse}></GanttTable>
+          </ul> */}
+          {modal.isShowing && <Modal data={data} modal={modal} toggleModal={toggleModal} handleSubmit={handleSubmit} />}
+          <GanttTable data={data} toggleModal={toggleModal} handleCollapse={handleCollapse}></GanttTable>
         </div>
         <div id="dom" className={common.dom} ref={chartRef}></div>
       </div>

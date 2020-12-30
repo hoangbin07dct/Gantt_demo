@@ -25,7 +25,7 @@ const GanttTable = ({ ...props }) => {
           <th>Progress</th>
           <td>
             <div className={`${table.flexCenter} ${table.justifyCenter}`}>
-              <img src={plus_sign} alt="Add Task" />
+              <img className={table.pointerCursor} src={plus_sign} alt="Add Task" onClick={() => props.toggleModal()} />
             </div>
           </td>
         </tr>
@@ -63,7 +63,12 @@ const GanttTable = ({ ...props }) => {
                 <td>{element.progress}%</td>
                 <td>
                   <div className={`${table.flexCenter} ${table.justifyCenter}`}>
-                    <img src={plus_sign} alt="Add Task" />
+                    <img
+                      className={table.pointerCursor}
+                      src={plus_sign}
+                      alt="Add Task"
+                      onClick={() => props.toggleModal(element.id)}
+                    />
                   </div>
                 </td>
               </tr>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 const useModal = () => {
   const [modal, setModal] = useState({
     isShowing: false,
-    contextId: 23
+    contextId: null
   });
 
   function toggleModal(contextId = null) {

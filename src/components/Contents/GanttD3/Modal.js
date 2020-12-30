@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Modal = (props) => {
   const [infoForm, setInfoForm] = useState({
-    id: '',
+    id: uuidv4(),
     isShow: true,
     task: '',
     type: '',
@@ -25,8 +25,16 @@ const Modal = (props) => {
   });
 
   useEffect(() => {
-    setInfoForm({ ...infoForm, id: uuidv4() });
-    
+    console.log(props.modal);
+    if (props.modal.contextId) {
+      const index = props.data.findIndex((el) => el.id === props.modal.contextId);
+      console.log(index);
+      setInfoForm({
+        ...infoForm,
+        type: props.data[index].type,
+        level: props.data[index].level + 1,
+      });
+    }
   }, []);
 
   const InputChange = (e) => {
@@ -87,7 +95,7 @@ const Modal = (props) => {
               className={common.modal_close_button}
               data-dismiss="modal"
               aria-label="Close"
-              onClick={props.hide}>
+              onClick={() => props.toggleModal()}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -97,12 +105,17 @@ const Modal = (props) => {
             <div>
               <input className={common.ip} type="text" onChange={InputChange} name="task" value={infoForm.task} />
             </div>
-
             <p>Type</p>
             <div>
-              <input className={common.ip} type="text" onChange={InputChange} name="type" value={infoForm.type} />
+              <input
+                className={common.ip}
+                type="text"
+                onChange={!props.modal.contextId ? InputChange : undefined}
+                name="type"
+                value={infoForm.type}
+                readOnly={!!props.modal.contextId}
+              />
             </div>
-
             <p>Start Time Current</p>
             <div>
               <Datetime
@@ -201,7 +214,7 @@ const Modal = (props) => {
               />
             </div>
             <div>
-              <span className={common.form_btn} onClick={(e) => props.handleSubmit(e, infoForm)}>
+              <span className={common.form_btn} onClick={(e) => props.handleSubmit(e, infoForm, props.modal.contextId)}>
                 Add
               </span>
             </div>
