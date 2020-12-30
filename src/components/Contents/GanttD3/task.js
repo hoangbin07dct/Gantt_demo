@@ -130,6 +130,7 @@ export default class Task {
       .style("stroke", "#000")
       .style("stroke-width", "2")
       .style("fill","none")
+      .style('pointer-events', 'none')
       .attr('marker-end', 'url(#arrow)')
       .attr('d', 
         d3.line()

@@ -149,12 +149,12 @@ export const initData = [
     isShow: true,
     task: 'Task9',
     type: 'Group4',
-    startTimeCurrent: '2020-12-03', //year/month/day
+    startTimeCurrent: '2020-12-05', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
-    endTimeInitialPlan: '2020-12-05',
+    startTimePlan: '2020-12-05', //year/month/day
+    endTimePlan: '2020-12-17',
+    startTimeInitialPlan: '2020-12-15', //year/month/day
+    endTimeInitialPlan: '2020-12-17',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 2,
@@ -166,11 +166,11 @@ export const initData = [
     isShow: true,
     task: 'Task10',
     type: 'Group4',
-    startTimeCurrent: '2020-12-03', //year/month/day
+    startTimeCurrent: '2020-11-25', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
+    startTimePlan: '2020-12-06', //year/month/day
+    endTimePlan: '2020-12-28',
+    startTimeInitialPlan: '2020-11-28', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
     progress: 90,
@@ -183,12 +183,12 @@ export const initData = [
     isShow: true,
     task: 'Task11',
     type: 'Group4',
-    startTimeCurrent: '2020-12-03', //year/month/day
-    endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
-    endTimeInitialPlan: '2020-12-05',
+    startTimeCurrent: '2020-12-15', //year/month/day
+    endTimeCurrent: '2020-12-29',
+    startTimePlan: '2020-12-16', //year/month/day
+    endTimePlan: '2020-12-29',
+    startTimeInitialPlan: '2020-12-10', //year/month/day
+    endTimeInitialPlan: '2020-12-27',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 3,

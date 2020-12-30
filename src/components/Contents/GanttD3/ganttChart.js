@@ -50,6 +50,16 @@ export default class GanttChart {
       .ticks(d3.timeMonth.every(1))
       .tickFormat((date) => d3.timeFormat('%Y/%m')(date));
 
+    d3.select(this.containerElement).select('svg').append('rect')
+      .attr('stroke','#ccc')
+      .attr('stroke-width', '2')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('fill', 'none')
+      .attr('shape-rendering', 'crispEdges')
+      .attr('width',this.width)
+      .attr('height', this.height);
+
     // render SubAxis
     this.svg
       .append('g')
@@ -57,7 +67,11 @@ export default class GanttChart {
       .attr('transform', `translate(0, -20)`)
       // .transition()
       // .duration(1000)
-      .call(this.subAxisX);
+      .call(this.subAxisX)
+      .call(g => {
+        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc');
+        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)');
+      });
 
     // axisX
     this.axisX = d3
@@ -86,8 +100,8 @@ export default class GanttChart {
       // .duration(1000)
       .call(this.axisX)
       .call((g) => {
-        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
-        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
+        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
         g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
     // this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
@@ -154,7 +168,8 @@ export default class GanttChart {
       .select('.axisX')
       .call(this.axisX.scale(this.timeScale))
       .call((g) => {
-        g.selectAll('line').attr('stroke', 'rgba(0, 0, 0, 0.2)');
+        g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
+        g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
         g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
     this.svg.select('.subAxisX').call(this.subAxisX.scale(this.timeScale));
