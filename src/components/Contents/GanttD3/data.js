@@ -70,7 +70,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    dependence: [5, 6]
+    dependence: [5, 6, 7, 8, 9]
   },
 
   {

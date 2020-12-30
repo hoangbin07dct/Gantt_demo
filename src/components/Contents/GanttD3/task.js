@@ -21,6 +21,14 @@ export default class Task {
     this.arrDepend = arrDepend;
     this.toolTip = new ToolTip(this.taskDetail, 0, 0);
     document.getElementById('dom').appendChild(this.toolTip.render());
+
+    this.t = 5;
+    this.arr = 4;
+    this.markerBoxHeight = this.arr;
+    this.markerBoxWidth = this.arr*2;
+    this.refX = this.markerBoxWidth / 2;
+    this.refY = this.markerBoxHeight / 2;
+    this.arrowPoints = [[0, 0], [0, this.arr], [this.arr, (this.arr/2)]];
   }
   render() {
     let _y = this.y;
@@ -102,12 +110,27 @@ export default class Task {
   }
 
   drawBaseline = (start, end, taskContainer) => {
-    const t = 5;
-    taskContainer.append('path').datum([start, [(start[0]+(t*3)), start[1]], [(end[0]-(t*3)), end[1]-t], [(end[0]), end[1]+(t*2)]])
+    // draw arrow
+    taskContainer.append('defs')
+      .append('marker')
+      .attr('id', 'arrow')
+      .attr('viewBox', [0, 0, this.markerBoxWidth, this.markerBoxHeight])
+      .attr('refX', this.refX)
+      .attr('refY', this.refY)
+      .attr('markerWidth', this.markerBoxWidth)
+      .attr('markerHeight', this.markerBoxHeight)
+      .attr('orient', 'auto-start-reverse')
+      .append('path')
+      .attr('d', d3.line()(this.arrowPoints))
+      .attr('stroke', 'black');
+    
+    // draw line
+    taskContainer.append('path').datum([start, [(start[0]+(this.t*3)), start[1]], [(end[0]-(this.t*3)), end[1]-this.t], [(end[0]), end[1]+(this.t*2)]])
       .classed('baseline', true)
       .style("stroke", "#000")
       .style("stroke-width", "2")
       .style("fill","none")
+      .attr('marker-end', 'url(#arrow)')
       .attr('d', 
         d3.line()
           .x((d) => {return d[0];})
