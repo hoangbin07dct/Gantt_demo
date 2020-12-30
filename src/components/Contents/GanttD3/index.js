@@ -62,7 +62,7 @@ const GanttD3 = (props) => {
     };
   }, []);
 
-  const handleSubmit = (e, form, appendIndex) => {
+  const handleCreateTask = (e, form, appendIndex) => {
     e.preventDefault();
     setData((data) => {
       const temp = [...data];
@@ -86,6 +86,17 @@ const GanttD3 = (props) => {
     toggleModal();
   };
 
+  const handleUpdateTask = (e, form, appendIndex) => {
+    e.preventDefault();
+    setData((data) => {
+      const temp = [...data];
+      const index = temp.findIndex((el) => el.id === appendIndex);
+      temp.splice(index, 1, form);
+      return temp;
+    });
+    toggleModal();
+  };
+
   const updateFrom = (e) => {
     setFrom(e);
   };
@@ -94,6 +105,7 @@ const GanttD3 = (props) => {
   };
 
   const handleCollapse = (e) => {
+    e.preventDefault();
     const target = e.currentTarget;
     let temp = [...data];
     const index = temp.findIndex((el) => el.id == target.id);
@@ -102,7 +114,7 @@ const GanttD3 = (props) => {
       if (temp[i].level > temp[index].level) {
         temp[i].isShow = temp[index].collapsed;
       } else break;
-      if (temp[i].collapsed == true) {
+      if (temp[i].collapsed === true) {
         break;
       }
     }
@@ -144,7 +156,15 @@ const GanttD3 = (props) => {
               </button>
             </li>
           </ul> */}
-          {modal.isShowing && <Modal data={data} modal={modal} toggleModal={toggleModal} handleSubmit={handleSubmit} />}
+          {modal.isShowing && (
+            <Modal
+              data={data}
+              modal={modal}
+              toggleModal={toggleModal}
+              handleCreateTask={handleCreateTask}
+              handleUpdateTask={handleUpdateTask}
+            />
+          )}
           <GanttTable data={data} toggleModal={toggleModal} handleCollapse={handleCollapse}></GanttTable>
         </div>
         <div id="dom" className={common.dom} ref={chartRef}></div>
