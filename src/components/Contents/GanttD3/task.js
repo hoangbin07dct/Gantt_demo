@@ -69,9 +69,10 @@ export default class Task {
       let start = [startX, h/2];
       this.dependence.forEach((d, i) => {
         let endX = this.arrDepend[i][0];
+        let endY = this.arrDepend[i][2];
         let end = [endX, this.arrDepend[i][2]];
         // console.log(this);
-        this.drawBaseline(start, end, taskContainer);
+        endX && endY && this.drawBaseline(start, end, taskContainer);
       });
     }
 

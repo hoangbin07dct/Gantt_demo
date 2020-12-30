@@ -26,7 +26,7 @@ export default class TasksList {
   }
 
   task = () => {
-    this.tasksList.append((d,i) => {
+    this.tasksList.append((d, i) => {
       const minDate = d3.min([this.dateFormat(d.startTimeCurrent), this.dateFormat(d.startTimePlan), this.dateFormat(d.startTimeInitialPlan)]);
       let x = this.timeScale(minDate);
       let y = i * this.gap + 4;
@@ -46,9 +46,14 @@ export default class TasksList {
       if (d.dependence) {
         dependence = d.dependence;
         dependence.forEach((d, i) => {
-          planStartChild = this.data[d-1] ? this.timeScale(this.dateFormat(this.data[d-1].startTimePlan)) : null;
-          planWidthChild = this.data[d-1] ? this.timeScale(this.dateFormat(this.data[d-1].endTimePlan)) - this.timeScale(this.dateFormat(this.data[d-1].startTimePlan)) : null;
-          yChild = ((d-1) * this.gap + 4) - y;
+          const test = this.data.find((a) => {
+            if(a.id === d) {
+              return a;
+            }
+          });
+          planStartChild = test && this.timeScale(this.dateFormat(test.startTimePlan));
+          planWidthChild = test && this.timeScale(this.dateFormat(test.endTimePlan)) - this.timeScale(this.dateFormat(test.startTimePlan));
+          yChild = test && ((test.id - 1) * this.gap + 4) - y;
           arrDepend.push([planStartChild, planWidthChild, yChild]);
         });
       }
