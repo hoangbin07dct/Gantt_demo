@@ -13,7 +13,6 @@ export default class ToolTip {
     this.containElement.style.width = `100px`;
     this.containElement.style.height = `50px`;
     this.containElement.style.color = '#ffffff';
-    // this.containElement.style.backgroundColor = '#2b3a6a';
     this.containElement.style.top = `${this.top}px`;
     this.containElement.style.left = `${this.left}px`;
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import GanttChart from './ganttChart';
 import GanttTable from './GanttTable';
 import common from '../../../styles/Common.module.scss';
@@ -14,7 +14,7 @@ const GanttD3 = (props) => {
   const getWidth = () => {
     return document.getElementById('dom').getBoundingClientRect().width;
   };
-  const [width, setWidth] = useState();
+  const [width, setWidth] = useState(0);
   const [data, setData] = useState(initData);
   const [from, setFrom] = useState(moment().subtract(30, 'days'));
   const [to, setTo] = useState(moment());
@@ -99,7 +99,7 @@ const GanttD3 = (props) => {
     console.log(typeof target.id);
     const index = temp.findIndex((el) => el.id == target.id);
     for (let i = index + 1; i < temp.length; i++) {
-      if (temp[i].level > temp[index].level) {
+      if (temp[i].level === temp[index].level + 1) {
         temp[i].isShow = temp[index].collapsed;
       } else break;
     }

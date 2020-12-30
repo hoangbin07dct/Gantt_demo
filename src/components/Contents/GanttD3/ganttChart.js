@@ -29,26 +29,6 @@ export default class GanttChart {
     this.timeScale = null;
     this.groupTasks = null;
     this.tasksList = null;
-    
-     // Define the div for the tooltip
-    //  if (document.querySelector('.tooltip')) {
-    //    document.querySelector('.tooltip').remove();
-    //  }
-    //  this.tooltip = d3.select("body").append("div")
-    //  .attr("class", "tooltip")	
-    //  this.tooltipInner = d3.select("body .tooltip")
-    //  .append("div")
-    //  .attr("class", "tooltipInner")
-
-
-    //  d3.select(".tooltip")
-
-
-    //  .style("opacity", 0)
-    //  .style("top", 0)
-    //  .style("position", 'absolute')
-   
-
 
   }
   render(data) {
@@ -89,7 +69,7 @@ export default class GanttChart {
     this.mainChart = this.svg.append('g').attr('class', 'main-chart');
 
     // render groupTasks
-    this.groupTasks = new GroupTasks(this.width, this.gap, data, categories);
+    // this.groupTasks = new GroupTasks(this.width, this.gap, data, categories);
     // let groupTasks = this.mainChart.node().appendChild(this.groupTasks.render());
 
     // render TasksList
@@ -112,10 +92,11 @@ export default class GanttChart {
     // this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
     let grid = this.svg.append('g');
     grid
-      .selectAll('line')
+      .selectAll('.horizon-grid')
       .data(data)
       .enter()
       .append('line')
+      .attr('class', 'horizon-grid')
       .attr('stroke', 'rgba(0, 0, 0, 0.2)')
       .attr('stroke-width', '1')
       .attr('x1', 0)
