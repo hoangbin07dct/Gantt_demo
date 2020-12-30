@@ -43,8 +43,8 @@ export default class ToolTip {
   }
 
   setPosition(left, top) {
-    let areaDimesion = document.querySelector('.main-chart').getBoundingClientRect();
+    let areaDimesion = document.querySelector('svg').getBoundingClientRect();
     this.left = areaDimesion.left + left;
-    this.top = areaDimesion.top + top;
+    this.top = areaDimesion.top + top + 35;
   }
 }
