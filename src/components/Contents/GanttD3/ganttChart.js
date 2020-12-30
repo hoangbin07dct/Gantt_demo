@@ -146,6 +146,10 @@ export default class GanttChart {
       .attr('y', 0);
     this.mainChart.selectAll('*:not(.tool-tip)').attr('clip-path', 'url(#clip)');
 
+    this.initLegend();
+    this.createLegend('計画工程（当初）', '#ffffff');
+    this.createLegend('計画工程（変更）', 'orange');
+    this.createLegend('実際', '#2b3a6a');
     function checkUnique(arr) {
       let hash = {},
         result = [];
@@ -175,4 +179,25 @@ export default class GanttChart {
     this.svg.select('.current-date').attr('x', this.timeScale(moment().startOf('day'))).attr('width', transX * 2);
     this.tasksList.changeScale(this.timeScale);
   }
+  initLegend = () => {
+    const legend = d3
+      .select('#dom')
+      .append('div')
+      .attr('class', 'legend');
+
+    legend.append('ul').attr('class', 'legend-list');
+
+  };
+
+  createLegend = (type, color) => {
+      const legend = d3.select('#dom .legend');
+      const legendItem = legend.select('ul.legend-list').append('li').attr('class', 'legend-item');
+      legendItem.append('span').attr('class', 'legend-label-color').style('background', color);
+      legendItem
+        .append('span')
+        .attr('class', 'legend-label-text')
+        .text(function () {
+          return type;
+        });
+  };
 }

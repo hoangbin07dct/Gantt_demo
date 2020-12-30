@@ -10,6 +10,7 @@ export default class ToolTip {
     this.containElement.style.visibility = this.visible ? 'visible' : 'hidden';
     this.containElement.className = 'tool-tip';
     this.containElement.innerHTML = '';
+    this.containElement.style.position = 'fixed';
     this.containElement.style.width = `100px`;
     this.containElement.style.height = `50px`;
     this.containElement.style.color = '#ffffff';

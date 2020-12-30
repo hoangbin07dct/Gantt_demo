@@ -7,7 +7,7 @@ export const initData = [
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-07',
+    endTimePlan: '2020-12-24',
     startTimeInitialPlan: '2020-12-01', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
