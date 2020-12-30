@@ -37,8 +37,8 @@ export default class TasksList {
       if (d.dependence) {
         dependence = d.dependence;
         dependence.forEach((d, i) => {
-          planStartChild = this.timeScale(dateFormat(this.data[d-1].startTimePlan));
-          planWidthChild = this.timeScale(dateFormat(this.data[d-1].endTimePlan)) - this.timeScale(dateFormat(this.data[d-1].startTimePlan));
+          planStartChild = this.data[d-1] ? this.timeScale(dateFormat(this.data[d-1].startTimePlan)) : null;
+          planWidthChild = this.data[d-1] ? this.timeScale(dateFormat(this.data[d-1].endTimePlan)) - this.timeScale(dateFormat(this.data[d-1].startTimePlan)) : null;
           yChild = ((d-1) * this.gap + 4) - y;
           arrDepend.push([planStartChild, planWidthChild, yChild]);
         });

@@ -61,7 +61,7 @@ export default class Task {
     // render current
     let current = taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
 
-    if (this.dependence) {
+    if (this.dependence && this.taskDetail.isShow) {
       let x = parseFloat(containElement.children[0].getAttribute('x'));
       let w = parseFloat(containElement.children[0].getAttribute('width'));
       let h = parseFloat(containElement.children[0].getAttribute('height'));

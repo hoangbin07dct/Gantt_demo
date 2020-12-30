@@ -17,7 +17,7 @@ export default class GanttChart {
     this.width = width - this.margin.left - this.margin.right;
     this.height = this.gap * length + this.margin.top;
     this.from = from.format('YYYY-MM-DD');
-    this.to = to.format('YYYY-MM-DD');
+    this.to = moment(to).add(1,'days').format('YYYY-MM-DD');
     this.svg = d3
       .select(containerElement)
       .append('svg')
@@ -49,6 +49,7 @@ export default class GanttChart {
       .scale(this.timeScale)
       .ticks(d3.timeMonth.every(1))
       .tickFormat((date) => d3.timeFormat('%Y/%m')(date));
+
     // render SubAxis
     this.svg
       .append('g')
@@ -90,6 +91,20 @@ export default class GanttChart {
         g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
     // this.svg.select('.axisX').selectAll('.tick:last-of-type text').remove();
+
+    // render current date
+    const currentDate = this.svg
+      .append('rect')
+      .attr('class', 'current-date')
+      .attr('x', this.timeScale(moment().startOf('day')))
+      .attr('y', 0)
+      .attr('height', this.height)
+      .attr('stroke', 'none')
+      .attr('fill', 'rgba(0, 0, 0, 0.5)')
+      .style('pointer-events', 'none')
+      .attr('width', transX * 2)
+      .attr('opacity', 1);
+
     let grid = this.svg.append('g');
     grid
       .selectAll('.horizon-grid')
@@ -132,7 +147,7 @@ export default class GanttChart {
   }
   changeScale(from, to) {
     this.from = from.format('YYYY-MM-DD');
-    this.to = to.format('YYYY-MM-DD');
+    this.to = moment(to).add(1,'days').format('YYYY-MM-DD');
     let transX = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays() / 2);
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg
@@ -143,6 +158,7 @@ export default class GanttChart {
         g.selectAll('text').attr('transform', `translate(${transX},0)`);
       });
     this.svg.select('.subAxisX').call(this.subAxisX.scale(this.timeScale));
+    this.svg.select('.current-date').attr('x', this.timeScale(moment().startOf('day'))).attr('width', transX * 2);
     this.tasksList.changeScale(this.timeScale);
   }
 }
