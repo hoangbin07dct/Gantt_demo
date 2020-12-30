@@ -102,7 +102,8 @@ export default class Task {
   }
 
   drawBaseline = (start, end, taskContainer) => {
-    taskContainer.append('path').datum([start, [(start[0]+5), start[1]], [(end[0]-5), end[1]-5], [(end[0]), end[1]+10]])
+    const t = 5;
+    taskContainer.append('path').datum([start, [(start[0]+(t*3)), start[1]], [(end[0]-(t*3)), end[1]-t], [(end[0]), end[1]+(t*2)]])
       .classed('baseline', true)
       .style("stroke", "#000")
       .style("stroke-width", "2")
