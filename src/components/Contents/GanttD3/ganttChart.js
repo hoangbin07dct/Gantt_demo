@@ -9,7 +9,7 @@ export default class GanttChart {
     this.gap = 54;
     this.containerElement = containerElement;
     this.margin = {
-      top: 40,
+      top: 41,
       right: 0,
       bottom: 0,
       left: 0,
