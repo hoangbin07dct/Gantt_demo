@@ -72,7 +72,7 @@ const GanttD3 = (props) => {
       temp.splice(index + 1, 0, form);
       return temp;
     });
-    toggleModal();
+    toggleModal(e);
   };
 
   const handleUpdateTask = (e, form, appendIndex) => {
@@ -83,7 +83,7 @@ const GanttD3 = (props) => {
       temp.splice(index, 1, form);
       return temp;
     });
-    toggleModal();
+    toggleModal(e);
   };
 
   const updateFrom = (e) => {

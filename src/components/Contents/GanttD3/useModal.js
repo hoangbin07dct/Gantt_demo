@@ -8,7 +8,7 @@ const useModal = () => {
   });
 
   function toggleModal(e, modalType = null, contextId = null) {
-    if (!!e && e.target.tagName !== 'IMG') {
+    if (!!e && e.target.alt !== 'expController') {
       setModal({
         type: modalType,
         isShowing: !modal.isShowing,
