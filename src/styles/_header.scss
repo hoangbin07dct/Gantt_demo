@@ -4,7 +4,38 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: rem(100);
-  background: #acacac;
-  text-align: center;
+  height: 55px;
+  background: linear-gradient(90deg, rgb(43, 58, 106) 0%, rgb(255, 255, 255) 100%);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+}
+.header_text {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.management {
+  width: 100%;
+  max-height: 4rem;
+  height: 4rem;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  transition: max-height 0.3s ease 0s;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0px 1rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 17px 0px;
+}
+
+.management_text {
+  color: rgb(43, 58, 106);
+  line-height: 1;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
