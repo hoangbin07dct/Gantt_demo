@@ -51,15 +51,15 @@ const Modal = (props) => {
     if (props.modal.type === 'create') {
       setModalContext({
         handleSubmit: props.handleCreateTask,
-        modalTitle: 'Add New Task',
-        submitText: 'Add',
+        modalTitle: '新規登録',
+        submitText: '登録',
       });
     }
     if (props.modal.type === 'update') {
       setModalContext({
         handleSubmit: props.handleUpdateTask,
-        modalTitle: 'Update Task',
-        submitText: 'Update',
+        modalTitle: '編集',
+        submitText: '更新',
         handleDelete: props.handleDeleteTask,
       });
     }
@@ -93,24 +93,24 @@ const Modal = (props) => {
       <div className={modal.modal_wrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
         <div className={modal.modal}>
           <div className={modal.modal_header}>
-            <button
+            {/* <button
               type="button"
               className={modal.modal_close_button}
               data-dismiss="modal"
               aria-label="Close"
               onClick={(e) => props.toggleModal(e)}>
               <span aria-hidden="true">&times;</span>
-            </button>
+            </button> */}
           </div>
           <form>
             <h3 className={modal.form_ttl}>{modalContext.modalTitle}</h3>
-            <p>Task</p>
+            <p>タスク</p>
             <div>
               <input className={modal.ip} type="text" onChange={InputChange} name="task" value={infoForm.task} />
             </div>
             <div className={modal.dateGroup}>
               <div className={modal.flexItem}>
-                <p>Type</p>
+                <p>種別</p>
                 <div>
                   <input
                     className={modal.ip}
@@ -130,7 +130,7 @@ const Modal = (props) => {
               </div>
               <div className={modal.flexItem}>
                 <p>
-                  Progress
+                  進捗
                   <input
                     className={modal.inputSlider}
                     type="number"
@@ -156,7 +156,7 @@ const Modal = (props) => {
 
             <div className={modal.dateGroup}>
               <div className={modal.flexItem}>
-                <p>Start Time Current</p>
+                <p>開始日（実際）</p>
                 <div className={modal.dateItem}>
                   <Datetime
                     // ref={dateFromRef}
@@ -167,11 +167,12 @@ const Modal = (props) => {
                     onChange={(e) => handleChangeTime(e, 'startTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
+                    inputProps={{readOnly:true}}
                   />
                 </div>
               </div>
               <div className={modal.flexItem}>
-                <p>End Time Current</p>
+                <p>終了日（実際）</p>
                 <div className={modal.dateItem}>
                   <Datetime
                     // ref={dateFromRef}
@@ -182,13 +183,14 @@ const Modal = (props) => {
                     onChange={(e) => handleChangeTime(e, 'endTimeCurrent')}
                     closeOnSelect={true}
                     className={modal.time}
+                    inputProps={{readOnly:true}}
                   />
                 </div>
               </div>
             </div>
             <div className={modal.dateGroup}>
               <div className={modal.flexItem}>
-                <p>Start Time Plan</p>
+                <p>開始日（計画）</p>
                 <div className={modal.dateItem}>
                   {/* <input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
                   <Datetime
@@ -200,11 +202,12 @@ const Modal = (props) => {
                     onChange={(e) => handleChangeTime(e, 'startTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
+                    inputProps={{readOnly:true}}
                   />
                 </div>
               </div>
               <div className={modal.flexItem}>
-                <p>End Time Plan</p>
+                <p>終了日（計画）</p>
                 <div className={modal.dateItem}>
                   {/* <input className={modal.ip} type='text' onChange={InputChange} name='endTime' value={infoForm.endTime} /> */}
                   <Datetime
@@ -216,6 +219,7 @@ const Modal = (props) => {
                     onChange={(e) => handleChangeTime(e, 'endTimePlan')}
                     closeOnSelect={true}
                     className={modal.time}
+                    inputProps={{readOnly:true}}
                   />
                 </div>
               </div>
@@ -248,18 +252,25 @@ const Modal = (props) => {
                 className={modal.time}
               />
             </div> */}
-            <p>Details</p>
+            <p>コメント</p>
             <div>
               <textarea className={modal.textarea} onChange={InputChange} name="details" value={infoForm.details} />
             </div>
             <div className={modal.btn_list}>
+              <span
+                className={`${modal.form_btn} ${modal.cancel_btn}`}
+                data-dismiss="modal"
+                aria-label="閉じる"
+                onClick={(e) => props.toggleModal(e)}>
+                閉じる
+              </span>
               {!!modalContext.handleDelete && (
                 <span
                   className={`${modal.form_btn} ${modal.delete_btn}`}
                   onClick={(e) => {
                     modalContext.handleDelete(e, props.modal.contextId);
                   }}>
-                  Delete
+                  削除
                 </span>
               )}
               <span

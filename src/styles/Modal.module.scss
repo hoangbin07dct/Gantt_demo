@@ -19,6 +19,7 @@
     margin: auto 0;
     width: 20px;
     height: 20px;
+    pointer-events: none;
   }
 }
 
@@ -40,7 +41,7 @@
   border-radius: 3px;
   width: 700px;
   // max-width: 600px;
-  padding: 2rem;
+  padding: 30px;
   background: white;
 }
 
@@ -59,13 +60,19 @@
 }
 
 .inputSlider {
-  width: 50px;
+  width: 35px;
   border-radius: 0;
   border: 1px solid #ddd;
   outline: none;
   height: 24px;
   margin: 0 5px;
   padding: 0 5px;
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .textarea {
@@ -112,7 +119,7 @@
 .btn_list {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .form_btn {
@@ -121,19 +128,37 @@
   justify-content: center;
   width: 200px;
   height: 35px;
-  margin-left: 20px;
-  background: #247ba0;
+  background: #2b3a64;
   color: #fff;
   font-size: 16px;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 17px 0px;
   cursor: pointer;
-  transition: 0.25s ease-in-out;
+  transition: 0.2s ease-in-out;
   &:hover {
-    opacity: 0.7;
+    background-color: #fff;
+    color: #2b3a64;
+  }
+  &:not(:first-of-type) {
+    margin-left: 30px;
+  }
+}
+
+.cancel_btn {
+  background: #c7c7c7;
+  color: black;
+  &:hover {
+    background: #ababab;
+    color: #fff;
   }
 }
 
 .delete_btn {
   background: #d80202;
+  &:hover {
+    background-color: #ababab;
+    color: #fff;
+  }
 }
 
 .modal_header {
