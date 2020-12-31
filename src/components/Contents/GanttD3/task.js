@@ -3,6 +3,7 @@ import PlansBar from './plansBar';
 import InitPlansBar from './initPlansBar';
 import CurrentBar from './currentBar';
 import ToolTip from './toolTip';
+import FlowChart from './flowChart';
 export default class Task {
   constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend) {
     
@@ -20,14 +21,6 @@ export default class Task {
     this.arrDepend = arrDepend;
     this.toolTip = new ToolTip(this.taskDetail, 0, 0);
     document.getElementById('dom').appendChild(this.toolTip.render());
-
-    this.t = 5;
-    this.arr = 4;
-    this.markerBoxHeight = this.arr;
-    this.markerBoxWidth = this.arr*2;
-    this.refX = this.markerBoxWidth / 2;
-    this.refY = this.markerBoxHeight / 2;
-    this.arrowPoints = [[0, 0], [0, this.arr], [this.arr, (this.arr/2)]];
   }
   render() {
     let _y = this.y;
@@ -38,11 +31,11 @@ export default class Task {
       .attr('transform', `translate(0,${this.y})`);
 
     // render plans
-    let plans = taskContainer.append(d => new PlansBar(this.planStart, this.planWidth, this.height, this.taskDetail).render());
+    taskContainer.append(d => new PlansBar(this.planStart, this.planWidth, this.height, this.taskDetail).render());
 
     // render init plan
     if(this.taskDetail.isTimePlanUpdated) {
-      let initPlan = taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
+      taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
     }
 
     // render progress bar
@@ -60,70 +53,31 @@ export default class Task {
     //   .attr('width', (d) => this.progress);
 
     // render current
-    let current = taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
+    taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
 
-    if (this.dependence && this.taskDetail.isShow) {
-      let x = parseFloat(containElement.children[0].getAttribute('x'));
-      let w = parseFloat(containElement.children[0].getAttribute('width'));
-      let h = parseFloat(containElement.children[0].getAttribute('height'));
-      let startX = x + w;
-      let start = [startX, h/2];
-      this.dependence.forEach((d, i) => {
-        let endX = this.arrDepend[i][0];
-        let endY = this.arrDepend[i][2];
-        let end = [endX, this.arrDepend[i][2]];
-        endX && endY && this.drawBaseline(start, end, taskContainer);
-      });
-    }
+    // render flow line
+    this.flowChart = new FlowChart(taskContainer, containElement, this.dependence, this.taskDetail, this.arrDepend);
+    this.flowChart.init();
 
     // event hover
     taskContainer
       .on('mouseout', mouseoutHandle)
       .on('mousemove', mouseMoveHandle);
 
+    // hidden toolTip
     function mouseoutHandle() {
-      // hidden toolTip
       _toolTip.visible = false;
       _toolTip.render();
     }
+
+    // update toolTip
     function mouseMoveHandle() {
       let mouse = d3.mouse(this);
-      // update toolTip
       _toolTip.setPosition(mouse[0], _y + 50);
       _toolTip.visible = true;
       _toolTip.render();
     }
-    return taskContainer.node();
-  }
 
-  drawBaseline = (start, end, taskContainer) => {
-    // draw arrow
-    taskContainer.append('defs')
-      .append('marker')
-      .attr('id', 'arrow')
-      .attr('viewBox', [0, 0, this.markerBoxWidth, this.markerBoxHeight])
-      .attr('refX', this.refX)
-      .attr('refY', this.refY)
-      .attr('markerWidth', this.markerBoxWidth)
-      .attr('markerHeight', this.markerBoxHeight)
-      .attr('orient', 'auto-start-reverse')
-      .append('path')
-      .attr('d', d3.line()(this.arrowPoints))
-      .attr('stroke', 'black');
-    
-    // draw line
-    taskContainer.append('path').datum([start, [(start[0]+(this.t*3)), start[1]], [(end[0]-(this.t*3)), end[1]-this.t], [(end[0]), end[1]+(this.t*2)]])
-      .classed('baseline', true)
-      .style("stroke", "#000")
-      .style("stroke-width", "2")
-      .style("fill","none")
-      .style('pointer-events', 'none')
-      .attr('marker-end', 'url(#arrow)')
-      .attr('d', 
-        d3.line()
-          .x((d) => {return d[0];})
-          .y((d) => {return d[1];})
-          .curve(d3.curveStepBefore)
-      );
+    return taskContainer.node();
   }
 }
