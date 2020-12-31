@@ -21,7 +21,7 @@ const Modal = (props) => {
     level: 1,
     hasChild: false,
     collapsed: false,
-    isUpdated: false,
+    isTimePlanUpdated: false,
     dependence: [],
   });
   let allGroup = new Set(props.data.map((item) => item.type));

@@ -41,7 +41,7 @@ export default class Task {
     let plans = taskContainer.append(d => new PlansBar(this.planStart, this.planWidth, this.height, this.taskDetail).render());
 
     // render init plan
-    if(this.taskDetail.isUpdated) {
+    if(this.taskDetail.isTimePlanUpdated) {
       let initPlan = taskContainer.append(d => new InitPlansBar(this.initialPlanStart, this.initialPlanWidth, this.height, this.taskDetail).render());
     }
 

@@ -15,7 +15,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
     dependence: [4]
   },
 
@@ -35,7 +35,7 @@ export const initData = [
     level: 2,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
 
   {
@@ -54,7 +54,7 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
 
   {
@@ -73,7 +73,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
     dependence: [6]
   },
 
@@ -93,7 +93,7 @@ export const initData = [
     level: 2,
     hasChild: false,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
 
   {
@@ -112,7 +112,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
     dependence: [10, 11]
   },
 
@@ -132,7 +132,7 @@ export const initData = [
     level: 2,
     hasChild: false,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
   {
     id: 8,
@@ -150,7 +150,7 @@ export const initData = [
     level: 1,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
 
   {
@@ -169,7 +169,7 @@ export const initData = [
     level: 2,
     hasChild: true,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
   {
     id: 10,
@@ -187,7 +187,7 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
   {
     id: 11,
@@ -205,6 +205,6 @@ export const initData = [
     level: 3,
     hasChild: false,
     collapsed: false,
-    isUpdated: true,
+    isTimePlanUpdated: true,
   },
 ];

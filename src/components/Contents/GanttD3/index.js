@@ -58,7 +58,6 @@ const GanttD3 = (props) => {
       ...form,
       startTimeInitialPlan: form.startTimePlan,
       endTimeInitialPlan: form.endTimePlan,
-      isUpdated: false,
     };
     setData((data) => {
       const temp = [...data];
@@ -86,9 +85,11 @@ const GanttD3 = (props) => {
 
   const handleUpdateTask = (e, form, appendIndex) => {
     e.preventDefault();
+    let diffInStartTime = moment(form.startTimeInitialPlan).diff(moment(form.startTimePlan));
+    let diffInEndTime = moment(form.endTimeInitialPlan).diff(moment(form.endTimePlan));
     let obj = {
       ...form,
-      isUpdated: true,
+      isTimePlanUpdated: diffInStartTime !== 0 || diffInEndTime !== 0,
     };
     setData((data) => {
       const temp = [...data];
