@@ -2,8 +2,8 @@ export const initData = [
   {
     id: 1,
     isShow: true,
-    task: 'Task1',
-    type: 'Group1',
+    task: 'タスク1',
+    type: 'グループ1',
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-02', //year/month/day
@@ -22,8 +22,8 @@ export const initData = [
   {
     id: 2,
     isShow: true,
-    task: 'Task2',
-    type: 'Group1',
+    task: 'タスク2',
+    type: 'グループ1',
     startTimeCurrent: '2020-12-20', //year/month/day
     endTimeCurrent: '2020-12-30',
     startTimePlan: '2020-12-20', //year/month/day
@@ -41,8 +41,8 @@ export const initData = [
   {
     id: 3,
     isShow: true,
-    task: 'Task3',
-    type: 'Group1',
+    task: 'タスク3',
+    type: 'グループ1',
     startTimeCurrent: '2020-12-07', //year/month/day
     endTimeCurrent: '2020-12-15',
     startTimePlan: '2020-12-07', //year/month/day
@@ -60,8 +60,8 @@ export const initData = [
   {
     id: 4,
     isShow: true,
-    task: 'Task4',
-    type: 'Group2',
+    task: 'タスク4',
+    type: 'グループ2',
     startTimeCurrent: '2020-12-11', //year/month/day
     endTimeCurrent: '2020-12-15',
     startTimePlan: '2020-12-11', //year/month/day
@@ -80,8 +80,8 @@ export const initData = [
   {
     id: 5,
     isShow: true,
-    task: 'Task5',
-    type: 'Group2',
+    task: 'タスク5',
+    type: 'グループ2',
     startTimeCurrent: '2020-12-15', //year/month/day
     endTimeCurrent: '2020-12-21',
     startTimePlan: '2020-12-15', //year/month/day
@@ -99,8 +99,8 @@ export const initData = [
   {
     id: 6,
     isShow: true,
-    task: 'Task6',
-    type: 'Group3',
+    task: 'タスク6',
+    type: 'グループ3',
     startTimeCurrent: '2020-12-16', //year/month/day
     endTimeCurrent: '2020-12-20',
     startTimePlan: '2020-12-16', //year/month/day
@@ -119,8 +119,8 @@ export const initData = [
   {
     id: 7,
     isShow: true,
-    task: 'Task7',
-    type: 'Group3',
+    task: 'タスク7',
+    type: 'グループ3',
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-03', //year/month/day
@@ -137,8 +137,8 @@ export const initData = [
   {
     id: 8,
     isShow: true,
-    task: 'Task8',
-    type: 'Group4',
+    task: 'タスク8',
+    type: 'グループ4',
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-03', //year/month/day
@@ -156,8 +156,8 @@ export const initData = [
   {
     id: 9,
     isShow: true,
-    task: 'Task9',
-    type: 'Group4',
+    task: 'タスク9',
+    type: 'グループ4',
     startTimeCurrent: '2020-12-05', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-05', //year/month/day
@@ -174,8 +174,8 @@ export const initData = [
   {
     id: 10,
     isShow: true,
-    task: 'Task10',
-    type: 'Group4',
+    task: 'タスク10',
+    type: 'グループ4',
     startTimeCurrent: '2020-12-21', //year/month/day
     endTimeCurrent: '2020-12-25',
     startTimePlan: '2020-12-21', //year/month/day
@@ -192,8 +192,8 @@ export const initData = [
   {
     id: 11,
     isShow: true,
-    task: 'Task11',
-    type: 'Group4',
+    task: 'タスク11',
+    type: 'グループ4',
     startTimeCurrent: '2020-12-21', //year/month/day
     endTimeCurrent: '2020-12-25',
     startTimePlan: '2020-12-21', //year/month/day
