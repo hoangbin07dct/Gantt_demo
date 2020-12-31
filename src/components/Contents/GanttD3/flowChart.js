@@ -30,7 +30,6 @@ export default class FlowChart {
         let start = [startX, hw + (h/2)];
         let endX = this.arrDepend[i][0];
         let endY = hw + this.arrDepend[i][2];
-        console.log(endY);
         let end = [endX, endY];
         endX && endY && this.drawBaseline(start, end, d);
       });
