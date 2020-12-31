@@ -28,6 +28,10 @@ export default class GanttChart {
     this.groupTasks = null;
     this.tasksList = null;
 
+
+ 
+
+
   }
   render(data) {
     let categories = data.map((d) => d.type);
@@ -40,13 +44,15 @@ export default class GanttChart {
       .range([0, this.width]);
 
     let transX = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays() / 2);
+    let transX2 = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays())*15;
 
     // SubAxis
     this.subAxisX = d3
       .axisTop()
       .scale(this.timeScale)
       .ticks(d3.timeMonth.every(1))
-      .tickFormat((date) => d3.timeFormat('%Y年%m月')(date));
+      .tickFormat((date) => d3.timeFormat('%Y年%m月')(date))
+  
 
     d3.select(this.containerElement).select('svg').append('rect')
       .attr('stroke','#ccc')
@@ -69,6 +75,7 @@ export default class GanttChart {
       .call(g => {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc');
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)');
+        g.selectAll('text').attr('transform', `translate(${transX2},0)`);
       });
 
     // render current date
@@ -110,7 +117,7 @@ export default class GanttChart {
     .call((g) => {
       g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
       g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
-      g.selectAll('text').attr('transform', `translate(${transX},-3)`);
+      g.selectAll('text').attr('transform', `translate(${transX},0)`);
     });
     let grid = this.svg.append('g');
     grid
@@ -161,6 +168,7 @@ export default class GanttChart {
     this.from = from.format('YYYY-MM-DD');
     this.to = moment(to).add(1,'days').format('YYYY-MM-DD');
     let transX = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays() / 2);
+    let transX2 = Math.abs(this.width / moment.duration(moment(this.from).diff(moment(this.to))).asDays())*15;
     this.timeScale.domain([d3.timeParse('%Y-%m-%d')(this.from), d3.timeParse('%Y-%m-%d')(this.to)]);
     this.svg
       .select('.axisX')
@@ -169,6 +177,12 @@ export default class GanttChart {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc').attr('transform','translate(0,-1)');
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)').attr('transform','translate(0,-20)');
         g.selectAll('text').attr('transform', `translate(${transX},-3)`);
+      });
+      this.svg
+      .select('.subAxisX')
+      .call(this.subAxisX.scale(this.timeScale))
+      .call((g) => {
+        g.selectAll('text').attr('transform', `translate(${transX2},2)`);
       });
     this.svg.select('.subAxisX').call(this.subAxisX.scale(this.timeScale));
     this.svg.select('.current-date').attr('x', this.timeScale(moment().startOf('day'))).attr('width', transX * 2);
