@@ -58,17 +58,19 @@ const GanttD3 = (props) => {
       ...form,
       startTimeInitialPlan: form.startTimePlan,
       endTimeInitialPlan: form.endTimePlan,
-      isUpdated: false
-    }
+      isUpdated: false,
+    };
     setData((data) => {
       const temp = [...data];
       if (!appendIndex) {
         let index = temp
           .slice()
           .reverse()
-          .findIndex((el) => el.type === obj.type);
+          .findIndex((el) => {
+            return el.type === obj.type;
+          });
         if (index > -1) {
-          temp.splice(index - 1, 0, obj);
+          temp.splice(temp.length - index, 0, obj);
           return temp;
         }
         temp.push(obj);
@@ -86,12 +88,68 @@ const GanttD3 = (props) => {
     e.preventDefault();
     let obj = {
       ...form,
-      isUpdated: true
-    }
+      isUpdated: true,
+    };
     setData((data) => {
       const temp = [...data];
       const index = temp.findIndex((el) => el.id === appendIndex);
       temp.splice(index, 1, obj);
+      return temp;
+    });
+    toggleModal(e);
+  };
+
+  const handleDeleteTask = (e, id) => {
+    e.preventDefault();
+    setData((data) => {
+      const temp = [...data];
+      const index = temp.findIndex((el) => el.id === id);
+      //If element hasChild -> Delete all Child
+      if (temp[index].hasChild) {
+        const childIdList = [];
+        for (let i = index + 1; i < temp.length; i++) {
+          if (temp[i].level > temp[index].level) {
+            childIdList.push(temp[i].id);
+          } else break;
+        }
+        childIdList.forEach((childId) => {
+          let childIndex = temp.findIndex((el) => el.id === childId);
+          temp.splice(childIndex, 1);
+        });
+      }
+      ///Find if the element is the only Child
+      if (temp[index].level > 1) {
+        let isOnlyChild = true;
+        let parentIndex;
+        //loop reverse upward
+        for (let i = index - 1; i >= 0; i--) {
+          if (temp[i].level === temp[index].level) {
+            isOnlyChild = false;
+            break;
+          }
+          if (temp[i].level < temp[index].level) {
+            parentIndex = i;
+            break;
+          }
+        }
+        //loop forward
+        for (let i = index + 1; i < temp.length; i++) {
+          if (temp[i].level === temp[index].level) {
+            isOnlyChild = false;
+            break;
+          }
+          if (temp[i].level < temp[index].level) {
+            break;
+          }
+        }
+        //if OnlyChild then update it's parent
+        if (isOnlyChild) {
+          temp[parentIndex].collapsed = false;
+          temp[parentIndex].hasChild = false;
+        }
+      }
+      //remove element
+      temp.splice(index, 1);
       return temp;
     });
     toggleModal(e);
@@ -164,6 +222,7 @@ const GanttD3 = (props) => {
               toggleModal={toggleModal}
               handleCreateTask={handleCreateTask}
               handleUpdateTask={handleUpdateTask}
+              handleDeleteTask={handleDeleteTask}
             />
           )}
           <GanttTable data={data} toggleModal={toggleModal} handleCollapse={handleCollapse}></GanttTable>

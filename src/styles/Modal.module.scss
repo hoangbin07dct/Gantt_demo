@@ -109,17 +109,31 @@
   outline: 0;
 }
 
+.btn_list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .form_btn {
-  width: 200px;
-  height: 35px;
-  background: #247ba0;
-  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 200px;
+  height: 35px;
+  margin-left: 20px;
+  background: #247ba0;
+  color: #fff;
   font-size: 16px;
-  margin-left: auto;
   cursor: pointer;
+  transition: 0.25s ease-in-out;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.delete_btn {
+  background: #d80202;
 }
 
 .modal_header {
