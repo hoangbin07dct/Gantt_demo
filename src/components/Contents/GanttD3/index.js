@@ -3,13 +3,13 @@ import { debounce } from 'lodash';
 import GanttChart from './ganttChart';
 import GanttTable from './GanttTable';
 import common from '../../../styles/Common.module.scss';
-import modal from '../../../styles/Modal.module.scss';
 import Modal from './Modal';
 import useModal from './useModal';
 import moment from 'moment';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { initData } from './data';
+import PeriodList from './PeriodList';
 
 const GanttD3 = (props) => {
   const getWidth = () => {
@@ -51,6 +51,26 @@ const GanttD3 = (props) => {
       window.removeEventListener('resize', resizeListener);
     };
   }, []);
+
+  const setPeriod = useCallback(
+    (type) => {
+      let date = moment(to);
+      switch (type) {
+        case 'day':
+          setFrom(date.subtract(1, 'days'));
+          break;
+        case 'week':
+          setFrom(date.subtract(7, 'days'));
+          break;
+        case 'month':
+          setFrom(date.subtract(1, 'months'));
+          break;
+        default:
+          break;
+      }
+    },
+    [to]
+  );
 
   const handleCreateTask = (e, form, appendIndex) => {
     e.preventDefault();
@@ -207,6 +227,7 @@ const GanttD3 = (props) => {
           closeOnSelect={true}
         />
       </div>
+      <PeriodList setPeriod={setPeriod} />
       <div className={common.container}>
         <div className={common.tableWrapper}>
           {/* <ul className={common.btnList}>
