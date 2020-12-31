@@ -6,6 +6,7 @@ td {
 }
 thead {
   td {
+    position: relative;
     vertical-align: middle;
     height: 40px;
   }
@@ -41,12 +42,16 @@ tbody {
 .hoverRow {
   &:hover {
     background-color: aliceblue;
+    .edit_btn {
+      display: block;
+    }
   }
 }
 .vertAlign {
   vertical-align: middle;
 }
 .flexCenter {
+  position: relative;
   display: flex;
   align-items: center;
   height: 100%;
@@ -70,4 +75,14 @@ tbody {
   width: 16px;
   height: 16px;
   margin-right: 6px;
+}
+.edit_btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  margin: auto;
+  cursor: pointer;
 }

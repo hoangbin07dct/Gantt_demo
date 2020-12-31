@@ -4,6 +4,7 @@ import table from '../../../styles/Table.module.scss';
 import exp_collapse from '../../../images/toggle_collapse.png';
 import exp_expand from '../../../images/toggle_expand.png';
 import plus_sign from '../../../images/plus.png';
+import edit_sign from '../../../images/edit.png';
 
 const GanttTable = ({ ...props }) => {
   useEffect(() => {}, []);
@@ -22,7 +23,7 @@ const GanttTable = ({ ...props }) => {
                 className={table.pointerCursor}
                 src={plus_sign}
                 alt="Add Task"
-                onClick={(e) => props.toggleModal(e,'create')}
+                onClick={(e) => props.toggleModal(e, 'create')}
               />
             </div>
           </td>
@@ -46,18 +47,18 @@ const GanttTable = ({ ...props }) => {
               <tr key={key} className={table.hoverRow}>
                 {td}
                 <td style={{ paddingLeft: (element.level - 1) * 20 + 5 + 'px' }}>
-                  <div className={table.flexCenter} onDoubleClick={(e) => props.toggleModal(e,'update', element.id)}>
+                  <div className={table.flexCenter} onDoubleClick={(e) => props.toggleModal(e, 'update', element.id)}>
                     {element.hasChild ? (
-                      <span
-                        id={element.id}
-                        className={table.expController}
-                        onClick={props.handleCollapse}>
+                      <span id={element.id} className={table.expController} onClick={props.handleCollapse}>
                         <img src={!element.collapsed ? exp_collapse : exp_expand} alt="expController" />
                       </span>
                     ) : (
                       <span className={table.emptyController}></span>
                     )}
                     <span>{element.task}</span>
+                    <span className={table.edit_btn} onClick={(e) => props.toggleModal(e, 'update', element.id)}>
+                      <img src={edit_sign} alt="Edit Task" />
+                    </span>
                   </div>
                 </td>
                 <td className={table.textCenter}>{element.progress}%</td>

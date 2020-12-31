@@ -7,15 +7,18 @@
 .item {
   padding: 3px 12px;
   background: #f1f1f1;
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   color: black;
   text-align: center;
   margin-left: 10px;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.25s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 5px 0px;
+
   &:hover {
-    background-color: aliceblue;
+    background-color:  #2b3a64;
+    color: #f1f1f1;
   }
 }
 
