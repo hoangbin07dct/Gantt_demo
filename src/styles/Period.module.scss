@@ -7,11 +7,16 @@
 .item {
   padding: 3px 12px;
   background: #f1f1f1;
+  border: 1px solid #ccc;
   color: black;
   text-align: center;
   margin-left: 10px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: 0.25s ease-in-out;
+  &:hover {
+    background-color: aliceblue;
+  }
 }
 
 .text {
