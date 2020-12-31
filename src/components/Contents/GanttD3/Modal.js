@@ -25,7 +25,7 @@ const Modal = (props) => {
     dependence: [],
   });
   let allGroup = new Set(props.data.map((item) => item.type));
-  let modalContext = useRef({
+  const [modalContext, setModalContext] = useState({
     handleSubmit: null,
     handleDelete: null,
     modalTitle: null,
@@ -49,15 +49,19 @@ const Modal = (props) => {
       }
     }
     if (props.modal.type === 'create') {
-      modalContext.current.handleSubmit = props.handleCreateTask;
-      modalContext.current.modalTitle = 'Add New Task';
-      modalContext.current.submitText = 'Add';
+      setModalContext({
+        handleSubmit: props.handleCreateTask,
+        modalTitle: 'Add New Task',
+        submitText: 'Add',
+      });
     }
     if (props.modal.type === 'update') {
-      modalContext.current.handleSubmit = props.handleUpdateTask;
-      modalContext.current.modalTitle = 'Update Task';
-      modalContext.current.submitText = 'Update';
-      modalContext.current.handleDelete = props.handleDeleteTask;
+      setModalContext({
+        handleSubmit: props.handleUpdateTask,
+        modalTitle: 'Update Task',
+        submitText: 'Update',
+        handleDelete: props.handleDeleteTask,
+      });
     }
   }, []);
 
@@ -99,7 +103,7 @@ const Modal = (props) => {
             </button>
           </div>
           <form>
-            <h3 className={modal.form_ttl}>{modalContext.current.modalTitle}</h3>
+            <h3 className={modal.form_ttl}>{modalContext.modalTitle}</h3>
             <p>Task</p>
             <div>
               <input className={modal.ip} type="text" onChange={InputChange} name="task" value={infoForm.task} />
@@ -249,11 +253,11 @@ const Modal = (props) => {
               <textarea className={modal.textarea} onChange={InputChange} name="details" value={infoForm.details} />
             </div>
             <div className={modal.btn_list}>
-              {!!modalContext.current.handleDelete && (
+              {!!modalContext.handleDelete && (
                 <span
                   className={`${modal.form_btn} ${modal.delete_btn}`}
                   onClick={(e) => {
-                    modalContext.current.handleDelete(e, props.modal.contextId);
+                    modalContext.handleDelete(e, props.modal.contextId);
                   }}>
                   Delete
                 </span>
@@ -261,9 +265,9 @@ const Modal = (props) => {
               <span
                 className={modal.form_btn}
                 onClick={(e) => {
-                  modalContext.current.handleSubmit(e, infoForm, props.modal.contextId);
+                  modalContext.handleSubmit(e, infoForm, props.modal.contextId);
                 }}>
-                {modalContext.current.submitText}
+                {modalContext.submitText}
               </span>
             </div>
           </form>
