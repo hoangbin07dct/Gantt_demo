@@ -151,6 +151,7 @@ export const initData = [
     hasChild: true,
     collapsed: false,
     isTimePlanUpdated: true,
+    dependence: [7]
   },
 
   {

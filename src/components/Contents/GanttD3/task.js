@@ -5,7 +5,7 @@ import CurrentBar from './currentBar';
 import ToolTip from './toolTip';
 import FlowChart from './flowChart';
 export default class Task {
-  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend) {
+  constructor(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend, tasksListContainer) {
     
     this.currentStart = currentStart;
     this.currentWidth = currentWidth;
@@ -21,6 +21,7 @@ export default class Task {
     this.arrDepend = arrDepend;
     this.toolTip = new ToolTip(this.taskDetail, 0, 0);
     document.getElementById('dom').appendChild(this.toolTip.render());
+    this.tasksListContainer = tasksListContainer;
   }
   render() {
     let _y = this.y;
@@ -56,7 +57,7 @@ export default class Task {
     taskContainer.append(d => new CurrentBar(this.currentStart, this.currentWidth, this.height, this.taskDetail).render());
 
     // render flow line
-    this.flowChart = new FlowChart(taskContainer, containElement, this.dependence, this.taskDetail, this.arrDepend);
+    this.flowChart = new FlowChart(taskContainer, containElement, this.dependence, this.taskDetail, this.arrDepend, this.tasksListContainer);
     this.flowChart.init();
 
     // event hover

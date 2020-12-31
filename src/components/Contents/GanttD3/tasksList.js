@@ -54,7 +54,7 @@ export default class TasksList {
           arrDepend.push([planStartChild, planWidthChild, yChild]);
         });
       }
-      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend).render();
+      return new Task(currentStart, currentWidth, planStart, planWidth, initialPlanStart, initialPlanWidth, y, height, progress, d, dependence, arrDepend, this.tasksListContainer).render();
     });
   }
 
