@@ -7,7 +7,7 @@ export const initData = [
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
     startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-25',
+    endTimePlan: '2020-12-10',
     startTimeInitialPlan: '2020-12-01', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
@@ -16,7 +16,7 @@ export const initData = [
     hasChild: true,
     collapsed: false,
     isUpdated: true,
-    dependence: [4, 6]
+    dependence: [4]
   },
 
   {
@@ -24,8 +24,8 @@ export const initData = [
     isShow: true,
     task: 'Task2',
     type: 'Group1',
-    startTimeCurrent: '2020-12-15', //year/month/day
-    endTimeCurrent: '2020-12-20',
+    startTimeCurrent: '2020-12-20', //year/month/day
+    endTimeCurrent: '2020-12-30',
     startTimePlan: '2020-12-20', //year/month/day
     endTimePlan: '2020-12-25',
     startTimeInitialPlan: '2020-12-20', //year/month/day
@@ -47,8 +47,8 @@ export const initData = [
     endTimeCurrent: '2020-12-15',
     startTimePlan: '2020-12-07', //year/month/day
     endTimePlan: '2020-12-10',
-    startTimeInitialPlan: '2020-12-13', //year/month/day
-    endTimeInitialPlan: '2020-12-25',
+    startTimeInitialPlan: '2020-12-07', //year/month/day
+    endTimeInitialPlan: '2020-12-10',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 3,
@@ -62,19 +62,19 @@ export const initData = [
     isShow: true,
     task: 'Task4',
     type: 'Group2',
-    startTimeCurrent: '2020-11-30', //year/month/day
-    endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-11-25', //year/month/day
-    endTimePlan: '2020-12-24',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
-    endTimeInitialPlan: '2020-12-10',
+    startTimeCurrent: '2020-12-11', //year/month/day
+    endTimeCurrent: '2020-12-15',
+    startTimePlan: '2020-12-11', //year/month/day
+    endTimePlan: '2020-12-15',
+    startTimeInitialPlan: '2020-12-11', //year/month/day
+    endTimeInitialPlan: '2020-12-16',
     details: "This actually didn't take any conceptualization",
     progress: 10,
     level: 1,
     hasChild: true,
     collapsed: false,
     isUpdated: true,
-    dependence: [10, 11]
+    dependence: [6]
   },
 
   {
@@ -82,7 +82,7 @@ export const initData = [
     isShow: true,
     task: 'Task5',
     type: 'Group2',
-    startTimeCurrent: '2020-12-05', //year/month/day
+    startTimeCurrent: '2020-12-15', //year/month/day
     endTimeCurrent: '2020-12-21',
     startTimePlan: '2020-12-15', //year/month/day
     endTimePlan: '2020-12-24',
@@ -101,18 +101,19 @@ export const initData = [
     isShow: true,
     task: 'Task6',
     type: 'Group3',
-    startTimeCurrent: '2020-11-25', //year/month/day
-    endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-11-25', //year/month/day
-    endTimePlan: '2020-12-10',
-    startTimeInitialPlan: '2020-11-26', //year/month/day
-    endTimeInitialPlan: '2020-12-09',
+    startTimeCurrent: '2020-12-16', //year/month/day
+    endTimeCurrent: '2020-12-20',
+    startTimePlan: '2020-12-16', //year/month/day
+    endTimePlan: '2020-12-20',
+    startTimeInitialPlan: '2020-12-16', //year/month/day
+    endTimeInitialPlan: '2020-12-20',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 1,
     hasChild: true,
     collapsed: false,
     isUpdated: true,
+    dependence: [10, 11]
   },
 
   {
@@ -122,9 +123,9 @@ export const initData = [
     type: 'Group3',
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
+    startTimePlan: '2020-12-03', //year/month/day
     endTimePlan: '2020-12-07',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
+    startTimeInitialPlan: '2020-12-03', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
     progress: 90,
@@ -140,9 +141,9 @@ export const initData = [
     type: 'Group4',
     startTimeCurrent: '2020-12-03', //year/month/day
     endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-02', //year/month/day
-    endTimePlan: '2020-12-29',
-    startTimeInitialPlan: '2020-12-01', //year/month/day
+    startTimePlan: '2020-12-03', //year/month/day
+    endTimePlan: '2020-12-15',
+    startTimeInitialPlan: '2020-12-03', //year/month/day
     endTimeInitialPlan: '2020-12-05',
     details: "This actually didn't take any conceptualization",
     progress: 90,
@@ -175,12 +176,12 @@ export const initData = [
     isShow: true,
     task: 'Task10',
     type: 'Group4',
-    startTimeCurrent: '2020-11-25', //year/month/day
-    endTimeCurrent: '2020-12-10',
-    startTimePlan: '2020-12-06', //year/month/day
+    startTimeCurrent: '2020-12-21', //year/month/day
+    endTimeCurrent: '2020-12-25',
+    startTimePlan: '2020-12-21', //year/month/day
     endTimePlan: '2020-12-28',
-    startTimeInitialPlan: '2020-11-28', //year/month/day
-    endTimeInitialPlan: '2020-12-05',
+    startTimeInitialPlan: '2020-12-21', //year/month/day
+    endTimeInitialPlan: '2020-12-25',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 3,
@@ -193,12 +194,12 @@ export const initData = [
     isShow: true,
     task: 'Task11',
     type: 'Group4',
-    startTimeCurrent: '2020-12-15', //year/month/day
-    endTimeCurrent: '2020-12-29',
-    startTimePlan: '2020-12-16', //year/month/day
-    endTimePlan: '2020-12-29',
-    startTimeInitialPlan: '2020-12-10', //year/month/day
-    endTimeInitialPlan: '2020-12-27',
+    startTimeCurrent: '2020-12-21', //year/month/day
+    endTimeCurrent: '2020-12-25',
+    startTimePlan: '2020-12-21', //year/month/day
+    endTimePlan: '2020-12-28',
+    startTimeInitialPlan: '2020-12-21', //year/month/day
+    endTimeInitialPlan: '2020-12-25',
     details: "This actually didn't take any conceptualization",
     progress: 90,
     level: 3,
