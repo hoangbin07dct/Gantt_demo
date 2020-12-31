@@ -75,7 +75,7 @@ export default class GanttChart {
       .call(g => {
         g.select('.domain').attr('shape-rendering', 'crispEdges').attr('stroke', '#ccc');
         g.selectAll('line').attr('shape-rendering', 'crispEdges').attr('stroke', 'rgba(0,0,0,0.2)');
-        g.selectAll('text').attr('transform', `translate(${transX2},0)`);
+        g.selectAll('text').attr('transform', `translate(${transX2},2)`);
       });
 
     // render current date
